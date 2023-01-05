@@ -4,7 +4,6 @@ module project.application {
 
 
     opens project.application to javafx.fxml;
-    exports project.application;
     exports project.application.App;
     opens project.application.App to javafx.fxml;
     exports project.application.Controlers;
