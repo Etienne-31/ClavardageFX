@@ -7,11 +7,18 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+
 public class App extends Application {
+    public static Stage primaryStage;
+
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/SessionChatView.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        App.primaryStage = stage;
+        System.out.println("Debut");
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/welcomeView.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        System.out.println("milieu");
+
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();

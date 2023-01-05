@@ -1,12 +1,10 @@
 package project.application.Controlers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import project.application.Models.Message;
 
-public class SessionChatControler {
+public class ChatControler {
 
     //Attributs du controler
 
@@ -22,7 +20,7 @@ public class SessionChatControler {
 
 
     @FXML
-    public void sendMessage(ActionEvent event) {
+    protected void sendMessage() {
         String txt = txtSendMsg.getText();
         txtSendMsg.clear();
         System.out.println(txt);
