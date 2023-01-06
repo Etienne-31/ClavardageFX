@@ -1,5 +1,12 @@
 package project.application.Models;
+import org.hibernate.annotations.Table;
+
 import java.time.LocalDateTime;
+
+
+
+
+
 public class Message {
     private String idSender;
     private String idReceiver;
