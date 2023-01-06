@@ -5,6 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
+
 public class loginControler {
 
     @FXML
@@ -21,7 +23,7 @@ public class loginControler {
 
 
     @FXML
-    protected void login(){
+    protected void login() throws IOException {
         String login;
         String mdp;
         Boolean bool;
@@ -38,6 +40,7 @@ public class loginControler {
             //Passez à la fenêtre pour voir les gens connecté
             System.out.println("Connected");
         }
+        AlertLoginFailed.display();
 
 
     }

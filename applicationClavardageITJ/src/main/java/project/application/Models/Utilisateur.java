@@ -6,6 +6,9 @@ public class Utilisateur {
     public String userPseudo;
     private InetAddress ipUser;
 
+
+
+    //Constructeur pour construire l autre utilisateur
     public Utilisateur(String idOtherUser,String pseudoOtherUser){
         this.password = null;
         this.ipUser = null;
@@ -14,6 +17,8 @@ public class Utilisateur {
 
     }
 
+
+    //Constructeur pour construire l'utilisateur
     public Utilisateur(String idUser,String password,String pseudo){
 
         try {

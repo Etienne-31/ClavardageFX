@@ -6,10 +6,6 @@ import javafx.scene.control.TextField;
 
 public class ChatControler {
 
-    //Attributs du controler
-
-    NetworkManager TCPmanagement;
-    //Rajouter liste de Message qui sera affichez
     //Attributs de la primary stage
     @FXML
     private Button sendButton;
