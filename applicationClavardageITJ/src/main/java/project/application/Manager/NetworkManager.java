@@ -1,4 +1,4 @@
-package project.application.Controlers;
+package project.application.Manager;
 
 import project.application.Models.Message;
 import project.application.Models.Utilisateur;

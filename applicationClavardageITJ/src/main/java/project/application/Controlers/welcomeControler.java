@@ -9,7 +9,7 @@ import project.application.App.App;
 
 import java.io.IOException;
 
-public class welcomeControler {
+public class WelcomeControler {
 
 
 

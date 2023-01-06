@@ -8,4 +8,6 @@ module project.application {
     opens project.application.App to javafx.fxml;
     exports project.application.Controlers;
     opens project.application.Controlers to javafx.fxml;
+    exports project.application.Manager;
+    opens project.application.Manager to javafx.fxml;
 }

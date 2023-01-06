@@ -1,5 +1,5 @@
 package project.application.Models;
-import project.application.Controlers.NetworkManager;
+import project.application.Manager.NetworkManager;
 
 import java.io.IOException;
 //import java.io.BufferedWriter;
