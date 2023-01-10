@@ -89,6 +89,37 @@ public class udpManager {
 
     }
 
+    public boolean attendreReponse(){
+        Boolean response = null;
+        DatagramPacket receivedDatagram;
+        byte[] receiveData = new byte[1024];
+        String msgrecu;
+
+        receivedDatagram = new DatagramPacket(receiveData,receiveData.length);
+
+        try{
+            this.dgramSocket.setSoTimeout(TIMEOUT_RECEPTION_REPONSE);
+            this.dgramSocket.receive(receivedDatagram);
+        }
+        catch (SocketException se){
+            se.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        msgrecu = new String(receivedDatagram.getData());
+
+        if(msgrecu.equals("non")){
+            response = false;
+        }
+        else{
+            response = true;
+            //Ajouter dans l'annuaire la personne
+        }
+
+
+        return response;
+    }
+
     public void envoyerResponse(InetAddress adrDest, int portDest, boolean resp, int myPort, String MyAddr) throws IOException {
         String msg;
         DatagramPacket packet;

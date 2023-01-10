@@ -9,7 +9,9 @@ A voir
 
 
 A faire
-1.Ecrire methode attenteResponse qui dis vrai ou faux si le pseudo est le même ou pas
+0. Dans attente requête rajouter l'ajout à l'annuaire au cas ou le pseudo ( a voir car peut nécéssite un renvoi du nouveau user pour confirmer qu'il prend ce pseudo )
+1.Ecrire methode attenteResponse qui dis vrai ou faux si le pseudo est le même ou pas   // Fait à moitié
+ - Ecrire classe annuaire qui soit une liste d'utilisateur
 2. Ecrire la fin de la méthode submit dans choose pseudoControler
 3. Ecrire methode pour avoir adresse broadcast ou voir comment l avoir
 4. Voir pourquoi je n'ai pas le @Entity alors que j'ai hibernate
