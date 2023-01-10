@@ -1,5 +1,5 @@
 package project.application.Models;
-import project.application.Manager.NetworkManager;
+import project.application.Manager.TCPManager;
 
 import java.io.IOException;
 //import java.io.BufferedWriter;
@@ -13,7 +13,7 @@ public class SessionChat {
     private boolean mode;
     private Socket socket = null;
     private ServerSocket socketInit = null;
-    private NetworkManager networkManagement = null;
+    private TCPManager networkManagement = null;
     private Utilisateur user = null;
     private Utilisateur other_user = null;
     private BufferedReader is = null;
@@ -21,7 +21,7 @@ public class SessionChat {
 
     public SessionChat(Utilisateur user,Utilisateur other_user,boolean mode,String adress,int port){
 
-        this.networkManagement = new NetworkManager();
+        this.networkManagement = new TCPManager();
         this.user = user;
         this.other_user = other_user;
         this.mode = mode;
@@ -115,7 +115,7 @@ public class SessionChat {
 
     public boolean getMode(){return this.mode;}
 
-    public NetworkManager getNetworkMananger(){return this.networkManagement;}
+    public TCPManager getNetworkMananger(){return this.networkManagement;}
 
     public Utilisateur getUser(){return this.user;}
 

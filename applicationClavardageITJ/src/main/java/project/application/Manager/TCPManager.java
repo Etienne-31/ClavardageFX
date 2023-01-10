@@ -9,7 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.io.IOException;
-public class NetworkManager {
+public class TCPManager {
     private String listening(BufferedReader is) throws IOException {
         String retour=null;
         try{

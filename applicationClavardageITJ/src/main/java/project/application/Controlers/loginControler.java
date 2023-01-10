@@ -47,7 +47,7 @@ public class LoginControler {
         mdp = mdpBar.getText();
 
         if((login.equals("Etienne"))&(mdp.equals("123"))){
-            id = login;
+            App.user.setId(login);
             System.out.println("Connected");
             myScene = new Scene(fxmlLoader.load());
             primaryStage.setScene(myScene);
@@ -55,8 +55,5 @@ public class LoginControler {
         else{
             AlertManager.displayLoginFailed();
         }
-
-
-
     }
 }

@@ -1,0 +1,20 @@
+
+A voir
+1. Si dan udp manager on transmet un port ou communiquer sur tcp ou si c 'est tous le même normalement pas besoins de le transmettre en udp
+2. Dans choosePseudoControler
+ - Voir quel port on utilise pour la communication UDP
+ - Trouver méthode pour avoir adresse de broadcast
+ 3. Pour choosePseudo et udpManager
+ - Demandez le comportement du receive en UDP dans le cas ou on recevrai plusieur message à la fois sur le même port ?
+
+
+A faire
+1.Ecrire methode attenteResponse qui dis vrai ou faux si le pseudo est le même ou pas
+2. Ecrire la fin de la méthode submit dans choose pseudoControler
+3. Ecrire methode pour avoir adresse broadcast ou voir comment l avoir
+4. Voir pourquoi je n'ai pas le @Entity alors que j'ai hibernate
+5. Mettre en place éléments pour la base de données ( Dans model , fichier de conf , pour build les sessions et tout )
+6. Demander infos pour la bd et remplir fichier de conf
+7. Créer table avec SQL
+8. Créeer la partie inscription
+9. Créer la partie apres acceptation du pseudo
