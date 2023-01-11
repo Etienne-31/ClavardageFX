@@ -1,5 +1,4 @@
 package project.application.Models;
-import org.hibernate.annotations.Table;
 
 import java.time.LocalDateTime;
 
@@ -7,14 +6,14 @@ import java.time.LocalDateTime;
 
 
 
-public class Message {
+public class Messages {
     private String idSender;
     private String idReceiver;
     private LocalDateTime timestamp;
     private String Data;
 
-    public Message(){}
-    public Message(Utilisateur idSender, Utilisateur idReceiver,String Data){
+    public Messages(){}
+    public Messages(Utilisateur idSender, Utilisateur idReceiver, String Data){
         this.idSender = idSender.getIdUser();
         this.idReceiver = idReceiver.getIdUser();
         this.timestamp = LocalDateTime.now();

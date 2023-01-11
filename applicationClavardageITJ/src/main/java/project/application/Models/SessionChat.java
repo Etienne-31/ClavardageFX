@@ -55,7 +55,7 @@ public class SessionChat {
     public void run() {
         System.out.println("On lance le run");
         System.out.println("On lance le start");
-        Message message = null;
+        Messages message = null;
         boolean quit = true;
 
 
@@ -107,8 +107,8 @@ public class SessionChat {
 
 
 
-    private Message receptionMessage() throws IOException{
-        Message data = null;
+    private Messages receptionMessage() throws IOException{
+        Messages data = null;
         data = networkManagement.receiveMessage(this.is, this.other_user, this.user);
         return data;
     }

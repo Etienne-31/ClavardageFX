@@ -37,7 +37,7 @@ public class LoginControler {
 
         //GestionInterface
         Stage primaryStage = App.primaryStage;
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/pseudoChooseView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/pseudoChooseView.fxml")); //Sert à loader la scen fait sur fxml
         Scene myScene;
 
         //Récupère le login
@@ -46,7 +46,7 @@ public class LoginControler {
         //récupère le mdp
         mdp = mdpBar.getText();
 
-        if((login.equals("Etienne"))&(mdp.equals("123"))){
+        if((login.equals("Etienne"))&(mdp.equals("123"))){   //Ici on devra faire une requête sur la base de donnée et comparer ce qu'on a
             App.user.setId(login);
             System.out.println("Connected");
             myScene = new Scene(fxmlLoader.load());

@@ -1,5 +1,6 @@
 package project.application.Models;
 import java.net.*;
+
 public class Utilisateur {
     private String idUser;
 
@@ -7,19 +8,22 @@ public class Utilisateur {
     private InetAddress ipUser;
 
 
+
+
     //Constructeur pour créer un utilisateur sans attribut ( utile au lancement de l'app )
 
     public Utilisateur() throws UnknownHostException {
         this.ipUser = InetAddress.getLocalHost();
+
     }
 
 
 
     //Constructeur pour construire l autre utilisateur
-    public Utilisateur(String idOtherUser,String pseudoOtherUser){
+    public Utilisateur(String pseudoOtherUser,InetAddress adress){
 
-        this.ipUser = null;
-        this.idUser = idOtherUser;
+        this.ipUser = adress;
+        this.idUser = null;
         this.userPseudo = pseudoOtherUser;
 
     }
@@ -27,7 +31,7 @@ public class Utilisateur {
 
     //Constructeur pour construire l'utilisateur
 
-    public Utilisateur(String idUser,String password,String pseudo){
+    public Utilisateur(String idUser,String pseudo){
 
         try {
             this.idUser = idUser;

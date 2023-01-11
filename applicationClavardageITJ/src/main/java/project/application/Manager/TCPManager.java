@@ -1,6 +1,6 @@
 package project.application.Manager;
 
-import project.application.Models.Message;
+
 import project.application.Models.Utilisateur;
 
 import java.io.*;
@@ -9,6 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.io.IOException;
+import project.application.Models.Messages;
 public class TCPManager {
     private String listening(BufferedReader is) throws IOException {
         String retour=null;
@@ -23,11 +24,11 @@ public class TCPManager {
 
     }
 
-    public Message receiveMessage(BufferedReader is, Utilisateur sender, Utilisateur receiver) throws  IOException{
-        Message receivedMessage = null;
+    public Messages receiveMessage(BufferedReader is, Utilisateur sender, Utilisateur receiver) throws  IOException{
+        Messages receivedMessage = null;
         String data = listening(is);
         if(data != null){
-            receivedMessage = new Message(sender,receiver,data);
+            receivedMessage = new Messages(sender,receiver,data);
         }
         return receivedMessage;
     }
@@ -142,7 +143,7 @@ public class TCPManager {
         return socketOfClient;
     }
 
-    public synchronized void printMessage(Message message){
+    public synchronized void printMessage(Messages message){
         message.toString();
     }
 }

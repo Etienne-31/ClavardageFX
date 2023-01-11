@@ -3,17 +3,16 @@ package project.application.Manager;
 import project.application.Models.Utilisateur;
 
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
+import java.net.*;
+import java.nio.channels.ClosedByInterruptException;
+
 public class udpManager {
 
     private static final int TIMEOUT_RECEPTION_REPONSE = 5000;
     public DatagramSocket dgramSocket = null;
     public byte[] myBuffer = null;
     public DatagramPacket inPacket = null;
-    public String msg = "";
+    public String msg;
     public Utilisateur user;
     public int port;
     public InetAddress broadcastAdress;
@@ -25,27 +24,59 @@ public class udpManager {
         this.dgramSocket = new DatagramSocket(port);
     }
 
-    public void envoyerBoradcastUDP() throws IOException
+    public void broadcastPseudo() throws IOException
     {
         try{
-            dgramSocket.setBroadcast(true);
+            dgramSocket.setBroadcast(true);// On active le broadcast
         }
         catch(SocketException e){
-            System.out.println("Erreur lors de l'initialisation du serveur UDP : "+e);
+            System.out.println("Erreur lors de l'initialisation du serveur UDP : "+e); //On affiche l'erreur en cas d'exception
         }
-        this.myBuffer = new byte[1024];
-        this.msg += this.user.userPseudo;
-        DatagramPacket packet = new DatagramPacket(this.msg.getBytes(), this.msg.length(), this.broadcastAdress, this.port);
-        this.dgramSocket.send(packet);
+
+        this.myBuffer = new byte[1024];         // On initialise le buffer pour envoyer le pseudo
+        this.msg ="pseudo:"+this.user.userPseudo+";";    // On créé le message contenant le pseudo
+        DatagramPacket packet = new DatagramPacket(this.msg.getBytes(), this.msg.length(), this.broadcastAdress, this.port);  // On construit le paquet
+        this.dgramSocket.send(packet);   // On envoie le paquet
+
+        try{
+            dgramSocket.setBroadcast(false); // Desactive le broadcast
+        }
+        catch(SocketException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void broadcastConfirmationPseudo() throws IOException  //Pas différente de broadcast pseudo juste on confirme que le pseudo est libre et qu'on le prend à l'ensemble du réseau
+    {
+        try{
+            dgramSocket.setBroadcast(true);// On active le broadcast
+        }
+        catch(SocketException e){
+            System.out.println("Erreur lors de l'initialisation du serveur UDP : "+e); //On affiche l'erreur en cas d'exception
+        }
+
+        this.myBuffer = new byte[1024];         // On initialise le buffer pour envoyer le pseudo
+        this.msg ="resonse:ok/pseudo:"+this.user.userPseudo+";";    // On créé le message contenant le pseudo
+        DatagramPacket packet = new DatagramPacket(this.msg.getBytes(), this.msg.length(), this.broadcastAdress, this.port);  // On construit le paquet
+        this.dgramSocket.send(packet);   // On envoie le paquet
+
+        try{
+            dgramSocket.setBroadcast(false); // Desactive le broadcast
+        }
+        catch(SocketException e){
+            e.printStackTrace();
+        }
     }
 
     // il faut que les ports soient differents parce que pas sur le meme pc
 
-    public void attendreRequete(int newPortCommunication) {
+    public void attendreRequetePseudo() {  //Cette fonction est voué à disparaitre et est remplace par Attendre message    // a changer pour ne plus avoir le traitement dans la fonction
 
         String msgrecu = "";
         Boolean response = null;
         DatagramPacket paquetRecu;
+        int debutPseudo;
+        int finPseudo;
 
         try{
             // On essaye de créer notre socket serveur UDP
@@ -66,22 +97,19 @@ public class udpManager {
             this.dgramSocket.receive(paquetRecu);
             msgrecu= new String(paquetRecu.getData());
 
+            debutPseudo = msgrecu.indexOf("pseudo:")+"pseudo:".length(); //On détermine l'Indexe du début de pseudo dans le String recu
+            finPseudo = msgrecu.indexOf(";");                           //On sait que le dernier élément envoyé dans le broadcast est un ";"
+
 
             //traitement de msgrecu
-            if(msgrecu.substring(0,msgrecu.indexOf(";")).equals(this.user.userPseudo)){
+            if(msgrecu.substring(debutPseudo,finPseudo).equals(this.user.userPseudo)){
                 response = false;
             }
             else{
                 response = true;
             }
-            envoyerResponse(paquetRecu.getAddress(),paquetRecu.getPort(),response,newPortCommunication,InetAddress.getLocalHost().toString()); // Le newPortCommunication est le port ou on ira discuter en tcp ( peut etre à changer à voir )
+            envoyerResponse(paquetRecu.getAddress(),paquetRecu.getPort(),response,InetAddress.getLocalHost().toString()); // Le newPortCommunication est le port ou on ira discuter en tcp ( peut etre à changer à voir )
 
-
-            //pour recuperer l'adresse du paquet au lieu de la separer du paquet
-            //InetAddress IPAddress = paquetRecu.getAddress();
-
-            /*int port = paquetRecu.getPort();*/
-            // Si on reçoit un "ping", on répond "pong" à celui qui nous l'a envoyé
         }
         catch (Exception e){
             e.printStackTrace();
@@ -89,51 +117,43 @@ public class udpManager {
 
     }
 
-    public boolean attendreReponse(){
-        Boolean response = null;
+    public String attendreMessage(){
+
         DatagramPacket receivedDatagram;
-        byte[] receiveData = new byte[1024];
+        byte[] receiveData = new byte[1024];   //On initialise le buffer de reception
         String msgrecu;
 
         receivedDatagram = new DatagramPacket(receiveData,receiveData.length);
 
         try{
-            this.dgramSocket.setSoTimeout(TIMEOUT_RECEPTION_REPONSE);
-            this.dgramSocket.receive(receivedDatagram);
+            this.dgramSocket.setSoTimeout(TIMEOUT_RECEPTION_REPONSE);   //On set le timoutout si aucun message n'est recu alors on lève la socketTimeoutException
+            this.dgramSocket.receive(receivedDatagram);                 // On attend la réception d'un message
         }
         catch (SocketException se){
-            se.printStackTrace();
-        } catch (IOException e) {
+            se.printStackTrace();              //Exception en cas d'erreur avec le socket
+        }
+        catch(SocketTimeoutException e){
+            msgrecu = null;
+        }
+        catch(IOException e){
             e.printStackTrace();
         }
-        msgrecu = new String(receivedDatagram.getData());
-
-        if(msgrecu.equals("non")){
-            response = false;
-        }
-        else{
-            response = true;
-            //Ajouter dans l'annuaire la personne
-        }
-
-
-        return response;
+        msgrecu = new String(receivedDatagram.getData());   //On transforme la data recu en String
+        return msgrecu;
     }
 
-    public void envoyerResponse(InetAddress adrDest, int portDest, boolean resp, int myPort, String MyAddr) throws IOException {
+    public void envoyerResponse(InetAddress adrDest, int portDest, boolean resp, String MyAddr) throws IOException {
         String msg;
         DatagramPacket packet;
-
-
-        if (resp){
-            msg = "oui;"+MyAddr+";"+String.valueOf(myPort);
-            packet = new DatagramPacket(msg.getBytes(), msg.length(), adrDest, portDest);
+        if (resp){   //Si le pseudo n'est pas pris par l'utilisateur qui envoie la response après récèption du broadcast alors resp = true
+            msg = "/Pseudo:"+this.user.userPseudo+"/Adresse:"+MyAddr+""+"/fin";       // On construit le message
+            packet = new DatagramPacket(msg.getBytes(), msg.length(), adrDest, portDest);   // On crée le paquet datagram
         }
         else{
             msg = "non";
             packet = new DatagramPacket(msg.getBytes(), msg.length(), adrDest, portDest);
         }
-        this.dgramSocket.send(packet);
+        this.dgramSocket.send(packet);      // On envoie le message
     }
 
 
