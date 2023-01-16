@@ -37,6 +37,18 @@ public class AlertManager {
         alertWindow.showAndWait();
     }
 
+    public static void displayPseudoSucceed() throws IOException {
+        Stage alertWindow = new Stage();   //Crée la nouvele fenêtre
+        Window = alertWindow;
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/pseudoSucceedView.fxml"));
+        Scene myScene = new Scene(fxmlLoader.load());
+
+        alertWindow.initModality(Modality.APPLICATION_MODAL);
+        alertWindow.setTitle("Connexion");
+        alertWindow.setScene(myScene);
+        alertWindow.showAndWait();
+    }
+
 
 
 }

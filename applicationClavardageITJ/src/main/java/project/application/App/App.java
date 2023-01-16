@@ -10,17 +10,20 @@ import project.application.Models.Utilisateur;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.SocketException;
 import java.net.UnknownHostException;
 
 
 public class App extends Application {
-    public static Stage primaryStage;
+    public static Stage primaryStage;     //Cet Attribut est l'interface graphique , cad la fenêtre où s'affiche les informations
 
-    public final static int udpPort = 1511;
-    public static Utilisateur user;
-    public static Annuaire userAnnuaire;
+    public final static int udpPort = 1511;  // Port sur leque on communique en UDP , c'est le même sur tous les devices utilisant l'applicatioj
+    public static Utilisateur user;       // représente l'utilisateur de l'application
+    public static Annuaire userAnnuaire; // l'annuaire de l'application
 
-    public static udpManager udpManager;
+    public static InetAddress  adrBroadcast= null; // Adresse de broadcast , a définir encore
+    public static Boolean connected;              // Attribut servant à indiquer si nous sommes connecté ou pas
+    public static udpManager udpManager;           // manager pour UDP
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -35,8 +38,10 @@ public class App extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) throws UnknownHostException {
+    public static void main(String[] args) throws UnknownHostException, SocketException {
+
         System.out.println("Debut");
+
         try{
             App.user = new Utilisateur();
         }
@@ -44,11 +49,11 @@ public class App extends Application {
             e.printStackTrace();
         }
         App.userAnnuaire = new Annuaire();
-        App.udpManager = new udpManager(App.user,App.udpPort,/*adr broadcast a faire encore */);
-
+        App.udpManager = new udpManager(App.user,App.udpPort,adrBroadcast);
+        System.out.println("Je lance l'appli My adress : "+InetAddress.getLocalHost().toString());
 
         launch();
-        System.out.println("My adress : "+InetAddress.getLocalHost().toString());
+
 
     }
 }

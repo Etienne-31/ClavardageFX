@@ -4,6 +4,8 @@ import java.net.*;
 public class Utilisateur {
     private String idUser;
 
+
+    
     public String userPseudo;
     private InetAddress ipUser;
 
