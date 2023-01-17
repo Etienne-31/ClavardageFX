@@ -49,7 +49,7 @@ public class App extends Application {
             e.printStackTrace();
         }
         App.userAnnuaire = new Annuaire();
-        App.udpManager = new udpManager(App.user,App.udpPort,adrBroadcast);
+        App.udpManager = new udpManager(App.user,App.udpPort);
         System.out.println("Je lance l'appli My adress : "+InetAddress.getLocalHost().toString());
 
         launch();

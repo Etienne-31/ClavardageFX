@@ -8,8 +8,12 @@ import java.time.LocalDateTime;
 
 public class Messages {
     private String idSender;
+
     private String idReceiver;
+
     private LocalDateTime timestamp;
+
+
     private String Data;
 
     public Messages(){}
@@ -19,21 +23,33 @@ public class Messages {
         this.timestamp = LocalDateTime.now();
         this.Data = Data;
     }
-    public String getidSender(){
-        return this.idSender;
+    public String getIdSender() {
+        return idSender;
     }
-    public String getidReceiver(){
-        return this.idReceiver;
+
+    public void setIdSender(String idSender) {
+        this.idSender = idSender;
     }
-    public LocalDateTime gettimestamp(){
-        return this.timestamp;
+    public String getIdReceiver() {
+        return idReceiver;
+    }
+
+    public void setIdReceiver(String idReceiver) {
+        this.idReceiver = idReceiver;
+    }
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
     }
     public String getData(){
         return this.Data;
     }
 
     public String toString(){
-        return "Message recu / Id sender :"+getidSender()+" / Id receiver :"+getidReceiver()+" / Timestamp : "+gettimestamp()+" \n"+" Message : "+getData();
+        return "Message recu / Id sender :"+getIdSender()+" / Id receiver :"+getIdReceiver()+" / Timestamp : "+getTimestamp()+" \n"+" Message : "+getData();
 
     }
 

@@ -15,7 +15,6 @@ import project.application.Models.Utilisateur;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
-import java.net.SocketException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.ArrayList;
@@ -95,7 +94,7 @@ public class ChoosePseudoControler implements Initializable {
 
         if(pseudoGood == true){
             App.connected = true;                   // Après toutes les étapes on est enfin connecté donc l'attribut boolean static dans App passe à true
-            App.user.setPseudo(pseudo);            // On set le pseudo qui vient d'être rentrer dans bar
+            App.user.setUserPseudo(pseudo);            // On set le pseudo qui vient d'être rentrer dans bar
             App.udpManager.broadcastConfirmationPseudo(); //Confirmer pseudo en broadcastant à nouveau
             AlertManager.displayPseudoSucceed();       // On affiche qu'on est connecté
 
