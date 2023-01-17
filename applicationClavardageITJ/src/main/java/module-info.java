@@ -2,6 +2,7 @@ module project.application {
     requires javafx.controls;
     requires javafx.fxml;
     requires  org.hibernate.orm.core;
+    requires  java.naming;
 
     opens project.application to javafx.fxml;
     exports project.application.App;

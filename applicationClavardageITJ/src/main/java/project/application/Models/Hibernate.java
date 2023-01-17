@@ -9,7 +9,7 @@ import org.hibernate.service.ServiceRegistry;
 
 public class Hibernate {
     public static void innit() throws Exception {
-        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure("/project/application/ressources/hibernate.cfg.xml").build();
+        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
         Metadata metadata = new MetadataSources(serviceRegistry).getMetadataBuilder().build();
         SessionFactory sessionFactory = metadata.getSessionFactoryBuilder().build();
     }

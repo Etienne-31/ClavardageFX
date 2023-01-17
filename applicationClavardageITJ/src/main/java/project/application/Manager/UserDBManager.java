@@ -8,6 +8,7 @@ import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import project.application.Models.Hibernate;
+import org.hibernate.*;
 import project.application.Models.Utilisateur;
 
 public class UserDBManager {
@@ -34,7 +35,7 @@ public class UserDBManager {
 
     }
 
-    public static void InsertDetached(Utilisateur utilisateur){
+   public static void InsertDetached(Utilisateur utilisateur){
         SessionFactory factory = Hibernate.getSessionFactory();
         Session session2 = factory.openSession();
 
@@ -56,13 +57,13 @@ public class UserDBManager {
 
     }
 
-    public static List<Utilisateur> getListUser(String  idUser){
+   public static List<Utilisateur> getListUser(String  idUser){
         SessionFactory factory = Hibernate.getSessionFactory();
         Session session = factory.openSession();
         List<Utilisateur> userList = null;
         try{
 
-            String sql = "SELECT user.password, user.mail from "+Utilisateur.class.getName()+" user"+" where user.mail="+idUser;
+            String sql = "SELECT user.password, user.idUser from "+Utilisateur.class.getName()+" user"+" where user.idUser="+idUser;
 
             Query query = session.createQuery(sql);
             userList = query.getResultList();
@@ -107,6 +108,5 @@ public class UserDBManager {
 
         return  userFromDB;
     }
-
 
 }

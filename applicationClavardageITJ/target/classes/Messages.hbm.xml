@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="project.application.Models.Messages" table="Messages">
+
+        <id name="idSender" type="String" column="idImage">
+            <generator class="native"/>
+        </id>
+
+        <property name="idReceiver" type="String" column="idReceiver" not-null="true"/>
+        <property name="timestamp" column="timestamp" type="java.time.LocalDateTime" not-null="true"/>
+        <property name="data" column="data" type="java.lang.String" not-null="true"/>
+    </class>
+
+</hibernate-mapping>
