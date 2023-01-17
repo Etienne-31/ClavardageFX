@@ -4,7 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7398802-4a07-4fd5-b481-985b98198880" name="Changes" comment="" />
+    <list default="true" id="a7398802-4a07-4fd5-b481-985b98198880" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ressource.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Controlers/loginControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Controlers/LoginControler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Controlers/welcomeControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Controlers/WelcomeControler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Models/Utilisateur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Models/Utilisateur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/project/application/App/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/project/application/App/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/project/application/Controlers/ChoosePseudoControler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/project/application/Controlers/ChoosePseudoControler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/project/application/Manager/udpManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/project/application/Manager/udpManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/project/application/Models/Utilisateur.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/project/application/Models/Utilisateur.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/project/application/acceuilView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/project/application/acceuilView.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -59,7 +71,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Libraries",
+    "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.508046",
     "vue.rearranger.settings.migration": "true"

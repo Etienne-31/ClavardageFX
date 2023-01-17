@@ -44,6 +44,7 @@
             <artifactId>hibernate-core</artifactId>
             <version>6.1.5.Final</version>
         </dependency>
+
         <dependency>
             <groupId>javax.persistence</groupId>
             <artifactId>javax.persistence-api</artifactId>
