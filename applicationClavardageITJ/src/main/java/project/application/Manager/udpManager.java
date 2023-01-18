@@ -12,7 +12,7 @@ import java.util.List;
 
 public class udpManager extends  Thread{
 
-    private static final int TIMEOUT_RECEPTION_REPONSE = 1500000000;
+
     public DatagramSocket dgramSocket = null;
     public byte[] myBuffer = null;
     public DatagramPacket inPacket = null;
@@ -33,16 +33,28 @@ public class udpManager extends  Thread{
     public void run(){
         MessageManager messageManager;
         DatagramPacket paquet = null;
-
-
+        try {
+            this.dgramSocket.setSoTimeout(0);
+        } catch (SocketException e) {
+            throw new RuntimeException(e);
+        }
         while(App.connected){
             try {
                 paquet = attendreMessage();
+                if(!(paquet.getAddress() == null)){
+                    boolean sameIP = App.udpManager.checkIP(paquet.getAddress());
+                    if(sameIP){paquet = null;}
+                }
+                else{
+                    paquet = null;
+                }
+
             } catch (UnknownHostException e) {
                 e.printStackTrace();
             }
             if(paquet != null){
-                System.out.println("Nouveau messages udp");
+                String msg = new String(paquet.getData());
+                System.out.println("From udpManager run() Nouveau messages udp / Le message : "+msg);
                 messageManager = new MessageManager(paquet);
                 messageManager.start();
             }
@@ -140,7 +152,6 @@ public class udpManager extends  Thread{
         }
     }
 
-
     public DatagramPacket attendreMessage() throws UnknownHostException {
         Boolean sameIP;
         DatagramPacket receivedDatagram;
@@ -150,33 +161,56 @@ public class udpManager extends  Thread{
         receivedDatagram = new DatagramPacket(receiveData,receiveData.length);
 
         try{
-            this.dgramSocket.setSoTimeout(TIMEOUT_RECEPTION_REPONSE);   //On set le timoutout si aucun message n'est recu alors on lève la socketTimeoutException
+            this.dgramSocket.receive(receivedDatagram);                 // On attend la réception d'un message
+        }
+        catch (SocketException se){
+            se.printStackTrace();              //Exception en cas d'erreur avec le socket
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        return receivedDatagram;   //Si le datagram n'est pas null, on le renvoie tout simplement
+    }
+
+
+    public DatagramPacket attendreMessageTO() throws UnknownHostException {
+        Boolean sameIP;
+        DatagramPacket receivedDatagram;
+        int timeout = 5000;
+        byte[] receiveData = new byte[500];   //On initialise le buffer de reception
+
+
+        receivedDatagram = new DatagramPacket(receiveData,receiveData.length);
+
+        try{
+            this.dgramSocket.setSoTimeout(timeout);   //On set le timoutout si aucun message n'est recu alors on lève la socketTimeoutException
             this.dgramSocket.receive(receivedDatagram);                 // On attend la réception d'un message
         }
         catch (SocketException se){
             se.printStackTrace();              //Exception en cas d'erreur avec le socket
         }
         catch(SocketTimeoutException e){
+            System.out.println("From udpManager attendreMessage() : le timeout a expiré ");
             return null;                //Si cette exception est levée alors cette méthode renverra null
         }
         catch(IOException e){
             e.printStackTrace();
         }
-        sameIP = this.checkIP(receivedDatagram.getAddress());
-        if(sameIP){receivedDatagram = null;}
 
         return receivedDatagram;   //Si le datagram n'est pas null, on le renvoie tout simplement
     }
+
+
 
     public void envoyerResponse(InetAddress adrDest, int portDest, boolean resp, String MyAddr) throws IOException {
         String msg;
         DatagramPacket packet;
         if (resp){   //Si le pseudo n'est pas pris par l'utilisateur qui envoie la response après récèption du broadcast alors resp = true
-            msg = "/Pseudo:"+this.user.userPseudo+"/Adresse:"+MyAddr+""+"/fin";       // On construit le message
+            msg = "objet:AcceptationPseudo/finObjet/Response:oui/finResponse"+"/Pseudo:"+this.user.userPseudo+"/Adresse:"+MyAddr+""+"/fin";       // On construit le message
             packet = new DatagramPacket(msg.getBytes(), msg.length(), adrDest, portDest);   // On crée le paquet datagram
         }
         else{
-            msg = "non";
+            msg = "objet:AcceptationPseudo/finObjet/Response:non/finResponse/fin";
             packet = new DatagramPacket(msg.getBytes(), msg.length(), adrDest, portDest);
         }
         this.dgramSocket.send(packet);      // On envoie le message

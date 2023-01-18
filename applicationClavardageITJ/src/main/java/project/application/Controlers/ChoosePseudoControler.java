@@ -40,6 +40,7 @@ public class ChoosePseudoControler implements Initializable {
         String pseudo;
         String message_recu;
         Boolean pseudoGood = true;
+        Boolean sameIP;
         DatagramPacket receivedDatagram;
         int debutPseudoResponse;
         int finPseudoResponse;
@@ -57,10 +58,11 @@ public class ChoosePseudoControler implements Initializable {
 
 
 
-        while(finRetour == false){
+        while(!finRetour){
             message_recu = "";               // On re initialise la variable message recu pour que rien ne soit contenu dedans
-            System.out.println("From choosePseudoControler submit() : En attente de reception d'un message ");
-            receivedDatagram = App.udpManager.attendreMessage();   // On attend une response , si il y en a pas received_datagram sera null
+            receivedDatagram = App.udpManager.attendreMessageTO();   // On attend une response , si il y en a pas received_datagram sera null
+            sameIP = App.udpManager.checkIP(receivedDatagram.getAddress());
+            if(sameIP){receivedDatagram = null;}
 
             if(receivedDatagram != null){
                 System.out.println("From ChoosePseudo controler - message recu ");
@@ -100,6 +102,7 @@ public class ChoosePseudoControler implements Initializable {
         }
         System.out.println("From choosePseudoControler submit() : Fin de lecture de  listeResponse");
         System.out.println("From choosePseudoControler submit() : Le variable pseudoGood est "+pseudoGood);
+
         if(pseudoGood){
             App.connected = true;                   // Après toutes les étapes on est enfin connecté donc l'attribut boolean static dans App passe à true
             App.udpManager.broadcastConfirmationPseudo(); //Confirmer pseudo en broadcastant à nouveau

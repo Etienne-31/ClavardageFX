@@ -23,9 +23,13 @@ public class MessageManager extends Thread{   // On lance un thread pour gérer 
         int finObjet = message.indexOf("/finObjet/");
         objet = message.substring(debutObjet,finObjet);                // On vient chercher l'objet du message et en fonction de cet objet on aura un traitement différent
         int debutPseudo = message.indexOf("pseudo:")+"pseudo:".length();
+
         int finPseudo = message.indexOf(";");
         String pseudo = message.substring(debutPseudo,finPseudo);
         System.out.println("L'objet du message est "+objet);
+
+
+
         if(objet.equals("demandePseudo")){
             Boolean response;
 
@@ -51,6 +55,19 @@ public class MessageManager extends Thread{   // On lance un thread pour gérer 
         }
         else if(objet.equals("deconnexion")){
             App.userAnnuaire.getAnnuaire().remove(pseudo);
+
+        }
+        else if(objet.equals("AcceptationPseudo")){
+            int debutResponse = message.indexOf("Response:")+"Response:".length();
+            int finResponse = message.indexOf("/finResponse");
+            String response = message.substring(debutResponse,finResponse);
+
+            if(response.equals("oui")){
+
+            }
+            else if (response.equals("non")){
+
+            }
 
         }
 

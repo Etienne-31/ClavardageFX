@@ -17,7 +17,7 @@ import java.net.UnknownHostException;
 public class App extends Application {
     public static Stage primaryStage;     //Cet Attribut est l'interface graphique , cad la fenêtre où s'affiche les informations
 
-    public final static int udpPort = 1511;  // Port sur leque on communique en UDP , c'est le même sur tous les devices utilisant l'applicatioj
+    public final static int udpPort = 1512;  // Port sur leque on communique en UDP , c'est le même sur tous les devices utilisant l'applicatioj
     public static Utilisateur user;       // représente l'utilisateur de l'application
     public static Annuaire userAnnuaire; // l'annuaire de l'application
 
