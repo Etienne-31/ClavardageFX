@@ -208,7 +208,7 @@ public class udpManager extends  Thread{
         String msg;
         DatagramPacket packet;
         if (resp){   //Si le pseudo n'est pas pris par l'utilisateur qui envoie la response après récèption du broadcast alors resp = true
-            msg = "objet:AcceptationPseudo/finObjet/Response:oui/finResponse"+"/Pseudo:"+this.user.userPseudo+"/Adresse:"+MyAddr+""+"/fin";       // On construit le message
+            msg = "objet:AcceptationPseudo/finObjet/Response:oui/finResponse"+"/Pseudo:"+this.user.userPseudo+"/Adresse:"+MyAddr+""+"/finAdresse";       // On construit le message
             packet = new DatagramPacket(msg.getBytes(), msg.length(), adrDest, portDest);   // On crée le paquet datagram
         }
         else{

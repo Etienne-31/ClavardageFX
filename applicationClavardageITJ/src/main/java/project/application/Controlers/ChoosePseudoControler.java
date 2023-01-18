@@ -108,7 +108,7 @@ public class ChoosePseudoControler implements Initializable {
                 finPseudoResponse = response.indexOf("/Adresse:");
 
                 debutAdresse = response.indexOf("/Adresse:")+"/Adresse:".length();
-                finAdresse = response.indexOf("/fin");
+                finAdresse = response.indexOf("/finAdresse");
 
                 fullResponseAdress = response.substring(debutAdresse,finAdresse);   //On récupère l'adresse
                 System.out.println("From ChoosePseudoControler submit() pour la réponse : "+response+" l'adresse est "+fullResponseAdress);
