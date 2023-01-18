@@ -12,7 +12,7 @@ import java.util.List;
 
 public class udpManager extends  Thread{
 
-    private static final int TIMEOUT_RECEPTION_REPONSE = 15000;
+    private static final int TIMEOUT_RECEPTION_REPONSE = 1500000000;
     public DatagramSocket dgramSocket = null;
     public byte[] myBuffer = null;
     public DatagramPacket inPacket = null;
