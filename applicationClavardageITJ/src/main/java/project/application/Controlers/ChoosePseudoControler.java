@@ -59,6 +59,7 @@ public class ChoosePseudoControler implements Initializable {
 
         while(finRetour == false){
             message_recu = "";               // On re initialise la variable message recu pour que rien ne soit contenu dedans
+            System.out.println("From choosePseudoControler submit() : En attente de reception d'un message ");
             receivedDatagram = App.udpManager.attendreMessage();   // On attend une response , si il y en a pas received_datagram sera null
 
             if(receivedDatagram != null){
@@ -68,6 +69,7 @@ public class ChoosePseudoControler implements Initializable {
             }
 
             if(message_recu.equals("")){    //Une fois qu'on aura recu toutes les réponses , attendreMessage renverra Null
+                System.out.println("From choosePseudoControler submit() : Fin du timer socket on attend plus de message");
                 finRetour = true;
             }
             else{
@@ -96,7 +98,8 @@ public class ChoosePseudoControler implements Initializable {
                 App.userAnnuaire.getAnnuaire().put(response.substring(debutPseudoResponse,finPseudoResponse),new Utilisateur(response.substring(debutPseudoResponse,finPseudoResponse),responseAdress));//On ajoute l'utilisateur à l'annuaire
             }
         }
-
+        System.out.println("From choosePseudoControler submit() : Fin de lecture de  listeResponse");
+        System.out.println("From choosePseudoControler submit() : Le variable pseudoGood est "+pseudoGood);
         if(pseudoGood){
             App.connected = true;                   // Après toutes les étapes on est enfin connecté donc l'attribut boolean static dans App passe à true
             App.udpManager.broadcastConfirmationPseudo(); //Confirmer pseudo en broadcastant à nouveau

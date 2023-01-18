@@ -25,16 +25,17 @@ public class MessageManager extends Thread{   // On lance un thread pour gérer 
         int debutPseudo = message.indexOf("pseudo:")+"pseudo:".length();
         int finPseudo = message.indexOf(";");
         String pseudo = message.substring(debutPseudo,finPseudo);
-
+        System.out.println("L'objet du message est "+objet);
         if(objet.equals("demandePseudo")){
             Boolean response;
-            System.out.println("Le message est sur la demande de pseudo");
+
             if(App.user.userPseudo.equals(pseudo)){
                 response = false;
             }
             else{
                 response = true;
             }
+            System.out.println("La response que je vais envoyer est :"+response);
             try {
                 App.udpManager.envoyerResponse(this.paquet.getAddress(),this.paquet.getPort(),response,App.user.getUserIpAdress().toString());
             } catch (IOException e) {
