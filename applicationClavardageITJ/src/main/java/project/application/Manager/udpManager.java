@@ -169,6 +169,7 @@ public class udpManager extends  Thread{
         catch(IOException e){
             e.printStackTrace();
         }
+
         return receivedDatagram;   //Si le datagram n'est pas null, on le renvoie tout simplement
     }
 
@@ -196,7 +197,8 @@ public class udpManager extends  Thread{
         catch(IOException e){
             e.printStackTrace();
         }
-
+        String msg = new String(receivedDatagram.getData());
+        System.out.println("From attendreMessageTO() : Valeur du datagram :"+msg);
         return receivedDatagram;   //Si le datagram n'est pas null, on le renvoie tout simplement
     }
 

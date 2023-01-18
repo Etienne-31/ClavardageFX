@@ -33,7 +33,7 @@ public class ChoosePseudoControler implements Initializable {
     Button submitButton;
 
     @FXML
-    protected void submit() throws IOException {
+    protected void submit() throws IOException, InterruptedException {
         Stage primaryStage = App.primaryStage;
         listResponse = new ArrayList<String>();
         Boolean finRetour = false;
@@ -59,10 +59,18 @@ public class ChoosePseudoControler implements Initializable {
 
 
         while(!finRetour){
+            sameIP = false;
             message_recu = "";               // On re initialise la variable message recu pour que rien ne soit contenu dedans
+            Thread.sleep(1000);
             receivedDatagram = App.udpManager.attendreMessageTO();   // On attend une response , si il y en a pas received_datagram sera null
-            sameIP = App.udpManager.checkIP(receivedDatagram.getAddress());
-            if(sameIP){receivedDatagram = null;}
+            if(receivedDatagram != null){
+                sameIP = App.udpManager.checkIP(receivedDatagram.getAddress());
+            }
+
+            if(sameIP){
+                receivedDatagram = null;
+                message_recu="nope";
+            }
 
             if(receivedDatagram != null){
                 System.out.println("From ChoosePseudo controler - message recu ");
@@ -74,9 +82,13 @@ public class ChoosePseudoControler implements Initializable {
                 System.out.println("From choosePseudoControler submit() : Fin du timer socket on attend plus de message");
                 finRetour = true;
             }
-            else{
+            else if(!message_recu.equals("nope")){
+                System.out.println("From choosePseudoControler submit() : On ajoute à la liste le msg :"+message_recu);
                 listResponse.add(message_recu);   //On ajoute les messages recu dans une liste pour faire un traitement après le while pour perdre le moins de temps possible
                 receivedDatagram = null;
+            }
+            else{
+                System.out.println("From choosePseudoControler submit() : le message est égale à :"+message_recu);
             }
         }
 
