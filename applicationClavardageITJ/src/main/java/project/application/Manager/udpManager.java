@@ -42,6 +42,7 @@ public class udpManager extends  Thread{
                 e.printStackTrace();
             }
             if(paquet != null){
+                System.out.println("Nouveau messages udp");
                 messageManager = new MessageManager(paquet);
                 messageManager.start();
             }

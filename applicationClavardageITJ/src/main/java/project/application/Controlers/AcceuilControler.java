@@ -10,6 +10,7 @@ public class AcceuilControler implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("Lancement du thread de gestion des messages");
         App.udpManager.start();
 
     }

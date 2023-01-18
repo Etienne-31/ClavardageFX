@@ -28,6 +28,7 @@ public class MessageManager extends Thread{   // On lance un thread pour gérer 
 
         if(objet.equals("demandePseudo")){
             Boolean response;
+            System.out.println("Le message est sur la demande de pseudo");
             if(App.user.userPseudo.equals(pseudo)){
                 response = false;
             }
@@ -41,7 +42,7 @@ public class MessageManager extends Thread{   // On lance un thread pour gérer 
             }
 
         }
-        else if(objet.equals("confirmationPseudo")){
+        else if(objet.equals("confirmationPseudo")){System.out.println("Le message est sur la confirmation de pseudo");
             Utilisateur nouvelAjout = new Utilisateur(pseudo,paquet.getAddress());
             App.userAnnuaire.getAnnuaire().put(pseudo,nouvelAjout);
 
