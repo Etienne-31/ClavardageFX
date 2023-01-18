@@ -144,7 +144,7 @@ public class udpManager extends  Thread{
     public DatagramPacket attendreMessage() throws UnknownHostException {
         Boolean sameIP;
         DatagramPacket receivedDatagram;
-        byte[] receiveData = new byte[70];   //On initialise le buffer de reception
+        byte[] receiveData = new byte[500];   //On initialise le buffer de reception
 
 
         receivedDatagram = new DatagramPacket(receiveData,receiveData.length);
