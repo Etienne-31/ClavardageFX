@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7398802-4a07-4fd5-b481-985b98198880" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Controlers/ChoosePseudoControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Controlers/ChoosePseudoControler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Manager/udpManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Manager/udpManager.java" afterDir="false" />
-    </list>
+    <list default="true" id="a7398802-4a07-4fd5-b481-985b98198880" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,8 +14,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
-        <option value="Class" />
         <option value="Tag Library Descriptor" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -118,6 +114,7 @@
       <workItem from="1673960854634" duration="3786000" />
       <workItem from="1674029592152" duration="15834000" />
       <workItem from="1674045603243" duration="4471000" />
+      <workItem from="1674066966657" duration="2364000" />
     </task>
     <servers />
   </component>

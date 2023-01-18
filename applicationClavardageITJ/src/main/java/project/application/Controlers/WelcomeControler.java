@@ -19,13 +19,20 @@ public class WelcomeControler {
     @FXML
     private Button connectionButton;
 
-    protected void goToInscription(){}
-
 
     @FXML
     protected void goToConnection() throws IOException {
         Stage primaryStage = App.primaryStage;
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/loginView.fxml"));
+        Scene Connectionscene = new Scene(fxmlLoader.load(), 600, 400);
+        primaryStage.setScene(Connectionscene);
+
+    }
+
+    @FXML
+    protected void goToInscription() throws IOException {
+        Stage primaryStage = App.primaryStage;
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/inscriptionView.fxml"));
         Scene Connectionscene = new Scene(fxmlLoader.load(), 600, 400);
         primaryStage.setScene(Connectionscene);
 

@@ -49,6 +49,30 @@ public class AlertManager {
         alertWindow.showAndWait();
     }
 
+    public static void displayInscriptionFailed() throws IOException {
+        Stage alertWindow = new Stage();   //Crée la nouvele fenêtre
+        Window = alertWindow;
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/inscriptionFailedView.fxml"));
+        Scene myScene = new Scene(fxmlLoader.load());
+
+        alertWindow.initModality(Modality.APPLICATION_MODAL);
+        alertWindow.setTitle("Connexion");
+        alertWindow.setScene(myScene);
+        alertWindow.showAndWait();
+    }
+
+    public static void displayInscriptionSucceed() throws IOException {
+        Stage alertWindow = new Stage();   //Crée la nouvele fenêtre
+        Window = alertWindow;
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/inscriptionSucceedView.fxml"));
+        Scene myScene = new Scene(fxmlLoader.load());
+
+        alertWindow.initModality(Modality.APPLICATION_MODAL);
+        alertWindow.setTitle("Connexion");
+        alertWindow.setScene(myScene);
+        alertWindow.showAndWait();
+    }
+
 
 
 }
