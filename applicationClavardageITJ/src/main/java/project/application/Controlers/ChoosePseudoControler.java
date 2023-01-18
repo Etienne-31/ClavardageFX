@@ -76,17 +76,21 @@ public class ChoosePseudoControler implements Initializable {
             }
             else{
                 listResponse.add(message_recu);   //On ajoute les messages recu dans une liste pour faire un traitement après le while pour perdre le moins de temps possible
+                receivedDatagram = null;
             }
         }
 
         for(String response : listResponse){
-            if(response.equals("non")){
+            int debutResponse = response.indexOf("Response:")+"Response:".length();
+            int finResponse = response.indexOf("/finResponse");
+            String rep = response.substring(debutResponse,finResponse);
+            if(rep.equals("non")){
                 App.user.setUserPseudo("");
                 App.userAnnuaire.getAnnuaire().clear(); // On reset l'annuaire
                 pseudoGood = false;
                 break;
             }
-            else{
+            else if(rep.equals("oui")){
                 System.out.println("Response recu : "+response);
                 debutPseudoResponse = response.indexOf("/Pseudo:")+"/Pseudo:".length();
                 finPseudoResponse = response.indexOf("/Adresse:");
@@ -98,6 +102,9 @@ public class ChoosePseudoControler implements Initializable {
                 System.out.println("From ChoosePseudoControler submit() pour la réponse : "+response+" l'adresse est "+fullResponseAdress);
                 responseAdress = InetAddress.getByName(fullResponseAdress.substring(fullResponseAdress.indexOf("/")+1)); // On la met en InetAdress en enlevant adress mac
                 App.userAnnuaire.getAnnuaire().put(response.substring(debutPseudoResponse,finPseudoResponse),new Utilisateur(response.substring(debutPseudoResponse,finPseudoResponse),responseAdress));//On ajoute l'utilisateur à l'annuaire
+            }
+            else{
+
             }
         }
         System.out.println("From choosePseudoControler submit() : Fin de lecture de  listeResponse");

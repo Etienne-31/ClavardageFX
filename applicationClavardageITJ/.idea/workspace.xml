@@ -6,13 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a7398802-4a07-4fd5-b481-985b98198880" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/project/application/App/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/App/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Controlers/ChoosePseudoControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Controlers/ChoosePseudoControler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Manager/MessageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Manager/MessageManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Manager/udpManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Manager/udpManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/project/application/Controlers/ChoosePseudoControler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/project/application/Controlers/ChoosePseudoControler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/project/application/Manager/MessageManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/project/application/Manager/MessageManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/project/application/Manager/udpManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/project/application/Manager/udpManager.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +117,7 @@
       <workItem from="1673960654042" duration="170000" />
       <workItem from="1673960854634" duration="3786000" />
       <workItem from="1674029592152" duration="15834000" />
-      <workItem from="1674045603243" duration="1879000" />
+      <workItem from="1674045603243" duration="2577000" />
     </task>
     <servers />
   </component>

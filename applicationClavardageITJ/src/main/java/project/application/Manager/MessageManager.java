@@ -57,19 +57,9 @@ public class MessageManager extends Thread{   // On lance un thread pour gérer 
             App.userAnnuaire.getAnnuaire().remove(pseudo);
 
         }
-        else if(objet.equals("AcceptationPseudo")){
-            int debutResponse = message.indexOf("Response:")+"Response:".length();
-            int finResponse = message.indexOf("/finResponse");
-            String response = message.substring(debutResponse,finResponse);
 
-            if(response.equals("oui")){
 
-            }
-            else if (response.equals("non")){
 
-            }
-
-        }
 
     }
 
