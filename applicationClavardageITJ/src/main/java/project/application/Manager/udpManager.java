@@ -32,11 +32,15 @@ public class udpManager extends  Thread{
     @Override
     public void run(){
         MessageManager messageManager;
-        DatagramPacket paquet;
+        DatagramPacket paquet = null;
 
 
         while(App.connected){
-            paquet = attendreMessage();
+            try {
+                paquet = attendreMessage();
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+            }
             if(paquet != null){
                 messageManager = new MessageManager(paquet);
                 messageManager.start();
@@ -54,15 +58,16 @@ public class udpManager extends  Thread{
             System.out.println("Erreur lors de l'initialisation du serveur UDP : "+e); //On affiche l'erreur en cas d'exception
         }
 
-        this.myBuffer = new byte[1024];         // On initialise le buffer pour envoyer le pseudo
-        this.msg ="objet:demandePseudo/finObjet/"+"pseudo:"+this.user.userPseudo+";";    // On créé le message contenant le pseudo
 
+        this.msg ="objet:demandePseudo/finObjet/"+"pseudo:"+this.user.userPseudo+";";    // On créé le message contenant le pseudo
+        this.myBuffer = new byte[this.msg.length()];         // On initialise le buffer pour envoyer le pseudo
         for(InetAddress broadcastAdress : this.getBroadcastAddresses()){
 
             DatagramPacket packet = new DatagramPacket(this.msg.getBytes(), this.msg.length(), broadcastAdress, this.port);  // On construit le paquet
-            System.out.println("-------------"+"User : "+this.user.getIdUser()+" Je vais Broadcast à l'adresse : "+broadcastAdress.toString());
+            System.out.println("-------------"+"User : "+this.user.getIdUser()+" Je vais Broadcast la demande de pseudo à l'adresse : "+broadcastAdress.toString()+" avec le message "+this.msg);
             this.dgramSocket.send(packet);   // On envoie le paquet
-            System.out.println("-------------"+"User : "+this.user.getIdUser()+"Broadcast de demandee envoyé à l'adresse : "+broadcastAdress.toString());
+            System.out.println("-------------"+"User : "+this.user.getIdUser()+" Broadcast de demande de pseudo envoyé à l'adresse : "+broadcastAdress.toString());
+
         }
 
 
@@ -85,12 +90,13 @@ public class udpManager extends  Thread{
             System.out.println("Erreur lors de l'initialisation du serveur UDP : "+e); //On affiche l'erreur en cas d'exception
         }
 
-        this.myBuffer = new byte[1024];         // On initialise le buffer pour envoyer le pseudo
+
         this.msg ="objet:deconnexion/finObjet/"+"pseudo:"+this.user.userPseudo+";";    // On créé le message prévenant de notre deconnexion
+        this.myBuffer = new byte[this.msg.length()];         // On initialise le buffer pour envoyer le pseudo
         for(InetAddress broadcastAdress : this.getBroadcastAddresses()){
             DatagramPacket packet = new DatagramPacket(this.msg.getBytes(), this.msg.length(), broadcastAdress, this.port);  // On construit le paquet
             this.dgramSocket.send(packet);
-            System.out.println("-------------"+"User : "+this.user.getIdUser()+"Broadcast de demandee envoyé à l'adresse : "+broadcastAdress.toString());
+            System.out.println("-------------"+"User : "+this.user.getIdUser()+"Broadcast de demande de déconnexion envoyé à l'adresse : "+broadcastAdress.toString());
         }
 
 
@@ -114,12 +120,12 @@ public class udpManager extends  Thread{
             System.out.println("Erreur lors de l'initialisation du serveur UDP : "+e); //On affiche l'erreur en cas d'exception
         }
 
-        this.myBuffer = new byte[1024];         // On initialise le buffer pour envoyer le pseudo
-        this.msg ="objet:confirmationPseudo/finObjet/"+"pseudo:"+this.user.userPseudo+";";    // On créé le message confirmant
+        this.msg ="objet:confirmationPseudo/finObjet/"+"pseudo:"+this.user.userPseudo+";";    // On créé le message
+        this.myBuffer = new byte[this.msg.length()];         // On initialise le buffer pour envoyer le pseudo
         for(InetAddress broadcastAdress : this.getBroadcastAddresses()){
             DatagramPacket packet = new DatagramPacket(this.msg.getBytes(), this.msg.length(), broadcastAdress, this.port);  // On construit le paquet
             this.dgramSocket.send(packet);   // On envoie le paquet
-            System.out.println("-------------"+"User : "+this.user.getIdUser()+"Broadcast de demandee envoyé à l'adresse : "+broadcastAdress.toString());
+            System.out.println("-------------"+"User : "+this.user.getIdUser()+" Broadcast de confirmation envoyé à l'adresse : "+broadcastAdress.toString());
         }
 
 
@@ -134,10 +140,10 @@ public class udpManager extends  Thread{
     }
 
 
-    public DatagramPacket attendreMessage(){
-
+    public DatagramPacket attendreMessage() throws UnknownHostException {
+        Boolean sameIP;
         DatagramPacket receivedDatagram;
-        byte[] receiveData = new byte[1024];   //On initialise le buffer de reception
+        byte[] receiveData = new byte[70];   //On initialise le buffer de reception
 
 
         receivedDatagram = new DatagramPacket(receiveData,receiveData.length);
@@ -155,6 +161,8 @@ public class udpManager extends  Thread{
         catch(IOException e){
             e.printStackTrace();
         }
+        sameIP = this.checkIP(receivedDatagram.getAddress());
+        if(sameIP){receivedDatagram = null;}
 
         return receivedDatagram;   //Si le datagram n'est pas null, on le renvoie tout simplement
     }
@@ -193,6 +201,25 @@ public class udpManager extends  Thread{
             e.printStackTrace();
         }
         return broadcastAddresses;
+    }
+
+    public  boolean checkIP(InetAddress address) {
+        try {
+            Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+            while (interfaces.hasMoreElements()) {
+                NetworkInterface ni = interfaces.nextElement();
+                Enumeration<InetAddress> addresses = ni.getInetAddresses();
+                while (addresses.hasMoreElements()) {
+                    InetAddress addr = addresses.nextElement();
+                    if (address.equals(addr)) {
+                        return true;
+                    }
+                }
+            }
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
 

@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7398802-4a07-4fd5-b481-985b98198880" name="Changes" comment="" />
+    <list default="true" id="a7398802-4a07-4fd5-b481-985b98198880" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Controlers/ChoosePseudoControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Controlers/ChoosePseudoControler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Manager/udpManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Manager/udpManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Models/Messages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Models/Messages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/project/application/acceuilView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/project/application/acceuilView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/project/application/pseudoSucceedView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/project/application/pseudoSucceedView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/project/application/Controlers/ChoosePseudoControler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/project/application/Controlers/ChoosePseudoControler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/project/application/Manager/udpManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/project/application/Manager/udpManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/project/application/acceuilView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/project/application/acceuilView.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,8 +24,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
-        <option value="Tag Library Descriptor" />
         <option value="Class" />
+        <option value="Tag Library Descriptor" />
       </list>
     </option>
   </component>
@@ -38,34 +48,33 @@
     </option>
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2JuUHZtKXoFLpAYl9a5zbaQWume" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "true",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "jdk.selected.JAVA_MODULE": "19",
-    "last_opened_file_path": "D:/Programmation_Insa/Projet_Java/ProjetJavaFXitj/ClavardageFX/applicationClavardageITJ",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.508046",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Programmation_Insa/Projet_Java/ProjetJavaFXitj/ClavardageFX/applicationClavardageITJ&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.508046&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="ImportMappingsDialog.RecentPackages">
       <recent name="" />
@@ -113,9 +122,7 @@
       <workItem from="1673891225063" duration="285000" />
       <workItem from="1673960654042" duration="170000" />
       <workItem from="1673960854634" duration="3786000" />
-      <workItem from="1673979251203" duration="6756000" />
-      <workItem from="1673987612411" duration="2597000" />
-      <workItem from="1673991743181" duration="4562000" />
+      <workItem from="1674029592152" duration="5324000" />
     </task>
     <servers />
   </component>

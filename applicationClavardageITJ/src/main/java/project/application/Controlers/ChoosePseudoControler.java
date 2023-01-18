@@ -50,22 +50,24 @@ public class ChoosePseudoControler implements Initializable {
         String fullResponseAdress;
         InetAddress responseAdress;
 
-        pseudo = pseudoBar.getText();
-        System.out.println("User :"+App.user.getIdUser()+" : Je vais broadcast mon pseudo");
+        App.user.setUserPseudo(pseudoBar.getText());
+        System.out.println("User from choosePseudoControler :"+App.user.getIdUser()+" : Je vais broadcast mon pseudo");
         broadcastManager.broadcastPseudo();    // On broadcast le pseudo
         System.out.println("User :"+App.user.getIdUser()+" : J'ai broadcast mon pseudo ");
 
 
 
         while(finRetour == false){
-            message_recu = null;               // On re initialise la variable message recu pour que rien ne soit contenu dedans
+            message_recu = "";               // On re initialise la variable message recu pour que rien ne soit contenu dedans
             receivedDatagram = App.udpManager.attendreMessage();   // On attend une response , si il y en a pas received_datagram sera null
 
             if(receivedDatagram != null){
+                System.out.println("From ChoosePseudo controler - message recu ");
                 message_recu = new String(receivedDatagram.getData());
+                System.out.println("From ChoosePseudo controler submit() - message recu :"+message_recu+" depuis l'adresse : "+receivedDatagram.getAddress().toString());
             }
 
-            if(message_recu.equals(null)){    //Une fois qu'on aura recu toutes les réponses , attendreMessage renverra Null
+            if(message_recu.equals("")){    //Une fois qu'on aura recu toutes les réponses , attendreMessage renverra Null
                 finRetour = true;
             }
             else{
@@ -75,26 +77,28 @@ public class ChoosePseudoControler implements Initializable {
 
         for(String response : listResponse){
             if(response.equals("non")){
+                App.user.setUserPseudo("");
                 App.userAnnuaire.getAnnuaire().clear(); // On reset l'annuaire
                 pseudoGood = false;
                 break;
             }
             else{
+                System.out.println("Response recu : "+response);
                 debutPseudoResponse = response.indexOf("/Pseudo:")+"/Pseudo:".length();
                 finPseudoResponse = response.indexOf("/Adresse:");
 
                 debutAdresse = response.indexOf("/Adresse:")+"/Adresse:".length();
-                finAdresse = response.indexOf("/port:");
+                finAdresse = response.indexOf("/fin");
 
                 fullResponseAdress = response.substring(debutAdresse,finAdresse);   //On récupère l'adresse
+                System.out.println("From ChoosePseudoControler submit() pour la réponse : "+response+" l'adresse est "+fullResponseAdress);
                 responseAdress = InetAddress.getByName(fullResponseAdress.substring(fullResponseAdress.indexOf("/")+1)); // On la met en InetAdress en enlevant adress mac
                 App.userAnnuaire.getAnnuaire().put(response.substring(debutPseudoResponse,finPseudoResponse),new Utilisateur(response.substring(debutPseudoResponse,finPseudoResponse),responseAdress));//On ajoute l'utilisateur à l'annuaire
             }
         }
 
-        if(pseudoGood == true){
+        if(pseudoGood){
             App.connected = true;                   // Après toutes les étapes on est enfin connecté donc l'attribut boolean static dans App passe à true
-            App.user.setUserPseudo(pseudo);            // On set le pseudo qui vient d'être rentrer dans bar
             App.udpManager.broadcastConfirmationPseudo(); //Confirmer pseudo en broadcastant à nouveau
             AlertManager.displayPseudoSucceed();       // On affiche qu'on est connecté
 

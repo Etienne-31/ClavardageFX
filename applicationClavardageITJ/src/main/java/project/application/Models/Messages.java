@@ -48,6 +48,10 @@ public class Messages {
         return this.Data;
     }
 
+    public void setData(String data) {
+        Data = data;
+    }
+
     public String toString(){
         return "Message recu / Id sender :"+getIdSender()+" / Id receiver :"+getIdReceiver()+" / Timestamp : "+getTimestamp()+" \n"+" Message : "+getData();
 

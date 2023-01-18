@@ -20,7 +20,7 @@
          <children>
             <AnchorPane prefHeight="193.0" prefWidth="612.0">
                <children>
-                  <Label fx:id="closeButton" layoutX="34.0" layoutY="37.0" prefHeight="17.0" prefWidth="237.0" text="Connecté" />
+                  <Label layoutX="34.0" layoutY="37.0" prefHeight="17.0" prefWidth="237.0" text="Connecté" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
