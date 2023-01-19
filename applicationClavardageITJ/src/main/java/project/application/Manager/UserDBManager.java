@@ -57,13 +57,13 @@ public class UserDBManager {
 
     }
 
-   public static List<Utilisateur> getListUser(String  idUser){
+  /* public static List<Utilisateur> getListUser(String  idUser){
         SessionFactory factory = Hibernate.getSessionFactory();
         Session session = factory.openSession();
         List<Utilisateur> userList = null;
         try{
 
-            String sql = "SELECT user.password, user.idUser from "+Utilisateur.class.getName()+" user"+" where user.idUser="+idUser;
+            String sql = "SELECT user.password, user.idUser FROM "+Utilisateur.class.getName()+" user"+" WHERE user.idUser="+idUser;
 
             Query query = session.createQuery(sql);
             userList = query.getResultList();
@@ -77,7 +77,17 @@ public class UserDBManager {
 
         return userList;
 
-    }
+    }*/
+  public static List<Utilisateur> getListUser(String idUser) {
+      Session session = Hibernate.getSessionFactory().openSession();
+       String hql = "FROM Utilisateur u WHERE u.idUser = :id";
+     // String hql = "SELECT u FROM "+Utilisateur.class.getName()+ " u WHERE u.idUser = :id";
+      Query query = session.createQuery(hql);
+      query.setParameter("id", idUser);
+      List<Utilisateur> utilisateurs = query.list();
+      session.close();
+      return utilisateurs;
+  }
 
     public static Utilisateur getUtilisateur(String idUser) throws UnknownHostException {
         SessionFactory factory = Hibernate.getSessionFactory();
