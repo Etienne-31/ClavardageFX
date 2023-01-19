@@ -88,11 +88,11 @@ public class UserDBManager {
         List<Utilisateur> list = null;
 
         String hql = "SELECT user FROM "+Utilisateur.class.getName()+" user"+"WHERE user.idUser="+idUser;
-
         try {
             session.getTransaction().begin();
             Query query = session.createQuery(hql);
-             list = query.getResultList();
+
+            list = query.getResultList();
             session.getTransaction().commit();
             Hibernate.shutdown();
         }

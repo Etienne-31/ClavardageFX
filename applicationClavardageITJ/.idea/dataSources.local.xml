@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal" created-in="IU-223.8214.52">
+    <data-source name="DBINSA" uuid="576d79fc-0aa5-4f8a-845e-c76a34044bdd">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" exact-version="5.7.28" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>tp_java4ir_004</user-name>
+      <schema-mapping />
+    </data-source>
+  </component>
+</project>

@@ -4,8 +4,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import project.application.Manager.AlertManager;
+import project.application.Manager.UserDBManager;
+import project.application.Models.Utilisateur;
 
 import java.io.IOException;
+import java.util.List;
 
 public class InscriptionControler {
 
@@ -22,10 +25,21 @@ public class InscriptionControler {
     @FXML
 
     protected void submit() throws IOException{
-        AlertManager.displayInscriptionFailed();
+        String idUser = idTextfiled.getText();
+        String passWord = passwordTextField.getText();
+        List<Utilisateur> listUserFromDB = UserDBManager.getListUser(idUser);
+        Boolean isGood = true;
 
-        //Ecrire Fonction Submit
-        //Enuite Dans login écrire Query depuis la BD
+        for(Utilisateur user : listUserFromDB){
+            if(user.getIdUser().equals(idUser)){
+                isGood = false;
+                break;
+            }
+        }
+
+        if(isGood){
+            UserDBManager.
+        }
 
     }
 }
