@@ -79,9 +79,9 @@ public class UserDBManager {
 
     }*/
   public static List<Utilisateur> getListUser(String idUser) {
-      Session session = Hibernate.getSessionFactory().openSession();
+      Session session = Hibernate.getSessionFacto  ry().openSession();
        String hql = "FROM Utilisateur u WHERE u.idUser = :id";
-       
+
      // String hql = "SELECT u FROM "+Utilisateur.class.getName()+ " u WHERE u.idUser = :id";
       Query query = session.createQuery(hql);
       query.setParameter("id", idUser);
