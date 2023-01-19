@@ -5,16 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a7398802-4a07-4fd5-b481-985b98198880" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Application.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Controlers/InscriptionControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Controlers/InscriptionControler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Manager/UserDBManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Manager/UserDBManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Models/Hibernate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Models/Hibernate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/project/application/Controlers/InscriptionControler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/project/application/Controlers/InscriptionControler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/project/application/Manager/UserDBManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/project/application/Manager/UserDBManager.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
