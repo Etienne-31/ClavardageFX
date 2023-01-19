@@ -4,6 +4,8 @@ module project.application {
     requires  org.hibernate.orm.core;
     requires  java.naming;
     requires java.sql;
+    requires mysql.connector.java;
+
 
     opens project.application to javafx.fxml;
     exports project.application.App;

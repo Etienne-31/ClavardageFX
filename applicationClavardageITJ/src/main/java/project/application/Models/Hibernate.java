@@ -27,12 +27,15 @@ public class Hibernate {
         }*/
         SessionFactory sessionFactory = null;
         try {
-            Configuration configuration = new Configuration().configure("/hibernate.cfg.xml");
+            sessionFactory = new Configuration().configure().buildSessionFactory();
+
+            /*Configuration configuration = new Configuration().configure("/hibernate.cfg.xml");
             StandardServiceRegistryBuilder serviceRegistryBuilder = new StandardServiceRegistryBuilder();
             serviceRegistryBuilder.applySettings(configuration.getProperties());
             ServiceRegistry serviceRegistry = serviceRegistryBuilder.build();
-            sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-        } catch (Exception e) {
+            sessionFactory = configuration.buildSessionFactory(serviceRegistry);*/
+        } catch (IllegalStateException e) {
+            System.out.println("Peut être problème de driver ");
             e.printStackTrace();
         }
         return  sessionFactory;

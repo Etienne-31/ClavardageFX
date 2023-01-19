@@ -41,6 +41,7 @@ public class App extends Application {
     public static void main(String[] args) throws UnknownHostException, SocketException {
 
         System.out.println("Debut");
+        System.out.println(System.getProperty("java.class.path"));
 
         try{
             App.user = new Utilisateur();
