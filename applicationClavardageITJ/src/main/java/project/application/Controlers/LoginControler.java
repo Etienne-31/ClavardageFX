@@ -9,6 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import project.application.App.App;
 import project.application.Manager.AlertManager;
+import project.application.Manager.UserDBManager;
+import project.application.Models.UserLogin;
 
 import java.io.IOException;
 
@@ -34,21 +36,29 @@ public class LoginControler {
         //Gestion BD
         String login;
         String mdp;
-
+        Boolean loginGood = true;
         //GestionInterface
         Stage primaryStage = App.primaryStage;
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/pseudoChooseView.fxml")); //Sert à loader la scen fait sur fxml
         Scene myScene;
-
+        UserLogin verifyInput = null;
         //Récupère le login
         login = idBar.getText();
-
         //récupère le mdp
         mdp = mdpBar.getText();
 
-        if((login.equals("Etienne"))&(mdp.equals("123"))){   //Ici on devra faire une requête sur la base de donnée et comparer ce qu'on a
+        if((login.equals(""))|(mdp.equals(""))|(login == null)|(mdp == null)){
+            loginGood = false;
+        }
+
+        if(loginGood){
+             verifyInput = UserDBManager.getUtilisateur(login);
+        }
+
+        if((login.equals(verifyInput.getIdUser()))&(mdp.equals(verifyInput.getPassword()))&loginGood){   //Ici on devra faire une requête sur la base de donnée et comparer ce qu'on a
             App.user.setId(login);
             System.out.println("Connected");
+            verifyInput = null;
             myScene = new Scene(fxmlLoader.load());
             primaryStage.setScene(myScene);
         }

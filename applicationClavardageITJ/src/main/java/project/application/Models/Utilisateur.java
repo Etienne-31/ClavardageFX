@@ -1,4 +1,9 @@
 package project.application.Models;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 import java.net.*;
 
 
@@ -19,11 +24,9 @@ public class Utilisateur {
 
 
     //Constructeur pour créer un utilisateur sans attribut ( utile au lancement de l'app )
-
-
-
     public Utilisateur() throws UnknownHostException {
         this.ipUser = InetAddress.getLocalHost();
+        this.userPseudo = null;
 
     }
 
@@ -56,6 +59,8 @@ public class Utilisateur {
         }
     }
 
+
+
     public String getIdUser() {
         return this.idUser;
     }
@@ -64,9 +69,11 @@ public class Utilisateur {
         this.idUser = idUser;
     }
 
-    public InetAddress getUserIpAdress() {
+
+    public InetAddress getIpUser() {
         return this.ipUser;
     }
+    public void setIpUser(InetAddress ip){this.ipUser = ip;}
 
     public String getUserPseudo() {
         return userPseudo;
@@ -77,6 +84,7 @@ public class Utilisateur {
     }
 
     public void setId(String idUser){this.idUser = idUser;}
+
 
     public String getPassword() {
         return password;

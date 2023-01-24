@@ -41,7 +41,7 @@ public class MessageManager extends Thread{   // On lance un thread pour gérer 
             }
             System.out.println("La response que je vais envoyer est :"+response);
             try {
-                App.udpManager.envoyerResponse(this.paquet.getAddress(),this.paquet.getPort(),response,App.user.getUserIpAdress().toString());
+                App.udpManager.envoyerResponse(this.paquet.getAddress(),this.paquet.getPort(),response,App.user.getIpUser().toString());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -49,13 +49,12 @@ public class MessageManager extends Thread{   // On lance un thread pour gérer 
         }
         else if(objet.equals("confirmationPseudo")){System.out.println("Le message est sur la confirmation de pseudo");
             Utilisateur nouvelAjout = new Utilisateur(pseudo,paquet.getAddress());
-            App.userAnnuaire.getAnnuaire().put(pseudo,nouvelAjout);
+            App.userAnnuaire.addAnnuaire(pseudo,nouvelAjout);
 
 
         }
         else if(objet.equals("deconnexion")){
-            App.userAnnuaire.getAnnuaire().remove(pseudo);
-
+            App.userAnnuaire.deleteFromAnnuaire(pseudo);
         }
 
 

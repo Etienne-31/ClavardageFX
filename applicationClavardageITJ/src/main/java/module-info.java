@@ -5,7 +5,7 @@ module project.application {
     requires  java.naming;
     requires java.sql;
     requires mysql.connector.java;
-
+    requires jakarta.persistence;
 
     opens project.application to javafx.fxml;
     exports project.application.App;
@@ -14,6 +14,8 @@ module project.application {
     opens project.application.Controlers to javafx.fxml;
     exports project.application.Manager;
     opens project.application.Manager to javafx.fxml;
+    exports project.application.Models;
+    opens project.application.Models to javafx.fxml;
 
     
 }

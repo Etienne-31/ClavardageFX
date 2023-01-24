@@ -50,7 +50,7 @@ public class TCPManager {
 
     public ServerSocket init_socketServerTCP(int port, ServerSocket socketServeur) throws  IOException {
         try {
-            socketServeur = new ServerSocket(1234);   // Penser à changer 1234 par port
+            socketServeur = new ServerSocket(port);   // Penser à changer 1234 par port
         } catch (UnknownHostException e) {
             System.out.println("init_socketServerTCP : Port "+port+" indisponible , init échoué ");
             System.exit(1);

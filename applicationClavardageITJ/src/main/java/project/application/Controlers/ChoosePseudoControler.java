@@ -9,12 +9,14 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import project.application.App.App;
 import project.application.Manager.AlertManager;
+import project.application.Manager.ConnexionChatManager;
 import project.application.Manager.udpManager;
 import project.application.Models.Utilisateur;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
+import java.net.SocketException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ public class ChoosePseudoControler implements Initializable {
     private udpManager broadcastManager;
     private int myPortUDP;
     private InetAddress broadcastAdress;
+    private ConnexionChatManager chatManager;
 
     private ArrayList<String> listResponse;
 
@@ -36,18 +39,17 @@ public class ChoosePseudoControler implements Initializable {
     protected void submit() throws IOException, InterruptedException {
         Stage primaryStage = App.primaryStage;
         listResponse = new ArrayList<String>();
-        Boolean finRetour = false;
-        String pseudo;
+        boolean finRetour = false;
+
         String message_recu;
-        Boolean pseudoGood = true;
-        Boolean sameIP;
+        boolean pseudoGood = true;
+        boolean sameIP;
         DatagramPacket receivedDatagram;
         int debutPseudoResponse;
         int finPseudoResponse;
         int debutAdresse;
         int finAdresse;
-        int debutPort;
-        int finPort;
+
         String fullResponseAdress;
         InetAddress responseAdress;
 
@@ -61,7 +63,7 @@ public class ChoosePseudoControler implements Initializable {
         while(!finRetour){
             sameIP = false;
             message_recu = "";               // On re initialise la variable message recu pour que rien ne soit contenu dedans
-            Thread.sleep(1000);
+            Thread.sleep(100);
             receivedDatagram = App.udpManager.attendreMessageTO();   // On attend une response , si il y en a pas received_datagram sera null
             if(receivedDatagram != null){
                 sameIP = App.udpManager.checkIP(receivedDatagram.getAddress());
@@ -113,11 +115,10 @@ public class ChoosePseudoControler implements Initializable {
                 fullResponseAdress = response.substring(debutAdresse,finAdresse);   //On récupère l'adresse
                 System.out.println("From ChoosePseudoControler submit() pour la réponse : "+response+" l'adresse est "+fullResponseAdress);
                 responseAdress = InetAddress.getByName(fullResponseAdress.substring(fullResponseAdress.indexOf("/")+1)); // On la met en InetAdress en enlevant adress mac
-                App.userAnnuaire.getAnnuaire().put(response.substring(debutPseudoResponse,finPseudoResponse),new Utilisateur(response.substring(debutPseudoResponse,finPseudoResponse),responseAdress));//On ajoute l'utilisateur à l'annuaire
-            }
-            else{
+                App.userAnnuaire.addAnnuaire(response.substring(debutPseudoResponse,finPseudoResponse),new Utilisateur(response.substring(debutPseudoResponse,finPseudoResponse),responseAdress));//On ajoute l'utilisateur à l'annuaire
 
             }
+
         }
         System.out.println("From choosePseudoControler submit() : Fin de lecture de  listeResponse");
         System.out.println("From choosePseudoControler submit() : Le variable pseudoGood est "+pseudoGood);
@@ -126,9 +127,19 @@ public class ChoosePseudoControler implements Initializable {
             App.connected = true;                   // Après toutes les étapes on est enfin connecté donc l'attribut boolean static dans App passe à true
             App.udpManager.broadcastConfirmationPseudo(); //Confirmer pseudo en broadcastant à nouveau
             AlertManager.displayPseudoSucceed();       // On affiche qu'on est connecté
+            try {
+                chatManager = new ConnexionChatManager(App.user,App.portUdpGestionTCP);
+                App.chatManager = chatManager;
+            } catch (SocketException e) {
+                App.connected = false;
+                App.primaryStage.close();
+                e.printStackTrace();
+            }
 
+            chatManager.start();
+            App.udpManager.start();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/acceuilView.fxml")); //Sert à loader la scen fait sur fxml
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/acceuilView.fxml")); //Sert à loader la scene fait sur fxml
             Scene myScene;
             myScene = new Scene(fxmlLoader.load());
             primaryStage.setScene(myScene);

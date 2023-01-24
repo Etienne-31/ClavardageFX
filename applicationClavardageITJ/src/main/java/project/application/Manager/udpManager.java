@@ -1,5 +1,6 @@
 package project.application.Manager;
 
+import org.hibernate.procedure.internal.Util;
 import project.application.App.App;
 import project.application.Models.Utilisateur;
 
@@ -29,6 +30,8 @@ public class udpManager extends  Thread{
         this.dgramSocket = new DatagramSocket(port);
     }
 
+    public DatagramSocket getDgramSocket(){return this.dgramSocket;}
+
     @Override
     public void run(){
         MessageManager messageManager;
@@ -40,7 +43,9 @@ public class udpManager extends  Thread{
         }
         while(App.connected){
             try {
-                paquet = attendreMessage();
+                synchronized (this.dgramSocket){
+                    paquet = attendreMessage();
+                }
                 if(!(paquet.getAddress() == null)){
                     boolean sameIP = App.udpManager.checkIP(paquet.getAddress());
                     if(sameIP){paquet = null;}
@@ -59,6 +64,8 @@ public class udpManager extends  Thread{
                 messageManager.start();
             }
         }
+
+        System.out.println("Fin du thread de gestion des messages udp");
     }
 
     public void broadcastPseudo() throws IOException
@@ -208,15 +215,17 @@ public class udpManager extends  Thread{
         String msg;
         DatagramPacket packet;
         if (resp){   //Si le pseudo n'est pas pris par l'utilisateur qui envoie la response après récèption du broadcast alors resp = true
-            msg = "objet:AcceptationPseudo/finObjet/Response:oui/finResponse"+"/Pseudo:"+this.user.userPseudo+"/Adresse:"+MyAddr+""+"/finAdresse";       // On construit le message
-            packet = new DatagramPacket(msg.getBytes(), msg.length(), adrDest, portDest);   // On crée le paquet datagram
+            msg = "objet:AcceptationPseudo/finObjet/Response:oui/finResponse"+"/Pseudo:"+this.user.userPseudo+"/Adresse:"+MyAddr+""+"/finAdresse";       // On construit le messag
         }
         else{
             msg = "objet:AcceptationPseudo/finObjet/Response:non/finResponse/fin";
-            packet = new DatagramPacket(msg.getBytes(), msg.length(), adrDest, portDest);
+
         }
+        packet = new DatagramPacket(msg.getBytes(), msg.length(), adrDest, portDest);   // On crée le paquet datagram
         this.dgramSocket.send(packet);      // On envoie le message
     }
+
+
 
     public List<InetAddress> getBroadcastAddresses() {
         List<InetAddress> broadcastAddresses = new ArrayList<>();

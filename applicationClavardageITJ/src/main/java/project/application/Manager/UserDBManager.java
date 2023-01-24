@@ -2,6 +2,8 @@ package project.application.Manager;
 
 import java.net.UnknownHostException;
 import java.util.List;
+
+import project.application.Models.UserLogin;
 import project.application.Models.Utilisateur;
 
 import org.hibernate.query.Query;
@@ -35,7 +37,7 @@ public class UserDBManager {
 
     }
 
-   public static void InsertDetached(Utilisateur utilisateur){
+   public static void InsertDetached(UserLogin utilisateur){
         SessionFactory factory = Hibernate.getSessionFactory();
         Session session2 = factory.openSession();
 
@@ -78,32 +80,33 @@ public class UserDBManager {
         return userList;
 
     }*/
-  public static List<Utilisateur> getListUser(String idUser) {
+  public static List<String> getListUser() {
       Session session = Hibernate.getSessionFactory().openSession();
-       String hql = "FROM Utilisateur u WHERE u.idUser = :id";
+       String hql = "SELECT idUser FROM UserLogin ";
 
      // String hql = "SELECT u FROM "+Utilisateur.class.getName()+ " u WHERE u.idUser = :id";
       Query query = session.createQuery(hql);
-      query.setParameter("id", idUser);
-      List<Utilisateur> utilisateurs = query.list();
+
+      List<String> utilisateurs = query.list();
       session.close();
       return utilisateurs;
   }
 
-    public static Utilisateur getUtilisateur(String idUser) throws UnknownHostException {
+    public static UserLogin getUtilisateur(String idUser) throws UnknownHostException {
         SessionFactory factory = Hibernate.getSessionFactory();
         System.out.println("Factory crée");
         Session session = factory.openSession();
         System.out.println("Session crée");
-        Utilisateur userFromDB = new Utilisateur();
-        List<Utilisateur> list = null;
+        UserLogin userFromDB = new UserLogin();
+        List<UserLogin> list = null;
 
-        String hql = "SELECT user FROM "+Utilisateur.class.getName()+" user"+"WHERE user.idUser="+idUser;
+        String hql = " FROM  UserLogin  WHERE idUser = :id";
+
         try {
             session.getTransaction().begin();
             Query query = session.createQuery(hql);
-
-            list = query.getResultList();
+            query.setParameter("id", idUser);
+            list = query.list();
             session.getTransaction().commit();
             Hibernate.shutdown();
         }
@@ -112,11 +115,12 @@ public class UserDBManager {
             e.printStackTrace();
         }
 
-        for(Utilisateur ite : list){
-            userFromDB.setId(ite.getIdUser());
-            userFromDB.setPassword(ite.getPassword());
+        for(UserLogin ite : list){
+            if(ite.getIdUser().equals(idUser)){
+                userFromDB.setIdUser(ite.getIdUser());
+                userFromDB.setPassword(ite.getPassword());
+            }
         }
-
         return  userFromDB;
     }
 

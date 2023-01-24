@@ -4,16 +4,28 @@
 "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
-    <session-factory>
+    <!--<session-factory>
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
-        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://srv-bdens.insa-toulouse.fr:3306/DBINSA</property>
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://srv-bdens.insa-toulouse.fr:3306/tp_java4ir_004</property>
         <property name="connection.username">tp_java4ir_004</property>
         <property name="connection.password">ned4Enge</property>
         <property name="show_sql">true</property>
         <property name="generate_statistics">true</property>
+        <mapping  class="project.application.Models.Utilisateur"/>
 
-        <mapping resource="/Messages.hbm.xml"/>
-        <mapping resource="/Utilisateur.hbm.xml"/>
+         <mapping resource="/Utilisateur.hbm.xml"/
+     </session-factory>-->
+    <session-factory>
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://ms1259484-002.privatesql.ovh.net:35414/bdprojetMaillard</property>
+        <property name="connection.username">maillardetienne</property>
+        <property name="connection.password">X3WCejHi854vm4</property>
+        <property name="show_sql">true</property>
+        <property name="generate_statistics">true</property>
+        <mapping  class="project.application.Models.UserLogin"/>
+
+        <!-- <mapping resource="/Utilisateur.hbm.xml"/>-->
     </session-factory>
-</hibernate-configuration>
+ </hibernate-configuration>

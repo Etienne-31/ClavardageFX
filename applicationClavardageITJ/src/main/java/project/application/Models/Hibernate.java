@@ -41,10 +41,30 @@ public class Hibernate {
         return  sessionFactory;
     }
 
+    private static SessionFactory setUp(){
+        SessionFactory sessionFactory = null;
+        ServiceRegistry registery = new StandardServiceRegistryBuilder()
+                .configure()
+                .build();
+        try{
+            System.out.println("Building sessionsFactory");
+            sessionFactory = new MetadataSources(registery)
+                    .buildMetadata()
+                    .buildSessionFactory();
+
+        }
+        catch (Exception e){
+            StandardServiceRegistryBuilder.destroy(registery);
+            e.printStackTrace();
+
+        }
+        return sessionFactory;
+    }
+
 
 
     public static SessionFactory getSessionFactory(){
-        return buildSessionFactory();
+        return setUp();
     }
 
     public static void shutdown(){

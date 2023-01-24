@@ -9,5 +9,12 @@
       <jdbc-url>jdbc:mysql://srv-bdens.insa-toulouse.fr:3306/</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="bdprojetMaillard" uuid="4a6422de-7183-4245-9936-5193a958e991">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://ms1259484-002.privatesql.ovh.net:35414</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

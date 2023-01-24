@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import project.application.App.App;
 import project.application.Manager.AlertManager;
 import project.application.Manager.UserDBManager;
+import project.application.Models.UserLogin;
 import project.application.Models.Utilisateur;
 
 import java.io.IOException;
@@ -32,20 +33,23 @@ public class InscriptionControler {
         Stage primaryStage = App.primaryStage;
         String idUser = idTextfiled.getText();
         String passWord = passwordTextField.getText();
-        List<Utilisateur> listUserFromDB = UserDBManager.getListUser(idUser);
+        List<String> listUserFromDB = UserDBManager.getListUser();
         Boolean isGood = true;
+        for(String ite : listUserFromDB){
+            if(idUser.equals(ite)){
+                isGood = false;
+            }
 
-        if(listUserFromDB != null){
+        }
+        if((idUser.equals(""))|(passWord.equals(""))|(idUser == null)|(passWord == null)){
             isGood = false;
         }
 
 
         if(isGood){
-            Utilisateur newUser = new Utilisateur();
-            newUser.setIdUser(idUser);
-            newUser.setPassword(passWord);
+            UserLogin newUser = new UserLogin(idUser,passWord);
             UserDBManager.InsertDetached(newUser);
-            newUser.setPassword("");
+            newUser = null;
             AlertManager.displayInscriptionSucceed();
             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/loginView.fxml"));
             Scene Connectionscene = new Scene(fxmlLoader.load(), 600, 400);

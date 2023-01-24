@@ -1,25 +1,38 @@
 package project.application.Controlers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import javafx.stage.Window;
+import project.application.App.App;
+import project.application.Models.SessionChat;
+import project.application.Models.Utilisateur;
 
-public class ChatControler {
+import java.net.URL;
+import java.util.ResourceBundle;
 
-    //Attributs de la primary stage
-    @FXML
-    private Button sendButton;
+public class ChatControler implements Initializable {
 
-    @FXML
-    private TextField txtSendMsg;
+    public static Stage primaryStage = null;
+    public static Utilisateur interlocuteur = null;
+    public static SessionChat sessionChatFenêtre = null;
+
+    public static Boolean mode = null;
 
 
 
-    @FXML
-    protected void sendMessage() {
-        String txt = txtSendMsg.getText();
-        txtSendMsg.clear();
-        System.out.println(txt);
+
+
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        ChatControler.primaryStage = App.primaryStage;
+
+        //Gerer ici verifiaction et Init des session chat et de tous le reste
+
 
     }
 }
