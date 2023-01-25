@@ -194,6 +194,7 @@ public class ConnexionChatManager extends Thread {
             String finalIdOtherUser = idOtherUser;
 
             System.out.println( "le pseudo recu est égala " + finalPseudoOtherUser2 );
+            
             Platform.runLater(() -> {
                 App.userAnnuaire.getUserFromAnnuaire(finalPseudoOtherUser2).setUserPseudo(finalPseudoOtherUser2);
                 App.userAnnuaire.getUserFromAnnuaire(finalPseudoOtherUser2).setIdUser(finalIdOtherUser);
@@ -217,9 +218,9 @@ public class ConnexionChatManager extends Thread {
                     String finalPseudoOtherUser = pseudoOtherUser;
                     Platform.runLater( () -> {
                         if(AlertManager.confirmAlert("nouvelle demande de chat","Voulez vous discuter avec "+ finalPseudoOtherUser+ " ?")){
-                            synchronized (ChatControler.sessionChatFenêtre) {
+
                                 ChatControler.sessionChatFenêtre = null;
-                            }
+
 
                                 ChatControler.interlocuteur = App.userAnnuaire.getUserFromAnnuaire(finalPseudoOtherUser);
 
