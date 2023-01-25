@@ -232,7 +232,6 @@ public class ConnexionChatManager extends Thread {
                                 throw new RuntimeException(e);
                             }
                             try {
-                                App.userAnnuaire.getAnnuaire().removeListener(AcceuilControler.listener);
                                 Scene myScene = new Scene(fxmlLoader.load());
                                 App.primaryStage.setScene(myScene);
                                 App.primaryStage.show();
