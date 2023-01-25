@@ -177,6 +177,9 @@ public class ConnexionChatManager extends Thread {
             String idOtherUser = null;
             String pseudoOtherUser = null;
 
+
+
+            
             int debutObjet = message.indexOf("objet:")+"objet:".length();
             int finObjet = message.indexOf("/finObjet/");
             int debutIdUser = message.indexOf("idUser:")+"idUser:".length();
