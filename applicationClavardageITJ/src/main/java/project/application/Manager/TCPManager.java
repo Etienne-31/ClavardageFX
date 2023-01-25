@@ -5,6 +5,7 @@ import project.application.Models.Utilisateur;
 
 import java.io.*;
 
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -130,12 +131,14 @@ public class TCPManager {
         return socketOfServeur;
     }
 
-    public Socket init_socketClientTCP(String serveurHost, int port,Socket socketOfClient) throws IOException {
+    public Socket init_socketClientTCP(InetAddress serveurHost, int port, Socket socketOfClient) throws IOException {
         if(serveurHost.equals(null) | (port < 1024)){
             System.out.println("init_socketClientTCP : le serveur host ou le port passé en argument est incorrect");
         }
         try {
+
             socketOfClient = new Socket(serveurHost, port);
+
         } catch (UnknownHostException e) {
             System.out.println("On ne sait rien de cet host");
         }

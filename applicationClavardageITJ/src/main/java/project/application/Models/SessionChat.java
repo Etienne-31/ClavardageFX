@@ -11,6 +11,7 @@ import java.io.IOException;
 //import java.io.BufferedWriter;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalDateTime;
@@ -36,7 +37,7 @@ public class SessionChat extends Thread {
 
     public SessionChat(){}
 
-    public SessionChat(Utilisateur user,Utilisateur other_user,boolean mode,String adress,int port){
+    public SessionChat(Utilisateur user, Utilisateur other_user, boolean mode, InetAddress adress, int port){
 
         this.networkManagement = new TCPManager();
         this.user = user;

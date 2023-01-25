@@ -125,17 +125,18 @@ public class ChatControler implements Initializable {
                         }
 
                 } else {
+
                     synchronized (ChatControler.mode) {
                             synchronized (ConnexionChatManager.mapConversationActive) {
                                 if (ChatControler.mode) {
-                                    ChatControler.sessionChatFenêtre = new SessionChat(App.user, ChatControler.interlocuteur, true, App.userAnnuaire.getUserFromAnnuaire(ChatControler.interlocuteur.getUserPseudo()).getIpUser().toString(), ChatControler.numPortLibre);
+                                    ChatControler.sessionChatFenêtre = new SessionChat(App.user, ChatControler.interlocuteur, true, App.userAnnuaire.getUserFromAnnuaire(ChatControler.interlocuteur.getUserPseudo()).getIpUser(), ChatControler.numPortLibre);
                                 } else {
                                     try {
                                         Thread.sleep(10);
                                     } catch (InterruptedException e) {
                                         throw new RuntimeException(e);
                                     }
-                                    ChatControler.sessionChatFenêtre = new SessionChat(App.user, ChatControler.interlocuteur, false, App.userAnnuaire.getUserFromAnnuaire(ChatControler.interlocuteur.getUserPseudo()).getIpUser().toString(), ChatControler.numPortLibre);
+                                    ChatControler.sessionChatFenêtre = new SessionChat(App.user, ChatControler.interlocuteur, false, App.userAnnuaire.getUserFromAnnuaire(ChatControler.interlocuteur.getUserPseudo()).getIpUser(), ChatControler.numPortLibre);
                                 }
                                 ConnexionChatManager.mapConversationActive.put(ChatControler.interlocuteur.getUserPseudo(), ChatControler.sessionChatFenêtre);
                             }
