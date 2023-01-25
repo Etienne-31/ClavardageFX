@@ -172,6 +172,7 @@ public class ConnexionChatManager extends Thread {
         }
 
         public void run(){
+            System.out.println("Debut traitement message udp a propos de tcp ");
             String message = new String(this.paquet.getData());
             String objet = null;
             String idOtherUser = null;
@@ -191,6 +192,8 @@ public class ConnexionChatManager extends Thread {
 
             String finalPseudoOtherUser2 = pseudoOtherUser;
             String finalIdOtherUser = idOtherUser;
+
+            System.out.println( "le pseudo recu est égala " + finalPseudoOtherUser2 );
             Platform.runLater(() -> {
                 App.userAnnuaire.getUserFromAnnuaire(finalPseudoOtherUser2).setUserPseudo(finalPseudoOtherUser2);
                 App.userAnnuaire.getUserFromAnnuaire(finalPseudoOtherUser2).setIdUser(finalIdOtherUser);
@@ -217,9 +220,9 @@ public class ConnexionChatManager extends Thread {
                             synchronized (ChatControler.sessionChatFenêtre) {
                                 ChatControler.sessionChatFenêtre = null;
                             }
-                            synchronized (ChatControler.interlocuteur) {
+
                                 ChatControler.interlocuteur = App.userAnnuaire.getUserFromAnnuaire(finalPseudoOtherUser);
-                            }
+
 
                             synchronized (ChatControler.mode) {
                                 ChatControler.mode = true;
