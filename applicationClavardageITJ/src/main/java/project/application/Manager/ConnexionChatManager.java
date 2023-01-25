@@ -182,7 +182,7 @@ public class ConnexionChatManager extends Thread {
             int finObjet = message.indexOf("/finObjet/");
             int debutIdUser = message.indexOf("idUser:")+"idUser:".length();
             int finIdUser = message.indexOf("/finIdUser");
-            int debutPseudo = message.indexOf("/Pseudo:")+"Pseudo:".length();
+            int debutPseudo = message.indexOf("/Pseudo:")+"/Pseudo:".length();
             int finPseudo = message.indexOf("/finPseudo");
 
 
