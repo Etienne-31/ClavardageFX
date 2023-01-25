@@ -60,7 +60,7 @@ public class TCPManager {
 
     public BufferedReader init_bufferReceptionTCP(Socket socketUsed){
         BufferedReader is = null;
-        if(socketUsed.equals(null)){
+        if(socketUsed==null){
             System.out.println("init_bufferReceptionTCP : le socketServeur passé en arguments est nul");
             return is;
         }
@@ -78,7 +78,7 @@ public class TCPManager {
 
     public BufferedWriter init_bufferEmissionTCP(Socket socketUsed ){
         BufferedWriter os = null;
-        if(socketUsed.equals(null)){
+        if(socketUsed == null){
             System.out.println("init_bufferEmissionTCP : le socket passé en arguments est nul");
             return os;
         }
