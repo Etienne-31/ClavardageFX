@@ -196,7 +196,6 @@ public class ConnexionChatManager extends Thread {
             System.out.println( "le pseudo recu est égala " + finalPseudoOtherUser2 );
 
             Platform.runLater(() -> {
-                App.userAnnuaire.getUserFromAnnuaire(finalPseudoOtherUser2).setUserPseudo(finalPseudoOtherUser2);
                 App.userAnnuaire.getUserFromAnnuaire(finalPseudoOtherUser2).setIdUser(finalIdOtherUser);
             });
 
@@ -286,12 +285,10 @@ public class ConnexionChatManager extends Thread {
                         e.printStackTrace();
                     }
 
-                    synchronized (ChatControler.sessionChatFenêtre){
+
                         ChatControler.sessionChatFenêtre = null;
-                    }
-                    synchronized ( ChatControler.interlocuteur){
+
                         ChatControler.interlocuteur = App.userAnnuaire.getUserFromAnnuaire(pseudoOtherUser);
-                    }
                     synchronized (ChatControler.mode){
                         ChatControler.mode = false;
                     }
