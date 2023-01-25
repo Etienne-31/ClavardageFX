@@ -94,31 +94,32 @@ public class ChoosePseudoControler implements Initializable {
             }
         }
 
-        for(String response : listResponse){
-            int debutResponse = response.indexOf("Response:")+"Response:".length();
-            int finResponse = response.indexOf("/finResponse");
-            String rep = response.substring(debutResponse,finResponse);
-            if(rep.equals("non")){
-                App.user.setUserPseudo("");
-                App.userAnnuaire.getAnnuaire().clear(); // On reset l'annuaire
-                pseudoGood = false;
-                break;
+        if(listResponse.size() > 0) {
+            for (String response : listResponse) {
+                int debutResponse = response.indexOf("Response:") + "Response:".length();
+                int finResponse = response.indexOf("/finResponse");
+                String rep = response.substring(debutResponse, finResponse);
+                if (rep.equals("non")) {
+                    App.user.setUserPseudo("");
+                    App.userAnnuaire.getAnnuaire().clear(); // On reset l'annuaire
+                    pseudoGood = false;
+                    break;
+                } else if (rep.equals("oui")) {
+                    System.out.println("Response recu : " + response);
+                    debutPseudoResponse = response.indexOf("/Pseudo:") + "/Pseudo:".length();
+                    finPseudoResponse = response.indexOf("/Adresse:");
+
+                    debutAdresse = response.indexOf("/Adresse:") + "/Adresse:".length();
+                    finAdresse = response.indexOf("/finAdresse");
+
+                    fullResponseAdress = response.substring(debutAdresse, finAdresse);   //On récupère l'adresse
+                    System.out.println("From ChoosePseudoControler submit() pour la réponse : " + response + " l'adresse est " + fullResponseAdress);
+                    responseAdress = InetAddress.getByName(fullResponseAdress.substring(fullResponseAdress.indexOf("/") + 1)); // On la met en InetAdress en enlevant adress mac
+                    App.userAnnuaire.addAnnuaire(response.substring(debutPseudoResponse, finPseudoResponse), new Utilisateur(response.substring(debutPseudoResponse, finPseudoResponse), responseAdress));//On ajoute l'utilisateur à l'annuaire
+
+                }
+
             }
-            else if(rep.equals("oui")){
-                System.out.println("Response recu : "+response);
-                debutPseudoResponse = response.indexOf("/Pseudo:")+"/Pseudo:".length();
-                finPseudoResponse = response.indexOf("/Adresse:");
-
-                debutAdresse = response.indexOf("/Adresse:")+"/Adresse:".length();
-                finAdresse = response.indexOf("/finAdresse");
-
-                fullResponseAdress = response.substring(debutAdresse,finAdresse);   //On récupère l'adresse
-                System.out.println("From ChoosePseudoControler submit() pour la réponse : "+response+" l'adresse est "+fullResponseAdress);
-                responseAdress = InetAddress.getByName(fullResponseAdress.substring(fullResponseAdress.indexOf("/")+1)); // On la met en InetAdress en enlevant adress mac
-                App.userAnnuaire.addAnnuaire(response.substring(debutPseudoResponse,finPseudoResponse),new Utilisateur(response.substring(debutPseudoResponse,finPseudoResponse),responseAdress));//On ajoute l'utilisateur à l'annuaire
-
-            }
-
         }
         System.out.println("From choosePseudoControler submit() : Fin de lecture de  listeResponse");
         System.out.println("From choosePseudoControler submit() : Le variable pseudoGood est "+pseudoGood);
