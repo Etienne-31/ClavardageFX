@@ -114,9 +114,9 @@ public class ChatControler implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ChatControler.primaryStage = App.primaryStage;
-        synchronized (ChatControler.interlocuteur){
+        
             pseudoDisplay.setText(ChatControler.interlocuteur.getUserPseudo());
-        }
+
         if(!ChatControler.ouvertureChatOkay){
             affichageMessages.getItems().add("En attente de réponse de l'autre utilisateur  ");
         }
