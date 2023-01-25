@@ -32,7 +32,7 @@ public class AcceuilControler implements Initializable {
 
 
 
-    private MapChangeListener<String, Utilisateur> listener;
+    public static MapChangeListener<String, Utilisateur> listener;
 
     private Stage primaryStage;
 

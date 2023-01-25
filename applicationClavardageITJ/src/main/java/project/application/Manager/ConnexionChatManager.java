@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import project.application.App.App;
+import project.application.Controlers.AcceuilControler;
 import project.application.Controlers.ChatControler;
 import project.application.Models.SessionChat;
 import project.application.Models.Utilisateur;
@@ -239,6 +240,7 @@ public class ConnexionChatManager extends Thread {
                                 throw new RuntimeException(e);
                             }
                             try {
+                                App.userAnnuaire.getAnnuaire().removeListener(AcceuilControler.listener);
                                 Scene myScene = new Scene(fxmlLoader.load());
                                 App.primaryStage.setScene(myScene);
                                 App.primaryStage.show();
