@@ -122,11 +122,11 @@ public class ChatControler implements Initializable {
                     }
                 }
                 if (convDejaActive) {
-                    synchronized (ChatControler.sessionChatFenêtre) {
+
                         synchronized (ConnexionChatManager.mapConversationActive) {
                             ChatControler.sessionChatFenêtre = ConnexionChatManager.mapConversationActive.get(ChatControler.interlocuteur.getUserPseudo());
                         }
-                    }
+                    
                 } else {
                     synchronized (ChatControler.mode) {
                             synchronized (ConnexionChatManager.mapConversationActive) {
