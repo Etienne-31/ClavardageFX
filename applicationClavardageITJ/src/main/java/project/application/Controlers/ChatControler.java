@@ -129,7 +129,6 @@ public class ChatControler implements Initializable {
                     }
                 } else {
                     synchronized (ChatControler.mode) {
-                        synchronized (ChatControler.sessionChatFenêtre) {
                             synchronized (ConnexionChatManager.mapConversationActive) {
                                 if (ChatControler.mode) {
                                     ChatControler.sessionChatFenêtre = new SessionChat(App.user, ChatControler.interlocuteur, true, App.userAnnuaire.getUserFromAnnuaire(ChatControler.interlocuteur.getUserPseudo()).getIpUser().toString(), ChatControler.numPortLibre);
@@ -143,7 +142,6 @@ public class ChatControler implements Initializable {
                                 }
                                 ConnexionChatManager.mapConversationActive.put(ChatControler.interlocuteur.getUserPseudo(), ChatControler.sessionChatFenêtre);
                             }
-                        }
                     }
                     ChatControler.sessionChatFenêtre.start();
                 }
