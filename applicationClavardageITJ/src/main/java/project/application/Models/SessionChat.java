@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
+import project.application.Manager.ConnexionChatManager;
 import project.application.Manager.TCPManager;
 
 import java.io.IOException;
@@ -12,9 +13,10 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 
-public class SessionChat {
+public class SessionChat extends Thread {
 
     private boolean mode;
     private Socket socket = null;
@@ -59,6 +61,7 @@ public class SessionChat {
             }
             this.is = this.networkManagement.init_bufferReceptionTCP(this.socket);
             this.os = this.networkManagement.init_bufferEmissionTCP(this.socket);
+
             Platform.runLater(()->{
                 listMessageData.addLast("Debut de la conversation");
             });
@@ -71,10 +74,12 @@ public class SessionChat {
     }
 
 
-    public void run() throws IOException {
+    public void run() {
         Messages message = null;
         System.out.println("On lance le chat entre l'utilisateur qui est :"+this.user.getUserPseudo()+" et son interlocuteur :"+this.other_user.getUserPseudo());
-
+        synchronized (ConnexionChatManager.mapConversationActive){
+            ConnexionChatManager.mapConversationActive.put(this.other_user.getUserPseudo(),this);
+        }
         while(!finConversation){
 
             try{
@@ -100,7 +105,14 @@ public class SessionChat {
             }
 
         }
-        endConnexion();
+        try {
+            endConnexion();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        synchronized (ConnexionChatManager.mapConversationActive){
+            ConnexionChatManager.mapConversationActive.remove(this.other_user.getUserPseudo());
+        }
     }
 
     private void endConnexion() throws IOException {
@@ -109,12 +121,11 @@ public class SessionChat {
     }
 
     public void sendMessage(String message){
-        String messageToSend = "Utilisateur : "+this.user.userPseudo+message;
+        String messageToSend = "Utilisateur : "+this.user.userPseudo+message+" \n"+ LocalDateTime.now().toString();
         this.networkManagement.send(messageToSend,this.os);
-        String messageData = "Moi : "+message;
-        Messages messageAajouter = new Messages(this.user,this.other_user,messageData);
+        Messages messageAajouter = new Messages(this.user,this.other_user,messageToSend);
         Platform.runLater( () -> {
-            this.listMessageData.addLast(String.valueOf(messageAajouter));
+            this.listMessageData.addLast(String.valueOf(messageToSend));
         });
 
     }

@@ -209,12 +209,21 @@ public class ConnexionChatManager extends Thread {
                 else{
                     String finalPseudoOtherUser = pseudoOtherUser;
                     Platform.runLater( () -> {
-                        boolean response;
                         if(AlertManager.confirmAlert("nouvelle demande de chat","Voulez vous discuter avec "+ finalPseudoOtherUser+ " ?")){
-                            response = true;
-                            ChatControler.sessionChatFenêtre = null;
-                            ChatControler.interlocuteur = App.userAnnuaire.getUserFromAnnuaire(finalPseudoOtherUser);
-                            ChatControler.mode = true;
+                            synchronized (ChatControler.sessionChatFenêtre) {
+                                ChatControler.sessionChatFenêtre = null;
+                            }
+                            synchronized (ChatControler.interlocuteur) {
+                                ChatControler.interlocuteur = App.userAnnuaire.getUserFromAnnuaire(finalPseudoOtherUser);
+                            }
+
+                            synchronized (ChatControler.mode) {
+                                ChatControler.mode = true;
+                            }
+
+                            synchronized (ChatControler.ouvertureChatOkay){
+                                ChatControler.ouvertureChatOkay = true;
+                            }
 
                             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/chatView.fxml")); //Sert à loader la scen fait sur fxml
                             try {
@@ -231,21 +240,25 @@ public class ConnexionChatManager extends Thread {
                             }
                         }
                         else{
-                            response = false;
                             try {
                                 ConnexionChatManager.envoyerReponseDemandeConnexionTCP(this.socketToUse, false,App.user,App.userAnnuaire.getUserFromAnnuaire(finalPseudoOtherUser),App.portUdpGestionTCP,ConnexionChatManager.numeroPortLibre);
+                                ChatControler.numPortLibre = numeroPortLibre;
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
                         }
                     });
+                        ChatControler.numPortLibre = ConnexionChatManager.numeroPortLibre;
+                        ConnexionChatManager.numeroPortLibre = ConnexionChatManager.numeroPortLibre +1;
                 }
             }
             else if(objet.equals("ReponseDemandeConnexionTCP")){
                 int debutResponse = message.indexOf("Response:")+"Response:".length();
                 int finResponse = message.indexOf("/finResponse");
+
                 String responseString = message.substring(debutResponse,finResponse);
                 boolean response;
+
 
                 if(responseString.equals("oui")){
                     response = true;
@@ -255,7 +268,10 @@ public class ConnexionChatManager extends Thread {
                 }
 
                 if(response){
-
+                    int debutPort = message.indexOf("/PortDeConnexion:")+"/PortDeConnexion:".length();
+                    int finPort = message.indexOf("/finPortDeConnexion/");
+                    int portOuLancerChat = Integer.parseInt(message.substring(debutPort,finPort));
+                    ChatControler.numPortLibre = portOuLancerChat;
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException e) {
@@ -270,6 +286,9 @@ public class ConnexionChatManager extends Thread {
                     }
                     synchronized (ChatControler.mode){
                         ChatControler.mode = false;
+                    }
+                    synchronized (ChatControler.ouvertureChatOkay){
+                        ChatControler.ouvertureChatOkay = true;
                     }
 
                     FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/chatView.fxml")); //Sert à loader la scen fait sur fxml

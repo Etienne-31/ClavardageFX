@@ -51,26 +51,7 @@ public class AcceuilControler implements Initializable {
     @FXML
     Button ChatWith;
 
-
     @FXML
-    protected void testSelect(){
-        String pseudo = ListAnnuaire.getSelectionModel().getSelectedItem();
-        Scene scene = null;
-        System.out.println("Chat démarré avec "+pseudo);
-
-        if(ChatControler.interlocuteur != null){
-            synchronized ( ChatControler.interlocuteur){
-                ChatControler.interlocuteur = null;
-            }
-        }
-
-        TestAjout test = new TestAjout();
-        test.run();
-
-    }
-
-
-
     protected void goToChat(){
         String pseudo = ListAnnuaire.getSelectionModel().getSelectedItem();                             // A récupérer de l'endroit ou on clique sur la listView
         Boolean chatDejactif = false;
@@ -89,7 +70,15 @@ public class AcceuilControler implements Initializable {
             e.printStackTrace();
         }
         App.userAnnuaire.getAnnuaire().removeListener(listener);
+        
+        synchronized (ChatControler.interlocuteur){
+            ChatControler.interlocuteur = App.userAnnuaire.getUserFromAnnuaire(pseudo);
+        }
+
         if(chatDejactif){
+            synchronized (ChatControler.ouvertureChatOkay){
+                ChatControler.ouvertureChatOkay = true;
+            }
             primaryStage.setScene(scene);
             primaryStage.show();
         }
@@ -99,21 +88,12 @@ public class AcceuilControler implements Initializable {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            if(ChatControler.interlocuteur != null){
-                synchronized ( ChatControler.interlocuteur){
-                    ChatControler.interlocuteur = null;
-                }
+            synchronized (ChatControler.ouvertureChatOkay){
+                ChatControler.ouvertureChatOkay = false;
             }
             primaryStage.setScene(scene);
             primaryStage.show();
-
         }
-
-
-
-
-
-
     }
 
     @FXML
@@ -133,7 +113,6 @@ public class AcceuilControler implements Initializable {
                     throw new RuntimeException(e);
                 }
             }
-
             App.userAnnuaire.getAnnuaire().removeListener(listener);
             App.udpManager.getDgramSocket().close();
             App.chatManager.getDgramSocket().close();
@@ -142,19 +121,10 @@ public class AcceuilControler implements Initializable {
 
     };
 
-
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Lancement du thread de gestion des messages");
         primaryStage = App.primaryStage;
-
-        try {
-            App.userAnnuaire.addAnnuaire("Thimoté",new Utilisateur());
-        } catch (UnknownHostException e) {
-            throw new RuntimeException(e);
-        }
 
         listener = change -> {
             if ((change.wasAdded()) | (change.wasRemoved())) {
@@ -167,54 +137,9 @@ public class AcceuilControler implements Initializable {
         ListAnnuaire.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         App.userAnnuaire.getAnnuaire().addListener(listener);
 
-
-        //Finit tuto pour pouvoir créer listView et voir comment vien rajouter et afficher annuaire
-        //Ajout de la méthode de construction de la view.
-
-        //Quand on clique sur un pseudo de l'annuaire , on vient vérifier si la conversation n'existe pas déjà dans la map de conversation Active
-        // Si oui on vient juste afficher la conversation déjà active
-        // Si non
-        // - On vient vérifier le nombre de conversation active et si le nombre est trop élévé on affiche qu il faut fermer des discussion
-        // - Si non
-        // - on envoie demande de connexion et on charge une page similaire a une page de chat mais où il sera marqué : en attente de réponse
-
-        //Penser à rajouter
-
-
-
-        //App.userAnnuaire.getAnnuaire().addListener(listener);
-        //App.userAnnuaire.getAnnuaire().removeListener(listener
-    }
-
-    @FXML
-    protected void startTest(){
-        TestAjout test = new TestAjout();
-        test.start();
-    }
-}
-
-class TestAjout extends Thread{
-
-    public TestAjout(){}
-
-    public void run(){
-
-
-        Platform.runLater(() -> {
-            Scene scene = null;
-            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/chatView.fxml"));
-            try {
-                scene = new Scene(fxmlLoader.load(), 600, 400);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            primaryStage.setScene(scene);
-            primaryStage.show();
-
-        });
-
-
     }
 
 
 }
+
+
