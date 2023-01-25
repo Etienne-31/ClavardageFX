@@ -33,11 +33,11 @@ public class ChatControler implements Initializable {
         }
     }
 
-    public static SessionChat sessionChatFenêtre = null;
+    public static SessionChat sessionChatFenêtre = new SessionChat();
 
-    public static Boolean mode = null;
+    public static Boolean mode = false;
 
-    public static Boolean ouvertureChatOkay = null;
+    public static Boolean ouvertureChatOkay = false;
 
     public static int numPortLibre = 1600;
 

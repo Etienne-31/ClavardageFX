@@ -34,6 +34,8 @@ public class SessionChat extends Thread {
 
     public ListProperty<String> listProperty;
 
+    public SessionChat(){}
+
     public SessionChat(Utilisateur user,Utilisateur other_user,boolean mode,String adress,int port){
 
         this.networkManagement = new TCPManager();
