@@ -47,7 +47,6 @@ public class ConnexionChatManager extends Thread {
             throw new RuntimeException(e);
         }
         while(App.connected){
-            System.out.println("TCP en attente ");
             try {
                 synchronized (this.dgramSocket){
                     paquet = attendreDemande();
@@ -73,7 +72,6 @@ public class ConnexionChatManager extends Thread {
                 newGestionDemande.start();
             }
         }
-        System.out.println("Fin du thread de gestion des connexions TCP");
     }
 
 
@@ -218,13 +216,7 @@ public class ConnexionChatManager extends Thread {
                     String finalPseudoOtherUser = pseudoOtherUser;
                     Platform.runLater( () -> {
                         if(AlertManager.confirmAlert("nouvelle demande de chat","Voulez vous discuter avec "+ finalPseudoOtherUser+ " ?")){
-
-                                ChatControler.sessionChatFenêtre = null;
-
-
                                 ChatControler.interlocuteur = App.userAnnuaire.getUserFromAnnuaire(finalPseudoOtherUser);
-
-
                             synchronized (ChatControler.mode) {
                                 ChatControler.mode = true;
                             }
