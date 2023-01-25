@@ -71,9 +71,9 @@ public class AcceuilControler implements Initializable {
         }
         App.userAnnuaire.getAnnuaire().removeListener(listener);
         
-        synchronized (ChatControler.interlocuteur){
+
             ChatControler.interlocuteur = App.userAnnuaire.getUserFromAnnuaire(pseudo);
-        }
+        
 
         if(chatDejactif){
             synchronized (ChatControler.ouvertureChatOkay){
