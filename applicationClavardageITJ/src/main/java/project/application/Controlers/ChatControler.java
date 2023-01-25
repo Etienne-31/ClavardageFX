@@ -36,8 +36,7 @@ public class ChatControler implements Initializable {
 
 
     private ListChangeListener<String> listener;
-    @FXML
-    Label pseudoDisplay;
+
     @FXML
     TextArea textBar;
 
@@ -106,8 +105,6 @@ public class ChatControler implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ChatControler.primaryStage = App.primaryStage;
         if (ChatControler.interlocuteur != null) {
-            pseudoDisplay.setText(ChatControler.interlocuteur.getUserPseudo());
-
             if (!ChatControler.ouvertureChatOkay) {
                 affichageMessages.getItems().add("En attente de réponse de l'autre utilisateur  ");
             } else {
