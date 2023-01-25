@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7398802-4a07-4fd5-b481-985b98198880" name="Changes" comment="" />
+    <list default="true" id="a7398802-4a07-4fd5-b481-985b98198880" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/application/App/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/App/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Controlers/AcceuilControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Controlers/AcceuilControler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Manager/AlertManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Manager/AlertManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Models/Hibernate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Models/Hibernate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/project/application/acceuilView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/project/application/acceuilView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/project/application/inscriptionSucceedView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/project/application/inscriptionSucceedView.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -171,11 +181,6 @@
           <properties class="java.lang.IllegalStateException" package="java.lang" />
           <option name="timeStamp" value="4" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/project/application/Controlers/ChoosePseudoControler.java</url>
-          <line>119</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

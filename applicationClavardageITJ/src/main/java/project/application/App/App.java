@@ -90,6 +90,7 @@ public class App extends Application {
             }
 
             if(App.user.getUserPseudo() != null){
+                ConnexionChatManager.endAllChat();
                 App.udpManager.broadcastDeconnexion();
             }
 

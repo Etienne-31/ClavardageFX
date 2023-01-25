@@ -20,7 +20,7 @@
          <children>
             <AnchorPane prefHeight="120.0" prefWidth="373.0">
                <children>
-                  <Label layoutX="48.0" layoutY="40.0" prefHeight="63.0" prefWidth="366.0" text="Vous êtes Inscrit, vous allez maitnenant pouvoir vous connecter" />
+                  <Label layoutX="48.0" layoutY="40.0" prefHeight="63.0" prefWidth="366.0" text="Vous êtes inscrit, vous allez maintenant pouvoir vous connecter" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">

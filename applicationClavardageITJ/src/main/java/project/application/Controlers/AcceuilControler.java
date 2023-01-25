@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import project.application.App.App;
@@ -24,6 +25,8 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
+
+import static project.application.App.App.primaryStage;
 
 public class AcceuilControler implements Initializable {
 
@@ -46,34 +49,61 @@ public class AcceuilControler implements Initializable {
     ListView<String>  ListAnnuaire;
 
     @FXML
-    Button test;
+    Button ChatWith;
 
 
     @FXML
+    protected void testSelect(){
+        String pseudo = ListAnnuaire.getSelectionModel().getSelectedItem();
+        Scene scene = null;
+        System.out.println("Chat démarré avec "+pseudo);
+
+        if(ChatControler.interlocuteur != null){
+            synchronized ( ChatControler.interlocuteur){
+                ChatControler.interlocuteur = null;
+            }
+        }
+
+        TestAjout test = new TestAjout();
+        test.run();
+
+    }
+
+
+
     protected void goToChat(){
-        String pseudo;                             // A récupérer de l'endroit ou on clique sur la listView
+        String pseudo = ListAnnuaire.getSelectionModel().getSelectedItem();                             // A récupérer de l'endroit ou on clique sur la listView
         Boolean chatDejactif = false;
         Scene scene = null;
         for(String key : ConnexionChatManager.mapConversationActive.keySet()){
-            if(pseudo.equals(key)){
+           if(pseudo.equals(key)){
                 chatDejactif = true;
                 break;
             }
         }
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/welcomeView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/chatView.fxml"));
 
         try {
              scene = new Scene(fxmlLoader.load(), 600, 400);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        App.userAnnuaire.getAnnuaire().removeListener(listener);
         if(chatDejactif){
             primaryStage.setScene(scene);
             primaryStage.show();
         }
         else{
-            ConnexionChatManager.envoyerDemandeConnexionTCP(//Mettre info ici);
+            try {
+                ConnexionChatManager.envoyerDemandeConnexionTCP(App.chatManager.getDgramSocket(),App.user,App.userAnnuaire.getUserFromAnnuaire(pseudo),App.portUdpGestionTCP);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            if(ChatControler.interlocuteur != null){
+                synchronized ( ChatControler.interlocuteur){
+                    ChatControler.interlocuteur = null;
+                }
+            }
             primaryStage.setScene(scene);
             primaryStage.show();
 
@@ -104,7 +134,7 @@ public class AcceuilControler implements Initializable {
                 }
             }
 
-
+            App.userAnnuaire.getAnnuaire().removeListener(listener);
             App.udpManager.getDgramSocket().close();
             App.chatManager.getDgramSocket().close();
             primaryStage.close();
@@ -134,6 +164,7 @@ public class AcceuilControler implements Initializable {
         };
 
         ListAnnuaire.getItems().addAll(App.userAnnuaire.getListPseudos());
+        ListAnnuaire.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         App.userAnnuaire.getAnnuaire().addListener(listener);
 
 
@@ -167,20 +198,18 @@ class TestAjout extends Thread{
     public TestAjout(){}
 
     public void run(){
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+
 
         Platform.runLater(() -> {
+            Scene scene = null;
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/chatView.fxml"));
             try {
-                App.userAnnuaire.addAnnuaire("Thomas",new Utilisateur());
-                App.userAnnuaire.addAnnuaire("Tom",new Utilisateur());
-            } catch (UnknownHostException e) {
-                throw new RuntimeException(e);
+                scene = new Scene(fxmlLoader.load(), 600, 400);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
+            primaryStage.setScene(scene);
+            primaryStage.show();
 
         });
 

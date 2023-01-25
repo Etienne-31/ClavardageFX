@@ -19,7 +19,7 @@
             <AnchorPane prefHeight="93.0" prefWidth="600.0">
                <children>
                   <Button fx:id="decoButton" layoutX="14.0" mnemonicParsing="false" onAction="#Deconnexion" prefHeight="39.0" prefWidth="214.0" text="Deconnexion" />
-                  <Button fx:id="test" layoutX="373.0" mnemonicParsing="false" onAction="#startTest" prefHeight="48.0" prefWidth="199.0" text="Chat with" />
+                  <Button fx:id="ChatWith" layoutX="373.0" mnemonicParsing="false" onAction="#testSelect" prefHeight="48.0" prefWidth="199.0" text="Chat with" />
                </children>
             </AnchorPane>
          </children>

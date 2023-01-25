@@ -79,7 +79,7 @@ public class AlertManager {
 
     public static void displayAlert(String alertPATH) throws IOException {
 
-        Stage alertWindow = new Stage();   //Crée la nouvele fenêtre
+        Stage alertWindow = new Stage();   //Crée la nouvelLe fenêtre
         Window = alertWindow;
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(alertPATH));
         Scene myScene = new Scene(fxmlLoader.load());

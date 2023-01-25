@@ -9,37 +9,6 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 public class Hibernate {
-    public static void innit() throws Exception {
-        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
-        Metadata metadata = new MetadataSources(serviceRegistry).getMetadataBuilder().build();
-        SessionFactory sessionFactory = metadata.getSessionFactoryBuilder().build();
-    }
-
-    private static SessionFactory buildSessionFactory(){
-
-        /*try{
-            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure("applicationClavardageITJ/src/main/resources/hibernate.cfg.xml").build();
-            Metadata metadata = new MetadataSources(serviceRegistry).getMetadataBuilder().build();
-            return metadata.getSessionFactoryBuilder().build();
-        } catch(Throwable Exception){
-            System.err.println("La création de la sessionFactory a échoué : "+Exception);
-            throw new ExceptionInInitializerError(Exception);
-        }*/
-        SessionFactory sessionFactory = null;
-        try {
-            sessionFactory = new Configuration().configure().buildSessionFactory();
-
-            /*Configuration configuration = new Configuration().configure("/hibernate.cfg.xml");
-            StandardServiceRegistryBuilder serviceRegistryBuilder = new StandardServiceRegistryBuilder();
-            serviceRegistryBuilder.applySettings(configuration.getProperties());
-            ServiceRegistry serviceRegistry = serviceRegistryBuilder.build();
-            sessionFactory = configuration.buildSessionFactory(serviceRegistry);*/
-        } catch (IllegalStateException e) {
-            System.out.println("Peut être problème de driver ");
-            e.printStackTrace();
-        }
-        return  sessionFactory;
-    }
 
     private static SessionFactory setUp(){
         SessionFactory sessionFactory = null;
@@ -60,8 +29,6 @@ public class Hibernate {
         }
         return sessionFactory;
     }
-
-
 
     public static SessionFactory getSessionFactory(){
         return setUp();
