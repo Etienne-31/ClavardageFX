@@ -5,17 +5,4 @@
 
 
 
-//Créer la scene de l'acceuil sur scene builder avec bouton de déconnexion et une anchorpane ou truc du genre prêt à recevoir la liste view
-//dans acceuilControler créer la listeView et rajouter les listener qui vont avec, quand on clique sur élément de la liste ca entame ce qui est décrit dans la classe
-//Créer la scene de chat controler avec ce que tu penses
-//Dans le Initialize du chatControler on lance le thread SessionChat
-//Quand on clance la session chat on la rajoutye dans la map De ConnexionChatMananger
-//Dans le initialize rajouter le listener et faire comme dans la scene d'acceuil
-//Dans acceuilControler quand on clique sur quelqu un pour lancer conversation on verifie d abord si  le chat n est pas dans la hashmap des difféerent chat actif si oui on recharge juste la page
-// si non on envoie une demande de connexion et on attend
-//Penser dans ce que tu as déjà fasi à retirer de la hashmap les chat fini lorsqu il se termine
-
-
-//Dans acceuilControler quand on clique sur quelq un on verifie si pas dans HashMap de conv active si oui on charge juste la page , si non on envoie demande
-//dans chatControler pour l initialisation de la page vérifier si pas déja dans has
-// dans chat controler rajouter un bouton de retour à l'annuaire
+//Dans choose pseudo controler , voir pour faire un pseudo avec juste une maj au début avec le substring

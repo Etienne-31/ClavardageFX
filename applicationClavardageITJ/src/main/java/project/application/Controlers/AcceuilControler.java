@@ -52,6 +52,18 @@ public class AcceuilControler implements Initializable {
     Button ChatWith;
 
     @FXML
+    Button dis;
+
+    @FXML
+    protected void display(){
+        System.out.println("Dans mon annuaire il y a ");
+        for(String key : App.userAnnuaire.getAnnuaire().keySet()){
+            System.out.println(" ------ "+App.userAnnuaire.getUserFromAnnuaire(key).getUserPseudo());
+        }
+
+    }
+
+    @FXML
     protected void goToChat(){
         String pseudo = ListAnnuaire.getSelectionModel().getSelectedItem();                             // A récupérer de l'endroit ou on clique sur la listView
         Boolean chatDejactif = false;
@@ -73,7 +85,7 @@ public class AcceuilControler implements Initializable {
         
 
             ChatControler.interlocuteur = App.userAnnuaire.getUserFromAnnuaire(pseudo);
-        
+
 
         if(chatDejactif){
             synchronized (ChatControler.ouvertureChatOkay){

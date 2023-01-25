@@ -190,8 +190,8 @@ public class ConnexionChatManager extends Thread {
             pseudoOtherUser = message.substring(debutPseudo,finPseudo);
 
 
-            App.userAnnuaire.getUserFromAnnuaire(pseudoOtherUser).setUserPseudo(pseudoOtherUser);
-            App.userAnnuaire.getUserFromAnnuaire(pseudoOtherUser).setIdUser(idOtherUser);
+            //App.userAnnuaire.getUserFromAnnuaire(pseudoOtherUser).setUserPseudo(pseudoOtherUser);
+            //App.userAnnuaire.getUserFromAnnuaire(pseudoOtherUser).setIdUser(idOtherUser);
 
 
             if(objet.equals("DemandeConnexionTCP")){
