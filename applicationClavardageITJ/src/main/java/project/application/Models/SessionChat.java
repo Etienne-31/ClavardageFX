@@ -39,8 +39,15 @@ public class SessionChat extends Thread {
 
     public SessionChat(Utilisateur user, Utilisateur other_user, boolean mode, InetAddress adress, int port){
 
-        System.out.println("Construction de la sessionChat entre : "+user.userPseudo+ " et "+other_user.getUserPseudo()
-        +"\n"+ " Dont l'adresse est : "+adress.toString()+" et initialisée sur le port : "+port);
+        if(mode == false){
+            System.out.println("Construction de la sessionChat Client : "+user.userPseudo+ " et "+other_user.getUserPseudo()
+                    +"\n"+ " Dont l'adresse est : "+adress.toString()+"  /et initialisée sur le port : "+port);
+        }
+        else{
+            System.out.println("Construction de la sessionChat Serveur : "+user.userPseudo+ " et "+other_user.getUserPseudo()
+                    +"\n"+"  initialisée sur le port : "+port);
+        }
+
 
         this.networkManagement = new TCPManager();
         this.user = user;
