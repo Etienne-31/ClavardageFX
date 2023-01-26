@@ -85,15 +85,17 @@ public class SessionChatUDP extends Thread {
                 System.out.println(" On a recu ce message de "+other_user.getUserPseudo()+" data : "+MessageFinale);
             }
 
-            if(MessageFinale.equals("EXIT_CONVERSATION")){
-                this.finConversation = true;
-            }
-            else{
-                this.listMessage.addLast(new Messages(this.user,this.other_user,MessageFinale));
-                String finalMessageFinale = MessageFinale;
-                Platform.runLater( () -> {
-                    this.listMessageData.addLast(finalMessageFinale);
-                });
+            if(MessageFinale !=null){
+                if(MessageFinale.equals("EXIT_CONVERSATION")){
+                    this.finConversation = true;
+                }
+                else{
+                    this.listMessage.addLast(new Messages(this.user,this.other_user,MessageFinale));
+                    String finalMessageFinale = MessageFinale;
+                    Platform.runLater( () -> {
+                        this.listMessageData.addLast(finalMessageFinale);
+                    });
+                }
             }
         }
         synchronized (ConnexionChatManager.mapConversationActive){
