@@ -93,6 +93,11 @@ public class SessionChat extends Thread {
 
 
     public void run() {
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         Messages message = null;
         System.out.println("On lance le chat entre l'utilisateur qui est :"+this.user.getUserPseudo()+" et son interlocuteur :"+this.other_user.getUserPseudo());
         synchronized (ConnexionChatManager.mapConversationActive){
@@ -101,9 +106,11 @@ public class SessionChat extends Thread {
         while(!finConversation){
 
             try{
-                System.out.println("En attente de reception d'un message");
                 message = receptionMessage();
-                System.out.println("Message recu de "+this.other_user.getUserPseudo() + " le message : "+message.getData());
+                if(message != null){
+                    System.out.println("Message recu de "+this.other_user.getUserPseudo() + " le message : "+message.getData());
+                }
+
             }
             catch(IOException e){
                 e.printStackTrace();
