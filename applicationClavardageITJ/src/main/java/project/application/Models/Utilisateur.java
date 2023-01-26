@@ -64,8 +64,11 @@ public class Utilisateur {
         }
     }
 
-    public int getPortOuContacter(){
-        return this.portOuContacter;
+    public Integer getPortOuContacter(){
+        if(this.portOuContacter != null){
+            return this.portOuContacter;
+        }
+        else return null;
     }
 
     public void setPortOuContacter(Integer portOuContacter) {

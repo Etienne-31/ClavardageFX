@@ -55,7 +55,7 @@ public class SessionChat extends Thread {
 
         try {
             if(mode == false ){
-
+                Thread.sleep(10);
                 this.socket = this.networkManagement.init_socketClientTCP(adress, port, this.socket);
                 System.out.println("Connected  with"+other_user.getUserPseudo());
             }
@@ -75,6 +75,8 @@ public class SessionChat extends Thread {
             System.out.println("Fin du constructuer");
         }
         catch (IOException e){
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }

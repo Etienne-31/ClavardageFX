@@ -125,7 +125,13 @@ public class ChatControler implements Initializable {
                 }
                 Utilisateur otherUser = App.userAnnuaire.getUserFromAnnuaire(ChatControler.PseudoInterlocuteur);
                 String pseudo = ChatControler.PseudoInterlocuteur;
-                this.sessionChatFenêtre = new SessionChat(App.user,otherUser,mode,otherUser.getIpUser(),otherUser.getPortOuContacter());
+                if(mode == true){
+                    this.sessionChatFenêtre = new SessionChat(App.user,otherUser,true,null,ConnexionChatManager.numeroPortLibre-1);
+                }
+                else{
+                    this.sessionChatFenêtre = new SessionChat(App.user,otherUser,false,otherUser.getIpUser(),otherUser.getPortOuContacter());
+                }
+
                 synchronized (ConnexionChatManager.mapConversationActive) {
                     ConnexionChatManager.mapConversationActive.put(pseudo,this.sessionChatFenêtre);
                 }
