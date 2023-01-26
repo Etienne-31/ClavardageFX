@@ -55,6 +55,7 @@ public class ChatControler implements Initializable {
         synchronized (ChatControler.ouvertureChatOkay) {
             if (ChatControler.ouvertureChatOkay) {
                 String getText = textBar.getText();
+                System.out.println("J'ai retiré ce message de la bar de text "+getText);
                 if (!((getText.equals("")) | (getText == null))) {
                     this.sessionChatFenêtre.sendMessage(getText);
                 }

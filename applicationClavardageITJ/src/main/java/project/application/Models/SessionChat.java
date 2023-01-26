@@ -152,10 +152,11 @@ public class SessionChat extends Thread {
 
     public void sendMessage(String message){
         String messageToSend = "Utilisateur : "+this.user.userPseudo+message+" \n"+ LocalDateTime.now().toString();
+        System.out.println("Je vais envoyer ce message : "+messageToSend);
         this.networkManagement.send(messageToSend,this.os);
         Messages messageAajouter = new Messages(this.user,this.other_user,messageToSend);
         Platform.runLater( () -> {
-            this.listMessageData.addLast(String.valueOf(messageToSend));
+            this.listMessageData.addLast(messageToSend);
         });
 
     }
@@ -167,63 +168,6 @@ public class SessionChat extends Thread {
             this.finConversation = true;
         }
     }
-
-
-
-    public void Testrun() {
-        System.out.println("On lance le run");
-        System.out.println("On lance le start");
-        Messages message = null;
-        boolean quit = true;
-
-
-        if(getMode()==true) {
-            System.out.println("Sessionchat.run : envoie des messages");
-            BufferedWriter os = this.networkManagement.init_bufferEmissionTCP(this.socket);
-            this.networkManagement.send("Test emission serveur", os);
-            this.networkManagement.send("Exit", os);
-            System.out.println("Sessionchat.run : messages Envoyé!");
-            try {
-                this.os.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        else {
-            while(quit == false){
-                try {
-                    message = receptionMessage();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                if(message != null){
-                    this.networkManagement.printMessage(message);
-                }
-                if(message.getData().equals("Exit")){
-
-
-
-                }
-
-
-            }
-            if(this.is != null){
-
-                try {
-                    System.out.println("Deconnexion du buffer de reception...");
-                    this.is.close();
-                    System.out.println("buffer de reception Deconnecté");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }
-
-
-    }
-
 
 
 
