@@ -29,10 +29,7 @@ public class ChatControler implements Initializable {
 
 
     public static Boolean mode = false;
-
-    public static Boolean ouvertureChatOkay = false;
-
-
+    
     private ListChangeListener<String> listener;
 
     @FXML
@@ -52,8 +49,8 @@ public class ChatControler implements Initializable {
 
     @FXML
     protected void sendMessage() {
-        synchronized (ChatControler.ouvertureChatOkay) {
-            if (ChatControler.ouvertureChatOkay) {
+        synchronized (ChatControler.PseudoInterlocuteur) {
+            if (!ChatControler.PseudoInterlocuteur.equals("")) {
                 String getText = textBar.getText();
                 System.out.println("J'ai retiré ce message de la bar de text "+getText);
                 if (!((getText.equals("")) | (getText == null))) {
