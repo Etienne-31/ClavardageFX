@@ -4,6 +4,9 @@ import javafx.application.Platform;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import project.application.App.App;
 import project.application.Manager.ConnexionChatManager;
 import project.application.Manager.TCPManager;
 
@@ -99,6 +102,7 @@ public class SessionChat extends Thread {
 
             try{
                 message = receptionMessage();
+                System.out.println("Message recu de "+this.other_user.getUserPseudo() + " le message : "+message.getData());
             }
             catch(IOException e){
                 e.printStackTrace();
@@ -128,6 +132,17 @@ public class SessionChat extends Thread {
         synchronized (ConnexionChatManager.mapConversationActive){
             ConnexionChatManager.mapConversationActive.remove(this.other_user.getUserPseudo());
         }
+        Platform.runLater(() -> {
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/acceuilView.fxml")); //Sert à loader la scene fait sur fxml
+            Scene myScene;
+            try {
+                myScene = new Scene(fxmlLoader.load());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            App.primaryStage.show();
+
+        });
     }
 
     private void endConnexion() throws IOException {
