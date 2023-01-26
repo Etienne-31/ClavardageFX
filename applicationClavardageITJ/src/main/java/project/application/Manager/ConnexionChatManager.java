@@ -219,7 +219,7 @@ public class ConnexionChatManager extends Thread {
                     String finalPseudoOtherUser = pseudoOtherUser;
                     ChatControler.PseudoInterlocuteur = finalPseudoOtherUser;
                     FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/chatView.fxml")); //Sert à loader la scen fait sur fxml
-                    
+
                     Platform.runLater( () -> {
                         if(AlertManager.confirmAlert("nouvelle demande de chat","Voulez vous discuter avec "+ finalPseudoOtherUser+ " ?")){
                             try {

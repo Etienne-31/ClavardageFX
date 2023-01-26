@@ -161,7 +161,7 @@ public class SessionChatUDP extends Thread {
             se.printStackTrace();              //Exception en cas d'erreur avec le socket
         }
         catch(SocketTimeoutException e){
-            System.out.println("From udpManager attendreMessage() : le timeout a expiré ");
+            //System.out.println("From udpManager attendreMessage() : le timeout a expiré ");
             return null;                //Si cette exception est levée alors cette méthode renverra null
         }
         catch(IOException e){
