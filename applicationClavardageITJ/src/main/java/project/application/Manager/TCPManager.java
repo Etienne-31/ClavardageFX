@@ -57,6 +57,8 @@ public class TCPManager {
             System.out.println("init_socketServerTCP : Port "+port+" indisponible , init échoué ");
             System.exit(1);
         }
+
+        System.out.println("Le socket serveur c'est initialisé correctement");
         return socketServeur;
     }
 
@@ -75,6 +77,7 @@ public class TCPManager {
         if(is == null){
             System.out.println("init_bufferReceptionTCP : Le buffer d'input flow du socket  "+ socketUsed.toString()+" est nul");
         }
+        System.out.println("Le Buffer de reception c'est initialisé correctement il retourne :"+is.toString());
         return is;
     }
 
@@ -91,6 +94,7 @@ public class TCPManager {
         catch(IOException e){
             System.out.println("init_bufferEmissionTCP : Client TCP init_send IException:"+e);
         }
+        System.out.println("Le le buffer d emission  c'est initialisé correctement il retourne :"+os.toString());
         return os;
     }
 

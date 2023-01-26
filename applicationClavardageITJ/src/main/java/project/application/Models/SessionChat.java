@@ -101,6 +101,7 @@ public class SessionChat extends Thread {
         while(!finConversation){
 
             try{
+                System.out.println("En attente de reception d'un message");
                 message = receptionMessage();
                 System.out.println("Message recu de "+this.other_user.getUserPseudo() + " le message : "+message.getData());
             }

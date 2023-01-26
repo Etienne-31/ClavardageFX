@@ -36,6 +36,8 @@ public class AcceuilControler implements Initializable {
 
     private Stage primaryStage;
 
+    private static int acceuilControler = 0;
+
     @FXML
     AnchorPane root;
 
@@ -142,11 +144,16 @@ public class AcceuilControler implements Initializable {
         ListAnnuaire.getItems().addAll(App.userAnnuaire.getListPseudos());
         ListAnnuaire.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         App.userAnnuaire.getAnnuaire().addListener(listener);
-        try {
-            AlertManager.displayPseudoSucceed();       // On affiche qu'on est connecté
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if(acceuilControler == 0){
+            acceuilControler = 1;
+            try {
+                AlertManager.displayPseudoSucceed();       // On affiche qu'on est connecté
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
         }
+
 
     }
 
