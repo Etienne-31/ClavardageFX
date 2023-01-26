@@ -15,6 +15,7 @@ public class TCPManager {
     private String listening(BufferedReader is) throws IOException {
         String retour=null;
         try{
+            System.out.println(" en attente d un retour de listening ");
             retour = is.readLine();
             System.out.println(" le retour de Listening "+ retour);
         }
