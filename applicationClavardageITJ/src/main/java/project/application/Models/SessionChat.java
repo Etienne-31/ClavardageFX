@@ -145,13 +145,15 @@ public class SessionChat extends Thread {
         });
     }
 
+    public LinkedList<String> getListMessageData(){return this.listMessageData;}
+
     private void endConnexion() throws IOException {
         System.out.println("fermeture des Buffers");
         this.networkManagement.close_connexion(this.os,this.is);
     }
 
     public void sendMessage(String message){
-        String messageToSend = "Utilisateur : "+this.user.userPseudo+message+" \n"+ LocalDateTime.now().toString();
+        String messageToSend = "Utilisateur : "+this.user.userPseudo+" "+message+" \n"+ LocalDateTime.now().toString();
         System.out.println("Je vais envoyer ce message : "+messageToSend);
         this.networkManagement.send(messageToSend,this.os);
         Messages messageAajouter = new Messages(this.user,this.other_user,messageToSend);

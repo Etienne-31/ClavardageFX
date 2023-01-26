@@ -130,7 +130,6 @@ public class AcceuilControler implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("Lancement du thread de gestion des messages");
         primaryStage = App.primaryStage;
 
         listener = change -> {
@@ -143,6 +142,11 @@ public class AcceuilControler implements Initializable {
         ListAnnuaire.getItems().addAll(App.userAnnuaire.getListPseudos());
         ListAnnuaire.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         App.userAnnuaire.getAnnuaire().addListener(listener);
+        try {
+            AlertManager.displayPseudoSucceed();       // On affiche qu'on est connecté
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 

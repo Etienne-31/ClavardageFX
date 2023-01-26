@@ -29,7 +29,7 @@ public class ChatControler implements Initializable {
 
 
     public static Boolean mode = false;
-    
+
     private ListChangeListener<String> listener;
 
     @FXML
@@ -135,14 +135,13 @@ public class ChatControler implements Initializable {
                 }
 
             }
-            //On créer le listener
             this.listener = change -> {
                 if (change.wasAdded()) {
-                    affichageMessages.getItems().addAll(this.sessionChatFenêtre.listProperty);
+                    affichageMessages.getItems().addAll(this.sessionChatFenêtre.getListMessageData());
                 }
             };
             this.sessionChatFenêtre.listProperty.addListener(listener);
-            affichageMessages.setItems(this.sessionChatFenêtre.listProperty);
+            affichageMessages.getItems().addAll(this.sessionChatFenêtre.getListMessageData());
 
         }
         else{

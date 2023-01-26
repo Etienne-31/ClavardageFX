@@ -127,7 +127,6 @@ public class ChoosePseudoControler implements Initializable {
         if(pseudoGood){
             App.connected = true;                   // Après toutes les étapes on est enfin connecté donc l'attribut boolean static dans App passe à true
             App.udpManager.broadcastConfirmationPseudo(); //Confirmer pseudo en broadcastant à nouveau
-            AlertManager.displayPseudoSucceed();       // On affiche qu'on est connecté
             try {
                 chatManager = new ConnexionChatManager(App.user,App.portUdpGestionTCP);
                 App.chatManager = chatManager;

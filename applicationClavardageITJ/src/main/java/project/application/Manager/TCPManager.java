@@ -40,6 +40,7 @@ public class TCPManager {
             os.write(message);
             os.newLine();
             os.flush();
+            System.out.println("Le message a été envoyé :  "+message + "avec l od "+os.toString());
 
         }
         catch(IOException e){
