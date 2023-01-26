@@ -68,7 +68,7 @@ public class ChatControler implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/acceuilView.fxml")); //Sert à loader la scene fait sur fxml
                 Scene myScene;
                 myScene = new Scene(fxmlLoader.load());
-                if(this.sessionChatFenêtre.listProperty != null) {
+                if((this.sessionChatFenêtre.listProperty != null)&(this.sessionChatFenêtre != null)) {
                     this.sessionChatFenêtre.listProperty.removeListener(listener);
                 }
                 primaryStage.setScene(myScene);

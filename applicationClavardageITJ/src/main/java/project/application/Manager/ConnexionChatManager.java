@@ -143,7 +143,7 @@ public class ConnexionChatManager extends Thread {
             msg = "objet:ReponseDemandeConnexionTCP/finObjet/Response:oui/finResponse"+"/idUser:"+user.getIdUser()+"/finIdUser"+"/Pseudo:"+user.getUserPseudo()+"/finPseudo"+"/PortDeConnexion:"+portDeConnexionTCP.toString()+"/finPortDeConnexion/";
         }
         else{
-            msg = "objet:ReponseDemandeConnexionTCP/finObjet/Response:non/finResponse"+"/Pseudo:"+user.getUserPseudo()+"/finPseudo";
+            msg = "objet:ReponseDemandeConnexionTCP/finObjet/Response:non/finResponse"+"/idUser:"+user.getIdUser()+"/finIdUser"+"/Pseudo:"+user.getUserPseudo()+"/finPseudo";
 
         }
         packet = new DatagramPacket(msg.getBytes(), msg.length(), utilisateurAcontacter.getIpUser(),portOuEnvoyer);
@@ -227,6 +227,7 @@ public class ConnexionChatManager extends Thread {
                             try {
                                 Scene myScene = new Scene(fxmlLoader.load());
                                 App.primaryStage.setScene(myScene);
+                                System.out.println(" On affiche la conversation ");
                                 App.primaryStage.show();
                             } catch (IOException e) {
                                 e.printStackTrace();
