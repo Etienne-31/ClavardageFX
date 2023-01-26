@@ -145,7 +145,6 @@ public class TCPManager {
         System.out.println("init_socketClientTCP : Connexion etabli avec :" + serveurHost + " au port : " + port);
         return socketOfClient;
     }
-
     public synchronized void printMessage(Messages message){
         message.toString();
     }
