@@ -197,9 +197,9 @@ public class ConnexionChatManager extends Thread {
             idOtherUser = message.substring(debutIdUser,finIdUser);
             pseudoOtherUser = message.substring(debutPseudo,finPseudo);
 
-            System.out.println( "le pseudo recu est égal a :" + pseudoOtherUser + " L adresse du mesagge recu est :"+paquet.getAddress().toString()+" et le port d envoie est : "+paquet.getPort());
+            System.out.println( "le pseudo recu est égal a : " + pseudoOtherUser + " L adresse du mesagge recu est :"+paquet.getAddress().toString()+" et le port d envoie est : "+paquet.getPort()+" Et propose de se connecter sur le port : "+portOuLancerChat);
 
-            App.userAnnuaire.updateAnnuaire(pseudoOtherUser,idOtherUser,paquet.getAddress(),null);
+            App.userAnnuaire.updateAnnuaire(pseudoOtherUser,idOtherUser,paquet.getAddress(),portOuLancerChat);
 
             if(objet.equals("DemandeConnexionTCP")){
                 if(ConnexionChatManager.conversationActive >= 50){

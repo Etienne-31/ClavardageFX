@@ -127,6 +127,7 @@ public class ChatControler implements Initializable {
                 }
                 Utilisateur otherUser = App.userAnnuaire.getUserFromAnnuaire(ChatControler.PseudoInterlocuteur);
                 String pseudo = ChatControler.PseudoInterlocuteur;
+                System.out.println("Chat controler Pret à initier la connexion avec : "+pseudo);
                 this.sessionChatFenêtre = new SessionChatUDP(App.user,otherUser,otherUser.getIpUser(),ConnexionChatManager.numeroPortLibre-1,otherUser.getPortOuContacter());
 
                 synchronized (ConnexionChatManager.mapConversationActive) {
