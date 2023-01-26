@@ -17,6 +17,7 @@ public class TCPManager {
         try{
             System.out.println(" en attente d un retour de listening ");
             retour = is.readLine();
+            is.reset();
             System.out.println(" le retour de Listening "+ retour);
         }
         catch(IOException e){

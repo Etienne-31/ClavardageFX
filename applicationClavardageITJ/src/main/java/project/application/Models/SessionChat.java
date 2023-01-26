@@ -93,7 +93,7 @@ public class SessionChat extends Thread {
 
 
     public void run() {
-       
+
         try {
             Thread.sleep(10);
         } catch (InterruptedException e) {
@@ -102,7 +102,7 @@ public class SessionChat extends Thread {
         Messages message = null;
         System.out.println("On lance le chat entre l'utilisateur qui est :"+this.user.getUserPseudo()+" et son interlocuteur :"+this.other_user.getUserPseudo());
         synchronized (ConnexionChatManager.mapConversationActive){
-            ConnexionChatManager.mapConversationActive.put(this.other_user.getUserPseudo(),this);
+            //ConnexionChatManager.mapConversationActive.put(this.other_user.getUserPseudo(),this);
         }
         while(!finConversation){
 

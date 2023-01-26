@@ -13,6 +13,7 @@ import project.application.App.App;
 import project.application.Manager.AlertManager;
 import project.application.Manager.ConnexionChatManager;
 import project.application.Models.SessionChat;
+import project.application.Models.SessionChatUDP;
 import project.application.Models.Utilisateur;
 
 import java.io.IOException;
@@ -25,7 +26,7 @@ public class ChatControler implements Initializable {
     public static Stage primaryStage = null;
     public static String PseudoInterlocuteur = "";
 
-    public SessionChat sessionChatFenêtre;
+    public SessionChatUDP sessionChatFenêtre;
 
 
     public static Boolean mode = false;
@@ -54,6 +55,9 @@ public class ChatControler implements Initializable {
                 String getText = textBar.getText();
                 System.out.println("J'ai retiré ce message de la bar de text "+getText);
                 if (!((getText.equals("")) | (getText == null))) {
+                    if (getText.length() < 1000){
+                        this.sessionChatFenêtre.sendMessage(getText);
+                    }
                     this.sessionChatFenêtre.sendMessage(getText);
                 }
             }
@@ -118,24 +122,19 @@ public class ChatControler implements Initializable {
 
             if(!convDejaActive){
                 boolean mode = false;
-                synchronized (ChatControler.mode){
+
                     mode = ChatControler.mode;
                 }
                 Utilisateur otherUser = App.userAnnuaire.getUserFromAnnuaire(ChatControler.PseudoInterlocuteur);
                 String pseudo = ChatControler.PseudoInterlocuteur;
-                if(mode == true){
-                    this.sessionChatFenêtre = new SessionChat(App.user,otherUser,true,null,ConnexionChatManager.numeroPortLibre-1);
-                }
-                else{
-                    this.sessionChatFenêtre = new SessionChat(App.user,otherUser,false,otherUser.getIpUser(),otherUser.getPortOuContacter());
-                }
+                this.sessionChatFenêtre = new SessionChatUDP(App.user,otherUser,otherUser.getIpUser(),ConnexionChatManager.numeroPortLibre-1,otherUser.getPortOuContacter());
 
                 synchronized (ConnexionChatManager.mapConversationActive) {
                     ConnexionChatManager.mapConversationActive.put(pseudo,this.sessionChatFenêtre);
                 }
                 this.sessionChatFenêtre.run();
 
-            }
+
             this.listener = change -> {
                 if (change.wasAdded()) {
                     affichageMessages.getItems().addAll(this.sessionChatFenêtre.getListMessageData());
@@ -150,5 +149,5 @@ public class ChatControler implements Initializable {
         }
     }
 
-
 }
+

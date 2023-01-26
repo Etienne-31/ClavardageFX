@@ -95,7 +95,7 @@ public class AcceuilControler implements Initializable {
         }
         else{
             try {
-                ConnexionChatManager.envoyerDemandeConnexionTCP(App.chatManager.getDgramSocket(),App.user,App.userAnnuaire.getUserFromAnnuaire(pseudo),App.portUdpGestionTCP);
+                ConnexionChatManager.envoyerDemandeConnexionTCP(App.chatManager.getDgramSocket(),App.user,App.userAnnuaire.getUserFromAnnuaire(pseudo),App.portUdpGestionTCP,ConnexionChatManager.numeroPortLibre);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

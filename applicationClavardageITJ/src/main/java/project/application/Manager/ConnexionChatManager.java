@@ -7,6 +7,7 @@ import project.application.App.App;
 import project.application.Controlers.AcceuilControler;
 import project.application.Controlers.ChatControler;
 import project.application.Models.SessionChat;
+import project.application.Models.SessionChatUDP;
 import project.application.Models.Utilisateur;
 
 import java.io.IOException;
@@ -22,7 +23,7 @@ public class ConnexionChatManager extends Thread {
     private Utilisateur user;
 
     public static int conversationActive = 0;
-    public static final HashMap<String, SessionChat> mapConversationActive = new HashMap<String,SessionChat>();
+    public static final HashMap<String, SessionChatUDP> mapConversationActive = new HashMap<String,SessionChatUDP>();
 
     public static int numeroPortLibre = 1610;
 
@@ -95,7 +96,7 @@ public class ConnexionChatManager extends Thread {
         return receivedDatagram;   //Si le datagram n'est pas null, on le renvoie tout simplement
     }
 
-    public  boolean checkIP(InetAddress address) {
+    private boolean checkIP(InetAddress address) {
         try {
             Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
             while (interfaces.hasMoreElements()) {
@@ -143,7 +144,7 @@ public class ConnexionChatManager extends Thread {
             msg = "objet:ReponseDemandeConnexionTCP/finObjet/Response:oui/finResponse"+"/idUser:"+user.getIdUser()+"/finIdUser"+"/Pseudo:"+user.getUserPseudo()+"/finPseudo"+"/PortDeConnexion:"+portDeConnexionTCP.toString()+"/finPortDeConnexion/";
         }
         else{
-            msg = "objet:ReponseDemandeConnexionTCP/finObjet/Response:non/finResponse"+"/idUser:"+user.getIdUser()+"/finIdUser"+"/Pseudo:"+user.getUserPseudo()+"/finPseudo";
+            msg = "objet:ReponseDemandeConnexionTCP/finObjet/Response:non/finResponse"+"/idUser:"+user.getIdUser()+"/finIdUser"+"/Pseudo:"+user.getUserPseudo()+"/finPseudo"+"/PortDeConnexion:"+portDeConnexionTCP.toString()+"/finPortDeConnexion/";
 
         }
         packet = new DatagramPacket(msg.getBytes(), msg.length(), utilisateurAcontacter.getIpUser(),portOuEnvoyer);
@@ -152,10 +153,10 @@ public class ConnexionChatManager extends Thread {
 
     }
 
-    public static void envoyerDemandeConnexionTCP(DatagramSocket dgramSocket, Utilisateur user, Utilisateur utilisateurAcontacter, Integer portOuEnvoyer) throws IOException {
+    public static void envoyerDemandeConnexionTCP(DatagramSocket dgramSocket, Utilisateur user, Utilisateur utilisateurAcontacter, Integer portOuEnvoyer, Integer portDeConnexionTCP) throws IOException {
         String msg;
         DatagramPacket packet;
-        msg = "objet:DemandeConnexionTCP/finObjet/idUser:"+user.getIdUser()+"/finIdUser"+"/Pseudo:"+user.getUserPseudo()+"/finPseudo/";
+        msg = "objet:DemandeConnexionTCP/finObjet/idUser:"+user.getIdUser()+"/finIdUser"+"/Pseudo:"+user.getUserPseudo()+"/finPseudo"+"/PortDeConnexion:"+portDeConnexionTCP.toString()+"/finPortDeConnexion/";
         packet = new DatagramPacket(msg.getBytes(), msg.length(), utilisateurAcontacter.getIpUser(),portOuEnvoyer);
         dgramSocket.send(packet);      // On envoie le message
     }
@@ -186,6 +187,10 @@ public class ConnexionChatManager extends Thread {
             int finIdUser = message.indexOf("/finIdUser");
             int debutPseudo = message.indexOf("/Pseudo:")+"/Pseudo:".length();
             int finPseudo = message.indexOf("/finPseudo");
+            int debutPort = message.indexOf("/PortDeConnexion:")+"/PortDeConnexion:".length();
+            int finPort = message.indexOf("/finPortDeConnexion/");
+            int portOuLancerChat = Integer.parseInt(message.substring(debutPort,finPort));
+
 
 
             objet = message.substring(debutObjet,finObjet);
@@ -212,10 +217,8 @@ public class ConnexionChatManager extends Thread {
                     String finalPseudoOtherUser = pseudoOtherUser;
                     Platform.runLater( () -> {
                         if(AlertManager.confirmAlert("nouvelle demande de chat","Voulez vous discuter avec "+ finalPseudoOtherUser+ " ?")){
+                               App.userAnnuaire.updateAnnuaire(finalPseudoOtherUser,null,null,portOuLancerChat);
                                ChatControler.PseudoInterlocuteur = finalPseudoOtherUser;
-                            synchronized (ChatControler.mode) {
-                                ChatControler.mode = true;
-                            }
 
                             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/chatView.fxml")); //Sert à loader la scen fait sur fxml
                             try {
@@ -263,23 +266,15 @@ public class ConnexionChatManager extends Thread {
                 }
 
                 if(response){
-                    int debutPort = message.indexOf("/PortDeConnexion:")+"/PortDeConnexion:".length();
-                    int finPort = message.indexOf("/finPortDeConnexion/");
-                    int portOuLancerChat = Integer.parseInt(message.substring(debutPort,finPort));
                     App.userAnnuaire.updateAnnuaire(pseudoOtherUser,null,null,portOuLancerChat);
+                    ConnexionChatManager.numeroPortLibre = ConnexionChatManager.numeroPortLibre +1;
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
 
-
-
-                        ChatControler.PseudoInterlocuteur = pseudoOtherUser;
-                    synchronized (ChatControler.mode){
-                        ChatControler.mode = false;
-                    }
-
+                    ChatControler.PseudoInterlocuteur = pseudoOtherUser;
 
                     FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/chatView.fxml")); //Sert à loader la scen fait sur fxml
                     Platform.runLater(() -> {
