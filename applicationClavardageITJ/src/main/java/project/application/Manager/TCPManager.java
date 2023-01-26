@@ -19,7 +19,7 @@ public class TCPManager {
 
         }
         catch(IOException e){
-            System.out.println("Serveur TCP listening:"+e);
+            System.out.println("Serveur TCP listening IO Exception:"+e);
         }
         return retour;
 
@@ -43,7 +43,7 @@ public class TCPManager {
 
         }
         catch(IOException e){
-            System.out.println("Serveur TCP send:"+e);
+            System.out.println("Serveur TCP send IOException:"+e);
         }
 
     }
@@ -88,7 +88,7 @@ public class TCPManager {
             os = new BufferedWriter(new OutputStreamWriter(socketUsed.getOutputStream()));
         }
         catch(IOException e){
-            System.out.println("init_bufferEmissionTCP : Client TCP init_send:"+e);
+            System.out.println("init_bufferEmissionTCP : Client TCP init_send IException:"+e);
         }
         return os;
     }
@@ -105,7 +105,8 @@ public class TCPManager {
 
         }
         catch(IOException e){
-            System.out.println("close_connexion : "+e);
+            System.out.println("close_connexion  IOException : ");
+            e.printStackTrace();
         }
         System.out.println("close_connexion : Connexion fermée");
 
@@ -122,7 +123,8 @@ public class TCPManager {
             System.out.println("Client accepté");
         }
         catch(IOException e){
-            System.out.println("wait_connexionTCP :"+e);
+            System.out.println("wait_connexionTCP IOException:");
+            e.printStackTrace();
         }
         if(socketOfServeur.equals(null)){
             System.out.println("wait_connexionTCP : le socket servant à initialiser les buffers est nul");
