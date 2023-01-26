@@ -26,7 +26,7 @@ public class ConnexionChatManager extends Thread {
     public static final HashMap<String, SessionChatUDP> mapConversationActive = new HashMap<String,SessionChatUDP>();
 
     public static int numeroPortLibre = 1610;
-
+    private boolean response = false;
 
 
     public ConnexionChatManager(Utilisateur user, Integer portEcoute) throws SocketException {
@@ -166,9 +166,11 @@ public class ConnexionChatManager extends Thread {
         private final DatagramSocket socketToUse;
         private final DatagramPacket paquet;
 
+
         public GestionDemande(DatagramSocket socket,DatagramPacket paquet){
             this.paquet = paquet;
             this.socketToUse = socket;
+
         }
 
         public void run(){
@@ -215,12 +217,11 @@ public class ConnexionChatManager extends Thread {
                 }
                 else{
                     String finalPseudoOtherUser = pseudoOtherUser;
+                    ChatControler.PseudoInterlocuteur = finalPseudoOtherUser;
+                    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/chatView.fxml")); //Sert à loader la scen fait sur fxml
+                    
                     Platform.runLater( () -> {
                         if(AlertManager.confirmAlert("nouvelle demande de chat","Voulez vous discuter avec "+ finalPseudoOtherUser+ " ?")){
-                               App.userAnnuaire.updateAnnuaire(finalPseudoOtherUser,null,null,portOuLancerChat);
-                               ChatControler.PseudoInterlocuteur = finalPseudoOtherUser;
-
-                            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/chatView.fxml")); //Sert à loader la scen fait sur fxml
                             try {
                                 ConnexionChatManager.envoyerReponseDemandeConnexionTCP(this.socketToUse, true,App.user,App.userAnnuaire.getUserFromAnnuaire(finalPseudoOtherUser),App.portUdpGestionTCP,ConnexionChatManager.numeroPortLibre);
                             } catch (IOException e) {
@@ -246,6 +247,7 @@ public class ConnexionChatManager extends Thread {
                             }
                         }
                     });
+
 
 
                 }
