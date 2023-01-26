@@ -107,7 +107,7 @@ public class SessionChat extends Thread {
 
             try{
                 while (message == null){
-                    Thread.sleep(5);
+                    Thread.sleep(100);
                     message = receptionMessage();
                 }
 
