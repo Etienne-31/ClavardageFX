@@ -106,7 +106,11 @@ public class SessionChat extends Thread {
         while(!finConversation){
 
             try{
-                message = receptionMessage();
+                while (message == null){
+                    Thread.sleep(5);
+                    message = receptionMessage();
+                }
+
                 if(message != null){
                     System.out.println("Message recu de "+this.other_user.getUserPseudo() + " le message : "+message.getData());
                 }
@@ -114,6 +118,8 @@ public class SessionChat extends Thread {
             }
             catch(IOException e){
                 e.printStackTrace();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
 
             if(message != null){
