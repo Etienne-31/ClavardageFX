@@ -133,16 +133,20 @@ public class ChatControler implements Initializable {
                 synchronized (ConnexionChatManager.mapConversationActive) {
                     ConnexionChatManager.mapConversationActive.put(pseudo,this.sessionChatFenêtre);
                 }
-                this.sessionChatFenêtre.run();
 
-
+            System.out.println("On crée le listener");
             this.listener = change -> {
                 if (change.wasAdded()) {
                     affichageMessages.getItems().addAll(this.sessionChatFenêtre.getListMessageData());
                 }
             };
+            System.out.println("On ajoute le listener");
             this.sessionChatFenêtre.listProperty.addListener(listener);
+            System.out.println("On affiche la liste de message");
             affichageMessages.getItems().addAll(this.sessionChatFenêtre.getListMessageData());
+            System.out.println("On lance le thread");
+            this.sessionChatFenêtre.run();
+            System.out.println("Thread lancé");
 
         }
         else{
