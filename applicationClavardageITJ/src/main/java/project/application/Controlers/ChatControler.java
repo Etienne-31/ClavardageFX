@@ -133,6 +133,7 @@ public class ChatControler implements Initializable {
                 synchronized (ConnexionChatManager.mapConversationActive) {
                     ConnexionChatManager.mapConversationActive.put(pseudo,this.sessionChatFenêtre);
                 }
+                this.sessionChatFenêtre.run();
 
             }
             this.listener = change -> {
