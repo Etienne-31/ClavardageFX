@@ -10,6 +10,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Controlers/ChatControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Controlers/ChatControler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Controlers/ChoosePseudoControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Controlers/ChoosePseudoControler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Manager/ConnexionChatManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Manager/ConnexionChatManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Manager/TCPManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Manager/TCPManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Models/SessionChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Models/SessionChat.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Models/Utilisateur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Models/Utilisateur.java" afterDir="false" />
     </list>
@@ -142,7 +143,7 @@
       <workItem from="1674650445036" duration="8776000" />
       <workItem from="1674670085307" duration="2667000" />
       <workItem from="1674730609824" duration="6496000" />
-      <workItem from="1674739055235" duration="7710000" />
+      <workItem from="1674739055235" duration="7949000" />
     </task>
     <servers />
   </component>

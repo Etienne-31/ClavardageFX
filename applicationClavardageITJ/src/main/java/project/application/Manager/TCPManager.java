@@ -16,7 +16,7 @@ public class TCPManager {
         String retour=null;
         try{
             retour = is.readLine();
-
+            System.out.println(" le retour de Listening "+ retour);
         }
         catch(IOException e){
             System.out.println("Serveur TCP listening IO Exception:"+e);
