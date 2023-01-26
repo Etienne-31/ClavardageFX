@@ -107,7 +107,7 @@ public class SessionChat extends Thread {
 
             try{
                 while (message == null){
-                    Thread.sleep(100);
+                    Thread.sleep(500);
                     message = receptionMessage();
                 }
 
@@ -188,9 +188,9 @@ public class SessionChat extends Thread {
 
 
     private Messages receptionMessage() throws IOException{
-        Messages data = null;
-        data = networkManagement.receiveMessage(this.is, this.other_user, this.user);
-        return data;
+
+        return  networkManagement.receiveMessage(this.is, this.other_user, this.user);
+
     }
 
     public boolean getMode(){return this.mode;}
