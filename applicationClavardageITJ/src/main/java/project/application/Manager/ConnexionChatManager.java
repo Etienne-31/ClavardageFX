@@ -24,7 +24,7 @@ public class ConnexionChatManager extends Thread {
     public static int conversationActive = 0;
     public static final HashMap<String, SessionChat> mapConversationActive = new HashMap<String,SessionChat>();
 
-    public static int numeroPortLibre = 1600;
+    public static int numeroPortLibre = 1610;
 
 
 
