@@ -81,16 +81,13 @@ public class AcceuilControler implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        App.userAnnuaire.getAnnuaire().removeListener(listener);
-        
 
-            ChatControler.interlocuteur = App.userAnnuaire.getUserFromAnnuaire(pseudo);
+        ChatControler.PseudoInterlocuteur = pseudo;
 
 
         if(chatDejactif){
-            synchronized (ChatControler.ouvertureChatOkay){
-                ChatControler.ouvertureChatOkay = true;
-            }
+
+            ChatControler.PseudoInterlocuteur = pseudo;
             primaryStage.setScene(scene);
             primaryStage.show();
         }
@@ -100,9 +97,7 @@ public class AcceuilControler implements Initializable {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            synchronized (ChatControler.ouvertureChatOkay){
-                ChatControler.ouvertureChatOkay = false;
-            }
+            ChatControler.PseudoInterlocuteur = "";
             primaryStage.setScene(scene);
             primaryStage.show();
         }

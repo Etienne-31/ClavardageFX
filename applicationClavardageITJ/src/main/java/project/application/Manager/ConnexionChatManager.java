@@ -38,7 +38,7 @@ public class ConnexionChatManager extends Thread {
     public DatagramSocket getDgramSocket(){return this.dgramSocket;}
     @Override
     public void run(){
-        System.out.println("Lancement du chat de gestion De connexion TCP ");
+        //System.out.println("Lancement du chat de gestion De connexion TCP ");
         ConnexionChatManager.GestionDemande newGestionDemande;
         DatagramPacket paquet = null;
         try {
@@ -192,16 +192,9 @@ public class ConnexionChatManager extends Thread {
             idOtherUser = message.substring(debutIdUser,finIdUser);
             pseudoOtherUser = message.substring(debutPseudo,finPseudo);
 
-            String finalPseudoOtherUser2 = pseudoOtherUser;
-            String finalIdOtherUser = idOtherUser;
+            System.out.println( "le pseudo recu est égal a :" + pseudoOtherUser + " L adresse du mesagge recu est :"+paquet.getAddress().toString()+" et le port d envoie est : "+paquet.getPort());
 
-            System.out.println( "le pseudo recu est égala " + finalPseudoOtherUser2 );
-
-            Platform.runLater(() -> {
-                App.userAnnuaire.getUserFromAnnuaire(finalPseudoOtherUser2).setIdUser(finalIdOtherUser);
-            });
-
-
+            App.userAnnuaire.updateAnnuaire(pseudoOtherUser,idOtherUser,paquet.getAddress(),null);
 
             if(objet.equals("DemandeConnexionTCP")){
                 if(ConnexionChatManager.conversationActive >= 50){
@@ -219,13 +212,9 @@ public class ConnexionChatManager extends Thread {
                     String finalPseudoOtherUser = pseudoOtherUser;
                     Platform.runLater( () -> {
                         if(AlertManager.confirmAlert("nouvelle demande de chat","Voulez vous discuter avec "+ finalPseudoOtherUser+ " ?")){
-                                ChatControler.interlocuteur = App.userAnnuaire.getUserFromAnnuaire(finalPseudoOtherUser);
+                               ChatControler.PseudoInterlocuteur = finalPseudoOtherUser;
                             synchronized (ChatControler.mode) {
                                 ChatControler.mode = true;
-                            }
-
-                            synchronized (ChatControler.ouvertureChatOkay){
-                                ChatControler.ouvertureChatOkay = true;
                             }
 
                             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/chatView.fxml")); //Sert à loader la scen fait sur fxml
@@ -234,6 +223,7 @@ public class ConnexionChatManager extends Thread {
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
+                            ConnexionChatManager.numeroPortLibre = ConnexionChatManager.numeroPortLibre +1;
                             try {
                                 Scene myScene = new Scene(fxmlLoader.load());
                                 App.primaryStage.setScene(myScene);
@@ -241,18 +231,19 @@ public class ConnexionChatManager extends Thread {
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
+
                         }
                         else{
                             try {
                                 ConnexionChatManager.envoyerReponseDemandeConnexionTCP(this.socketToUse, false,App.user,App.userAnnuaire.getUserFromAnnuaire(finalPseudoOtherUser),App.portUdpGestionTCP,ConnexionChatManager.numeroPortLibre);
-                                ChatControler.numPortLibre = numeroPortLibre;
+
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
                         }
                     });
-                        ChatControler.numPortLibre = ConnexionChatManager.numeroPortLibre;
-                        ConnexionChatManager.numeroPortLibre = ConnexionChatManager.numeroPortLibre +1;
+
+
                 }
             }
             else if(objet.equals("ReponseDemandeConnexionTCP")){
@@ -274,23 +265,20 @@ public class ConnexionChatManager extends Thread {
                     int debutPort = message.indexOf("/PortDeConnexion:")+"/PortDeConnexion:".length();
                     int finPort = message.indexOf("/finPortDeConnexion/");
                     int portOuLancerChat = Integer.parseInt(message.substring(debutPort,finPort));
-                    ChatControler.numPortLibre = portOuLancerChat;
+                    App.userAnnuaire.updateAnnuaire(pseudoOtherUser,null,null,portOuLancerChat);
                     try {
-                        Thread.sleep(100);
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
 
 
-                        ChatControler.sessionChatFenêtre = null;
 
-                        ChatControler.interlocuteur = App.userAnnuaire.getUserFromAnnuaire(pseudoOtherUser);
+                        ChatControler.PseudoInterlocuteur = pseudoOtherUser;
                     synchronized (ChatControler.mode){
                         ChatControler.mode = false;
                     }
-                    synchronized (ChatControler.ouvertureChatOkay){
-                        ChatControler.ouvertureChatOkay = true;
-                    }
+
 
                     FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/chatView.fxml")); //Sert à loader la scen fait sur fxml
                     Platform.runLater(() -> {

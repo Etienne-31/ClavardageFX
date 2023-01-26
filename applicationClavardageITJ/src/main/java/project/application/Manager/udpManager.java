@@ -65,14 +65,14 @@ public class udpManager extends  Thread{
             }
         }
 
-        System.out.println("Fin du thread de gestion des messages udp");
+        //System.out.println("Fin du thread de gestion des messages udp");
     }
 
     public void broadcastPseudo() throws IOException
     {
         try{
             dgramSocket.setBroadcast(true);// On active le broadcast
-            System.out.println("-------------Socket broadcast activé");
+            //System.out.println("-------------Socket broadcast activé");
         }
         catch(SocketException e){
             System.out.println("Erreur lors de l'initialisation du serveur UDP : "+e); //On affiche l'erreur en cas d'exception
@@ -84,16 +84,16 @@ public class udpManager extends  Thread{
         for(InetAddress broadcastAdress : this.getBroadcastAddresses()){
 
             DatagramPacket packet = new DatagramPacket(this.msg.getBytes(), this.msg.length(), broadcastAdress, this.port);  // On construit le paquet
-            System.out.println("-------------"+"User : "+this.user.getIdUser()+" Je vais Broadcast la demande de pseudo à l'adresse : "+broadcastAdress.toString()+" avec le message "+this.msg);
+           // System.out.println("-------------"+"User : "+this.user.getIdUser()+" Je vais Broadcast la demande de pseudo à l'adresse : "+broadcastAdress.toString()+" avec le message "+this.msg);
             this.dgramSocket.send(packet);   // On envoie le paquet
-            System.out.println("-------------"+"User : "+this.user.getIdUser()+" Broadcast de demande de pseudo envoyé à l'adresse : "+broadcastAdress.toString());
+           // System.out.println("-------------"+"User : "+this.user.getIdUser()+" Broadcast de demande de pseudo envoyé à l'adresse : "+broadcastAdress.toString());
 
         }
 
 
         try{
             dgramSocket.setBroadcast(false); // Desactive le broadcast
-            System.out.println("-------------Socket broadcast desactivé");
+           // System.out.println("-------------Socket broadcast desactivé");
         }
         catch(SocketException e){
             e.printStackTrace();
@@ -104,7 +104,7 @@ public class udpManager extends  Thread{
     {
         try{
             dgramSocket.setBroadcast(true);// On active le broadcast
-            System.out.println("-------------Socket broadcast activé");
+            //System.out.println("-------------Socket broadcast activé");
         }
         catch(SocketException e){
             System.out.println("Erreur lors de l'initialisation du serveur UDP : "+e); //On affiche l'erreur en cas d'exception
@@ -116,14 +116,14 @@ public class udpManager extends  Thread{
         for(InetAddress broadcastAdress : this.getBroadcastAddresses()){
             DatagramPacket packet = new DatagramPacket(this.msg.getBytes(), this.msg.length(), broadcastAdress, this.port);  // On construit le paquet
             this.dgramSocket.send(packet);
-            System.out.println("-------------"+"User : "+this.user.getIdUser()+"Broadcast de demande de déconnexion envoyé à l'adresse : "+broadcastAdress.toString());
+           // System.out.println("-------------"+"User : "+this.user.getIdUser()+"Broadcast de demande de déconnexion envoyé à l'adresse : "+broadcastAdress.toString());
         }
 
 
 
         try{
             dgramSocket.setBroadcast(false); // Desactive le broadcast
-            System.out.println("-------------Socket broadcast desactivé");
+            //System.out.println("-------------Socket broadcast desactivé");
         }
         catch(SocketException e){
             e.printStackTrace();
@@ -134,7 +134,7 @@ public class udpManager extends  Thread{
     {
         try{
             dgramSocket.setBroadcast(true);// On active le broadcast
-            System.out.println("-------------Socket broadcast activé");
+           // System.out.println("-------------Socket broadcast activé");
         }
         catch(SocketException e){
             System.out.println("Erreur lors de l'initialisation du serveur UDP : "+e); //On affiche l'erreur en cas d'exception
@@ -145,14 +145,14 @@ public class udpManager extends  Thread{
         for(InetAddress broadcastAdress : this.getBroadcastAddresses()){
             DatagramPacket packet = new DatagramPacket(this.msg.getBytes(), this.msg.length(), broadcastAdress, this.port);  // On construit le paquet
             this.dgramSocket.send(packet);   // On envoie le paquet
-            System.out.println("-------------"+"User : "+this.user.getIdUser()+" Broadcast de confirmation envoyé à l'adresse : "+broadcastAdress.toString());
+           // System.out.println("-------------"+"User : "+this.user.getIdUser()+" Broadcast de confirmation envoyé à l'adresse : "+broadcastAdress.toString());
         }
 
 
 
         try{
             dgramSocket.setBroadcast(false); // Desactive le broadcast
-            System.out.println("-------------Socket broadcast desactivé");
+           // System.out.println("-------------Socket broadcast desactivé");
         }
         catch(SocketException e){
             e.printStackTrace();
@@ -205,7 +205,7 @@ public class udpManager extends  Thread{
             e.printStackTrace();
         }
         String msg = new String(receivedDatagram.getData());
-        System.out.println("From attendreMessageTO() : Valeur du datagram :"+msg);
+       // System.out.println("From attendreMessageTO() : Valeur du datagram :"+msg);
         return receivedDatagram;   //Si le datagram n'est pas null, on le renvoie tout simplement
     }
 

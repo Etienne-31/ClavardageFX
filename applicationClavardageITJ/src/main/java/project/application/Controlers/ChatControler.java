@@ -23,16 +23,14 @@ import java.util.ResourceBundle;
 public class ChatControler implements Initializable {
 
     public static Stage primaryStage = null;
-    public static Utilisateur interlocuteur = null;
+    public static String PseudoInterlocuteur = "";
 
+    public SessionChat sessionChatFenêtre;
 
-    public static SessionChat sessionChatFenêtre = new SessionChat();
 
     public static Boolean mode = false;
 
     public static Boolean ouvertureChatOkay = false;
-
-    public static int numPortLibre = 1600;
 
 
     private ListChangeListener<String> listener;
@@ -58,7 +56,7 @@ public class ChatControler implements Initializable {
             if (ChatControler.ouvertureChatOkay) {
                 String getText = textBar.getText();
                 if (!((getText.equals("")) | (getText == null))) {
-                    sessionChatFenêtre.sendMessage(getText);
+                    this.sessionChatFenêtre.sendMessage(getText);
                 }
             }
         }
@@ -72,8 +70,8 @@ public class ChatControler implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/acceuilView.fxml")); //Sert à loader la scene fait sur fxml
                 Scene myScene;
                 myScene = new Scene(fxmlLoader.load());
-                if(ChatControler.sessionChatFenêtre.listProperty != null) {
-                    ChatControler.sessionChatFenêtre.listProperty.removeListener(listener);
+                if(this.sessionChatFenêtre.listProperty != null) {
+                    this.sessionChatFenêtre.listProperty.removeListener(listener);
                 }
                 primaryStage.setScene(myScene);
             }
@@ -93,7 +91,7 @@ public class ChatControler implements Initializable {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                    ChatControler.sessionChatFenêtre.listProperty.removeListener(listener);
+                    this.sessionChatFenêtre.listProperty.removeListener(listener);
                     primaryStage.setScene(myScene);
                 }
             }
@@ -101,59 +99,52 @@ public class ChatControler implements Initializable {
     }
 
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ChatControler.primaryStage = App.primaryStage;
-        if (ChatControler.interlocuteur != null) {
-            if (!ChatControler.ouvertureChatOkay) {
-                affichageMessages.getItems().add("En attente de réponse de l'autre utilisateur  ");
-            } else {
-                Boolean convDejaActive = false;
+        if(!(ChatControler.PseudoInterlocuteur.equals(""))){
 
-                synchronized (ConnexionChatManager.mapConversationActive) {
-                    for (String key : ConnexionChatManager.mapConversationActive.keySet()) {
-                        if (ChatControler.interlocuteur.getUserPseudo().equals(key)) {
-                            convDejaActive = true;
-                            break;
-                        }
+            SessionChat sessionChatWindow;
+            Boolean convDejaActive = false;
+
+            synchronized (ConnexionChatManager.mapConversationActive) {
+                for (String key : ConnexionChatManager.mapConversationActive.keySet()) {
+                    if (ChatControler.PseudoInterlocuteur.equals(key)) {
+                        this.sessionChatFenêtre = ConnexionChatManager.mapConversationActive.get(key);
+                        convDejaActive = true;
+                        break;
                     }
                 }
-                if (convDejaActive) {
-
-                        synchronized (ConnexionChatManager.mapConversationActive) {
-                            ChatControler.sessionChatFenêtre = ConnexionChatManager.mapConversationActive.get(ChatControler.interlocuteur.getUserPseudo());
-                        }
-
-                } else {
-
-                    synchronized (ChatControler.mode) {
-                            synchronized (ConnexionChatManager.mapConversationActive) {
-                                if (ChatControler.mode) {
-                                    ChatControler.sessionChatFenêtre = new SessionChat(App.user, ChatControler.interlocuteur, true, App.userAnnuaire.getUserFromAnnuaire(ChatControler.interlocuteur.getUserPseudo()).getIpUser(), ChatControler.numPortLibre);
-                                } else {
-                                    try {
-                                        Thread.sleep(10);
-                                    } catch (InterruptedException e) {
-                                        throw new RuntimeException(e);
-                                    }
-                                    ChatControler.sessionChatFenêtre = new SessionChat(App.user, ChatControler.interlocuteur, false, App.userAnnuaire.getUserFromAnnuaire(ChatControler.interlocuteur.getUserPseudo()).getIpUser(), ChatControler.numPortLibre);
-                                }
-                                ConnexionChatManager.mapConversationActive.put(ChatControler.interlocuteur.getUserPseudo(), ChatControler.sessionChatFenêtre);
-                            }
-                    }
-                    ChatControler.sessionChatFenêtre.start();
-                }
-                listener = change -> {
-                    if (change.wasAdded()) {
-                        affichageMessages.getItems().addAll(ChatControler.sessionChatFenêtre.listProperty);
-                    }
-                };
-                ChatControler.sessionChatFenêtre.listProperty.addListener(listener);
-                affichageMessages.getItems().addAll(ChatControler.sessionChatFenêtre.listProperty);
-
             }
 
+            if(!convDejaActive){
+                boolean mode = false;
+                synchronized (ChatControler.mode){
+                    mode = ChatControler.mode;
+                }
+                Utilisateur otherUser = App.userAnnuaire.getUserFromAnnuaire(ChatControler.PseudoInterlocuteur);
+                String pseudo = ChatControler.PseudoInterlocuteur;
+                this.sessionChatFenêtre = new SessionChat(App.user,otherUser,mode,otherUser.getIpUser(),otherUser.getPortOuContacter());
+                synchronized (ConnexionChatManager.mapConversationActive) {
+                    ConnexionChatManager.mapConversationActive.put(pseudo,this.sessionChatFenêtre);
+                }
+
+            }
+            //On créer le listener
+            this.listener = change -> {
+                if (change.wasAdded()) {
+                    affichageMessages.getItems().addAll(this.sessionChatFenêtre.listProperty);
+                }
+            };
+            this.sessionChatFenêtre.listProperty.addListener(listener);
+            affichageMessages.setItems(this.sessionChatFenêtre.listProperty);
 
         }
+        else{
+            affichageMessages.getItems().add(" En attente de connexion de l'autre utilisateur ");
+        }
     }
+
+
 }

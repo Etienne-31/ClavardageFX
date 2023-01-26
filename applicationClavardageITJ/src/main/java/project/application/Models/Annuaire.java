@@ -2,6 +2,8 @@ package project.application.Models;
 import javafx.application.Platform;
 import javafx.collections.ObservableMap;
 import javafx.collections.FXCollections;
+
+import java.net.InetAddress;
 import java.util.*;
 
 public class Annuaire {
@@ -22,6 +24,22 @@ public class Annuaire {
 
     public Utilisateur getUserFromAnnuaire(String pseudo) {
         return annuaire.get(pseudo);
+    }
+
+    public void updateAnnuaire(String pseudo, String idUser, InetAddress newAdress,Integer portOuContacter){
+
+        Platform.runLater(() -> {
+                if(idUser != null){
+                    annuaire.get(pseudo).setIdUser(idUser);
+                }
+                if(newAdress != null){
+                    annuaire.get(pseudo).setIpUser(newAdress);
+                }
+                if(portOuContacter != null){
+                    annuaire.get(pseudo).setPortOuContacter(portOuContacter);
+                }
+        });
+
     }
 
     public void addAnnuaire(String pseudo, Utilisateur newUser) {

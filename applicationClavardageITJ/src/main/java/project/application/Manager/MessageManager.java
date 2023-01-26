@@ -39,7 +39,7 @@ public class MessageManager extends Thread{   // On lance un thread pour gérer 
             else{
                 response = true;
             }
-            System.out.println("La response que je vais envoyer est :"+response);
+            //System.out.println("La response que je vais envoyer est :"+response);
             try {
                 App.udpManager.envoyerResponse(this.paquet.getAddress(),this.paquet.getPort(),response,App.user.getIpUser().toString());
             } catch (IOException e) {

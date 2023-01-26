@@ -136,11 +136,11 @@ public class TCPManager {
             System.out.println("init_socketClientTCP : le serveur host ou le port passé en argument est incorrect");
         }
         try {
-
             socketOfClient = new Socket(serveurHost, port);
 
         } catch (UnknownHostException e) {
-            System.out.println("On ne sait rien de cet host");
+            System.out.println("On ne peut pas se connecter au  host : "+serveurHost + " port : "+port);
+            e.printStackTrace();
         }
         System.out.println("init_socketClientTCP : Connexion etabli avec :" + serveurHost + " au port : " + port);
         return socketOfClient;

@@ -15,7 +15,7 @@ public class WindowManager {
 
     public static void closeWindow(Stage windowToClose){
         windowToClose.close();
-        System.out.println("Window closed ! ");
+        //System.out.println("Window closed ! ");
     }
 
     public static Stage initWindowChat(Stage newStage,String FXMLpath) throws IOException {

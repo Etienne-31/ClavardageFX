@@ -16,7 +16,7 @@ public class Hibernate {
                 .configure()
                 .build();
         try{
-            System.out.println("Building sessionsFactory");
+            //System.out.println("Building sessionsFactory");
             sessionFactory = new MetadataSources(registery)
                     .buildMetadata()
                     .buildSessionFactory();

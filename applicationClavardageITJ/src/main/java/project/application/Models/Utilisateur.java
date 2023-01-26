@@ -20,6 +20,8 @@ public class Utilisateur {
 
     private InetAddress ipUser;
 
+    private Integer portOuContacter;
+
 
 
 
@@ -27,6 +29,7 @@ public class Utilisateur {
     public Utilisateur() throws UnknownHostException {
         this.ipUser = InetAddress.getLocalHost();
         this.userPseudo = null;
+        this.portOuContacter = null;
 
     }
 
@@ -39,6 +42,7 @@ public class Utilisateur {
         this.idUser = null;
         this.password = null;
         this.userPseudo = pseudoOtherUser;
+        this.portOuContacter = null;
 
     }
 
@@ -52,6 +56,7 @@ public class Utilisateur {
             this.userPseudo = pseudo;
             this.ipUser = InetAddress.getLocalHost();
             this.password = null;
+            this.portOuContacter = null;
         }
         catch(UnknownHostException e){
             System.out.println("Erreur venant du constructeur Utilisateur"+e);
@@ -59,7 +64,13 @@ public class Utilisateur {
         }
     }
 
+    public int getPortOuContacter(){
+        return this.portOuContacter;
+    }
 
+    public void setPortOuContacter(Integer portOuContacter) {
+        this.portOuContacter = portOuContacter;
+    }
 
     public String getIdUser() {
         return this.idUser;

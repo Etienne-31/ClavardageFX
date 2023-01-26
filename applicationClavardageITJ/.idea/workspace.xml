@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7398802-4a07-4fd5-b481-985b98198880" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Controlers/ChatControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Controlers/ChatControler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Manager/TCPManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Manager/TCPManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Models/SessionChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Models/SessionChat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/project/application/Manager/TCPManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/project/application/Manager/TCPManager.class" afterDir="false" />
-    </list>
+    <list default="true" id="a7398802-4a07-4fd5-b481-985b98198880" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -139,6 +133,7 @@
       <workItem from="1674563354511" duration="19813000" />
       <workItem from="1674650445036" duration="8776000" />
       <workItem from="1674670085307" duration="2667000" />
+      <workItem from="1674730609824" duration="6358000" />
     </task>
     <servers />
   </component>
