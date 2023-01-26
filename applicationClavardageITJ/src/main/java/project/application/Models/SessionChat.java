@@ -93,6 +93,7 @@ public class SessionChat extends Thread {
 
 
     public void run() {
+       
         try {
             Thread.sleep(10);
         } catch (InterruptedException e) {
@@ -168,7 +169,7 @@ public class SessionChat extends Thread {
     }
 
     public void sendMessage(String message){
-        String messageToSend = "Utilisateur : "+this.user.userPseudo+" "+message+" \n"+ LocalDateTime.now().toString();
+        String messageToSend = "Utilisateur : "+this.user.userPseudo+" "+message+ "  "+ LocalDateTime.now().toString();
         System.out.println("Je vais envoyer ce message : "+messageToSend);
         this.networkManagement.send(messageToSend,this.os);
         Messages messageAajouter = new Messages(this.user,this.other_user,messageToSend);
