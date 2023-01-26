@@ -61,13 +61,17 @@ public class SessionChatUDP extends Thread {
         DatagramPacket paquet = null;
         String message_recu = null;
         String MessageFinale = null;
+        System.out.println("On est dans le thread");
+
         while(!this.finConversation){
+            System.out.println("On rentre dans le while");
             try {
                 paquet = attendreMessageTO();
             } catch (UnknownHostException e) {
                 e.printStackTrace();
             }
             if(paquet != null){
+                System.out.println("Paquet recu");
                 if(!(paquet.getAddress() == null)){
                     boolean sameIP = checkIP(paquet.getAddress());
                     if(sameIP){paquet = null;}
