@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import project.application.App.App;
 import project.application.Manager.ConnexionChatManager;
+import project.application.Manager.MessageDBManager;
 
 import java.io.IOException;
 import java.net.*;
@@ -104,7 +105,7 @@ public class SessionChatUDP extends Thread {
                 if(MessageFinale.equals("EXIT_CONVERSATION")){
                     this.finConversation = true;
                 }
-                this.listMessage.addLast(new Messages(this.user,this.other_user,MessageFinale));
+                MessageDBManager.InsertDetached(new Messages(this.user,this.other_user,MessageFinale));
                 String finalMessageFinale = MessageFinale;
                 Platform.runLater( () -> {
                         this.listMessageDataObservable.add(finalMessageFinale);
@@ -154,7 +155,7 @@ public class SessionChatUDP extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }Platform.runLater(() ->{
-            this.listMessageDataObservable.add(message);
+            this.listMessageDataObservable.add(messageToDisplay);
         });
 
     }

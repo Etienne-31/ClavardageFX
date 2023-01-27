@@ -20,7 +20,6 @@
                <children>
                   <Button fx:id="decoButton" layoutX="14.0" mnemonicParsing="false" onAction="#Deconnexion" prefHeight="39.0" prefWidth="214.0" text="Deconnexion" />
                   <Button fx:id="ChatWith" layoutX="373.0" mnemonicParsing="false" onAction="#goToChat" prefHeight="48.0" prefWidth="199.0" text="Chat with" />
-                  <Button fx:id="dis" layoutX="274.0" layoutY="20.0" mnemonicParsing="false" onAction="#display" text="Button" />
                </children>
             </AnchorPane>
          </children>
