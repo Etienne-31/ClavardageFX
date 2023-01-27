@@ -74,9 +74,7 @@ public class SessionChatUDP extends Thread {
         String MessageFinale = null;
         System.out.println("On est dans le thread");
         Platform.runLater(()->{
-
                 this.listMessageDataObservable.add("Debut de la conversation");
-
 
         });
 
