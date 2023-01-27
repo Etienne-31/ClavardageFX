@@ -90,8 +90,6 @@ public class AcceuilControler implements Initializable {
             e.printStackTrace();
         }
 
-        ChatControler.PseudoInterlocuteur = pseudo;
-
 
         if(chatDejactif){
 
