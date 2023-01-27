@@ -96,6 +96,7 @@ public class SessionChatUDP extends Thread {
                 }
                 else{
                     this.listMessage.addLast(new Messages(this.user,this.other_user,MessageFinale));
+                    this.listMessageData.addLast(MessageFinale);
                     String finalMessageFinale = MessageFinale;
                     Platform.runLater( () -> {
                         this.listMessageData.addLast(finalMessageFinale);
@@ -142,6 +143,7 @@ public class SessionChatUDP extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        this.listMessageData.add(MessageAEnvoyer);
 
     }
 

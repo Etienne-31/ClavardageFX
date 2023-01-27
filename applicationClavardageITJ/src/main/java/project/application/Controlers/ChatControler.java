@@ -137,7 +137,7 @@ public class ChatControler implements Initializable {
 
 
             this.listener = change -> {
-                if (change.wasAdded()) {
+                if (change.wasAdded()|change.wasUpdated()|change.wasRemoved()){
                     affichageMessages.getItems().addAll(this.sessionChatFenêtre.getListMessageData());
                 }
             };
