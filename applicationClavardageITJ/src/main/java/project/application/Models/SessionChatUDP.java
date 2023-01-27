@@ -55,9 +55,7 @@ public class SessionChatUDP extends Thread {
             e.printStackTrace();
         }
 
-        Platform.runLater(()->{
-            this.listMessageDataObservable.add("Debut de la conversation");
-        });
+
     }
 
     public LinkedList<String> getListMessageData(){return this.listMessageData;}
@@ -72,6 +70,9 @@ public class SessionChatUDP extends Thread {
         String message_recu = null;
         String MessageFinale = null;
         System.out.println("On est dans le thread");
+        Platform.runLater(()->{
+            this.listMessageDataObservable.add("Debut de la conversation");
+        });
 
         while(!this.finConversation){
             try {
