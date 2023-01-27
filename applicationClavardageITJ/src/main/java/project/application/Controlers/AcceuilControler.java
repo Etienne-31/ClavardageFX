@@ -77,6 +77,7 @@ public class AcceuilControler implements Initializable {
         Scene scene = null;
         for(String key : ConnexionChatManager.mapConversationActive.keySet()){
            if(pseudo.equals(key)){
+                System.out.println("La conversation entre "+App.user.getUserPseudo()+ " et "+  ConnexionChatManager.mapConversationActive.get(key).getOtherUser().getUserPseudo() +" a été trouvée et fonctionne avec le socket : "+ConnexionChatManager.mapConversationActive.get(key).getSocket().toString());
                 chatDejactif = true;
                 break;
             }

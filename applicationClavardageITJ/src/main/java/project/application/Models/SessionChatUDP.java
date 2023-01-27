@@ -18,7 +18,7 @@ import java.util.LinkedList;
 public class SessionChatUDP extends Thread {
 
 
-    public DatagramSocket dgramSocket = null;
+    private DatagramSocket dgramSocket;
 
     private Utilisateur user;
     private Utilisateur other_user = null;
@@ -56,6 +56,8 @@ public class SessionChatUDP extends Thread {
     public Utilisateur getUser(){return this.user;}
     public Utilisateur getOtherUser() {return this.other_user;}
 
+    public DatagramSocket getSocket(){return this.dgramSocket;}
+
 
     public void run(){
         DatagramPacket paquet = null;
@@ -64,7 +66,6 @@ public class SessionChatUDP extends Thread {
         System.out.println("On est dans le thread");
 
         while(!this.finConversation){
-            System.out.println("On rentre dans le while");
             try {
                 paquet = attendreMessageTO();
             } catch (UnknownHostException e) {
