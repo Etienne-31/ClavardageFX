@@ -26,9 +26,21 @@ public class InscriptionControler {
 
     @FXML
     Button  submitButton;
+    @FXML
+    Button backButton;
+
 
     @FXML
+    protected void goBack() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/welcomeView.fxml")); //Sert à loader la scen fait sur fxml
+        Scene myScene;
+        myScene = new Scene(fxmlLoader.load());
+        App.primaryStage.setScene(myScene);
+        App.primaryStage.show();
 
+    }
+
+    @FXML
     protected void submit() throws IOException{
         Stage primaryStage = App.primaryStage;
         String idUser = idTextfiled.getText();

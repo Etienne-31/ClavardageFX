@@ -153,7 +153,6 @@ public class ChatControler implements Initializable {
         }
         else{
             affichageMessages.getItems().add(" En attente de connexion de l'autre utilisateur ");
-
         }
         System.out.println("On a fini d'initialiser la chat view");
     }

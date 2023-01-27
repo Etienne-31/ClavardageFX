@@ -87,5 +87,6 @@
             <Button fx:id="loginButton" layoutX="56.0" layoutY="29.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="102.0" text="Connection" />
          </children>
       </AnchorPane>
+      <Button fx:id="backButton" mnemonicParsing="false" onAction="#goBack" prefHeight="25.0" prefWidth="234.0" text="retour à l'acceuil" GridPane.columnIndex="2" />
    </children>
 </GridPane>

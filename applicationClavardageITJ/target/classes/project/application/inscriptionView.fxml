@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.application.Controlers.InscriptionControler">
    <children>
       <GridPane layoutX="-1.0" layoutY="-1.0" prefHeight="400.0" prefWidth="600.0">
@@ -40,6 +39,7 @@
                         <TextField fx:id="idTextfiled" layoutX="14.0" layoutY="100.0" prefHeight="26.0" prefWidth="238.0" promptText="Rentrez votre identifiant" />
                         <TextField fx:id="passwordTextField" layoutX="14.0" layoutY="140.0" prefHeight="26.0" prefWidth="238.0" promptText="Rentrez votre mot de passe " />
                         <Label layoutX="27.0" layoutY="14.0" prefHeight="18.0" prefWidth="166.0" text="Inscription" textAlignment="JUSTIFY" />
+                        <Button fx:id="backButton" layoutX="235.0" layoutY="20.0" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="199.0" text="Retour à l'acceuil" />
                      </children>
                   </AnchorPane>
                </children>

@@ -30,6 +30,21 @@ public class LoginControler {
     @FXML
     private Label wrongMdp;
 
+    @FXML
+    Button backButton;
+
+
+    @FXML
+    protected void goBack() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/welcomeView.fxml")); //Sert à loader la scen fait sur fxml
+        Scene myScene;
+        myScene = new Scene(fxmlLoader.load());
+        App.primaryStage.setScene(myScene);
+        App.primaryStage.show();
+
+    }
+
+
 
     @FXML
     protected void login() throws IOException {
