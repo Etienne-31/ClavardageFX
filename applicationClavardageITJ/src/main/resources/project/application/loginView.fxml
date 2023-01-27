@@ -84,7 +84,7 @@
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <children>
             <Label layoutX="3.0" layoutY="31.0" prefHeight="57.0" prefWidth="205.0" text="Le mot login ou mdp est incorrect" visible="false" />
-            <Button fx:id="loginButton" layoutX="56.0" layoutY="29.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="102.0" text="Connection" />
+            <Button fx:id="loginButton" layoutX="56.0" layoutY="29.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="102.0" text="Connexion" />
          </children>
       </AnchorPane>
       <Button fx:id="backButton" mnemonicParsing="false" onAction="#goBack" prefHeight="25.0" prefWidth="234.0" text="retour à l'acceuil" GridPane.columnIndex="2" />

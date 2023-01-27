@@ -20,7 +20,7 @@ import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
 
-public class SessionChatUDP extends Thread {
+public class  SessionChatUDP extends Thread {
 
 
     private DatagramSocket dgramSocket;

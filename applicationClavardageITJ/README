@@ -1,0 +1,69 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Présentation de l'application :
+
+L'application ClavardageFX est une application utilisant JavaFX pour afficher l'interface graphique. Cette application est une application de
+messagerie décentralisée permettant à différents utilisateurs étant sur le même réseau de communiquer. Chaque utilisateur possède un compte
+unique pour se connecter à la base de données. Afin de gérer l'incompatibilité Objet/Relationnel, un ORM ( Object Relationnal Mapping ) est
+utilisé. L'ORM utilisé est Hibernate et permet de créer un mapping entre les objets de l'application et la base de données. La connexion
+à la base de données se fait via un fichier de configuration où se trouvent les informations de connexion à la base de données. Le serveur
+de base de données est un serveur MySQL.
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Technologies utilisées :
+
+----------------------------------------------------------------------------------------------------
+Version du JDK nécessaire pour faire fonctionner l'application : jdk-19.0.1
+téléchargeable ici :  https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html
+----------------------------------------------------------------------------------------------------
+Version Hibernate : 6.1.5
+Version Jakarta Persistence : 2.2
+Version Serveur MySQL : 5.7.40
+Version Connecteurs MySQL : 8.0.28
+
+docs Hibernate/Jakarta Persistence : https://hibernate.org/orm/documentation/6.1/
+docs MySQL : https://dev.mysql.com/doc/
+
+----------------------------------------------------------------------------------------------------
+
+Version JavaFX : 19
+
+API Documentation  : https://openjfx.io/javadoc/19/
+Getting Started : https://openjfx.io/openjfx-docs/
+docs : https://www.oracle.com/java/technologies/javase/javafx-docs.html
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Explications de téléchargement du projet si vous souahitez le modifier :
+Télécharger le jdk-19 directement sur le site d'oracle ou depuis votre IDE. Comme le projet, est un projet Maven au moment de Build et de lancer le projet,
+les dépendances se téléchargeront d'elles mêmes. 
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Mode d'emploi :
+
+Attention l'application fonctionne uniquement sur Windows
+
+0. Allez dans le dossier applicationClavardageITJ\out\artifacts\Application_jar et double cliquez sur Application.jar
+1. Aller sur la page d'inscription
+2. Renseignez un identifiant ainsi que le mot de passe que vous souhaitez utiliser
+3. Cliquez sur submit
+4. Vous allez être redirigé vers la page de connexion
+5. Renseignez votre identifiant et votre mot de passe
+6  Cliquez sur Connexion
+7. Une fois sur la page de choix de pseudo, choisissez le pseudo que vous souhaitez utiliser
+8. Cliquez sur Submit
+9. Une fois sur l'annuaire, vous voyez toutes les personnes connectés à l'application
+10. Selectionnez la personne avec qui vous souhaitez discuter et cliquez sur bouton "Chat with" et une demande de connexion sera envoyé à l'utilisateur selectionné
+11. Si vous recevez une demande de connexion, il vous sera demandé si vous souhaitZ discuter avec l'utilisateur, répondez oui ou non
+12. Vous pouvez discuter avec votre interlocuteur
+13. Si vous souhaitez discuter avec une autre personne, cliquez sur le bouton de retour à l'annuaire et selectionné un nouvel interlocuteur
+14. Si vous souhaitez vous déconnecté du chat en cours, cliquez sur le bouton de deconnexion du chat en haut à droite de la fenêtre de chat
+15. Si vous souhaitez quitter l'application, retourner sur l'annuaire et cliquez sur le bouton de déconnexion. Tous vos chats en cours seront fermés
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+A venir :
+
+Les messages envoyés étant enregistrés sur la base de données, dans la prochaine mise à jour l'historique des chats sera disponible.
