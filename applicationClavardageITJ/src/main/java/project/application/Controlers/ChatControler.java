@@ -124,7 +124,7 @@ public class ChatControler implements Initializable {
 
             if(!convDejaActive) {
 
-
+                System.out.println("Chat controler , la conv n a pas été trouvé on la crée ");
                 Utilisateur otherUser = App.userAnnuaire.getUserFromAnnuaire(ChatControler.PseudoInterlocuteur);
                 String pseudo = ChatControler.PseudoInterlocuteur;
                 System.out.println("Chat controler Pret à initier la connexion avec : " + pseudo + " qui propose de se sonnecter au port : " + otherUser.getPortOuContacter());
@@ -133,6 +133,7 @@ public class ChatControler implements Initializable {
                 synchronized (ConnexionChatManager.mapConversationActive) {
                     ConnexionChatManager.mapConversationActive.put(pseudo, this.sessionChatFenêtre);
                 }
+                this.sessionChatFenêtre.start();
             }
 
 
@@ -146,8 +147,8 @@ public class ChatControler implements Initializable {
 
             affichageMessages.getItems().addAll(this.sessionChatFenêtre.getListMessageData());
 
-            this.sessionChatFenêtre.start();
-            
+
+
 
         }
         else{
