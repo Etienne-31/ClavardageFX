@@ -58,7 +58,6 @@ public class ChatControler implements Initializable {
                     if (getText.length() < 1000){
                         this.sessionChatFenêtre.sendMessage(getText);
                     }
-                    this.sessionChatFenêtre.sendMessage(getText);
                 }
             }
         }
