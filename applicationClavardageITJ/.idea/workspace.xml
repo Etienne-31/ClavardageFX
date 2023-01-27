@@ -8,7 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Controlers/AcceuilControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Controlers/AcceuilControler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Controlers/ChatControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Controlers/ChatControler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Models/SessionChatUDP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Models/SessionChatUDP.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
