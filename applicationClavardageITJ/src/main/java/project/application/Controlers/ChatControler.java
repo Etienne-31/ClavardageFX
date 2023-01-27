@@ -33,6 +33,7 @@ public class ChatControler implements Initializable {
 
     private ListChangeListener<String> listener;
 
+
     @FXML
     TextArea textBar;
 
@@ -136,16 +137,16 @@ public class ChatControler implements Initializable {
             }
 
 
+
+
+            affichageMessages.getItems().addAll(this.sessionChatFenêtre.getListMessageDataObservable());
+
             this.listener = change -> {
                 if (change.wasAdded()|change.wasUpdated()|change.wasRemoved()){
                     affichageMessages.getItems().addAll(this.sessionChatFenêtre.getListMessageDataObservable());
                 }
             };
             this.sessionChatFenêtre.getListMessageDataObservable().addListener(listener);
-
-            affichageMessages.getItems().addAll(this.sessionChatFenêtre.getListMessageDataObservable());
-
-
 
 
         }
