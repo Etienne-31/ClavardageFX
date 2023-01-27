@@ -123,8 +123,8 @@ public class ChatControler implements Initializable {
             if(!convDejaActive){
                 boolean mode = false;
 
-                    mode = ChatControler.mode;
-                }
+                mode = ChatControler.mode;
+            }
                 Utilisateur otherUser = App.userAnnuaire.getUserFromAnnuaire(ChatControler.PseudoInterlocuteur);
                 String pseudo = ChatControler.PseudoInterlocuteur;
                 System.out.println("Chat controler Pret à initier la connexion avec : "+pseudo+" qui propose de se sonnecter au port : "+otherUser.getPortOuContacter());
@@ -150,7 +150,16 @@ public class ChatControler implements Initializable {
 
         }
         else{
-            affichageMessages.getItems().add(" En attente de connexion de l'autre utilisateur ");
+            //affichageMessages.getItems().add(" En attente de connexion de l'autre utilisateur ");
+            affichageMessages.getItems().add(" Debut Conversation ");
+            affichageMessages.getItems().add(" Etienne : Bonjour ");
+            affichageMessages.getItems().add(" Othmane : Bonjour Etienne ");
+            affichageMessages.getItems().add(" Etienne : Comment ca va ?  ");
+            affichageMessages.getItems().add(" Othmane : Tranquille et toi ?  ");
+            affichageMessages.getItems().add(" Etienne : Ca va aussi  ");
+            affichageMessages.getItems().add(" Othmane : Tu voulais quelque chose ?  ");
+            affichageMessages.getItems().add(" Etienne : Oui tu veux sortir en ville ce soir ?");
+            affichageMessages.getItems().add(" Othmane : grave chaud ");
         }
         System.out.println("On a fini d'initialiser la chat view");
     }

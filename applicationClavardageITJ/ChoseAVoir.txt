@@ -5,4 +5,8 @@
 
 
 
-//Dans choose pseudo controler , voir pour faire un pseudo avec juste une maj au début avec le substring
+//Faire screens deco
+//faire screen conv qui marche
+//faire screen pseudo déjà utilisé
+//Test dans le Initialize du acceuil controler si lancé un thread la bloque l appli
+//Si oui , bouger le lancement du thread dans Connexion manager

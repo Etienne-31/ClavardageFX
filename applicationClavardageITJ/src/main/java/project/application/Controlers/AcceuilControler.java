@@ -58,11 +58,16 @@ public class AcceuilControler implements Initializable {
 
     @FXML
     protected void display(){
-        System.out.println("Dans mon annuaire il y a ");
-        for(String key : App.userAnnuaire.getAnnuaire().keySet()){
-            System.out.println(" ------ "+App.userAnnuaire.getUserFromAnnuaire(key).getUserPseudo());
+        ChatControler.PseudoInterlocuteur ="";
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/chatView.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 600, 400);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     @FXML
