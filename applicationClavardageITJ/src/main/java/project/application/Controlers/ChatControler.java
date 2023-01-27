@@ -71,8 +71,8 @@ public class ChatControler implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/acceuilView.fxml")); //Sert à loader la scene fait sur fxml
                 Scene myScene;
                 myScene = new Scene(fxmlLoader.load());
-                if((this.sessionChatFenêtre.listProperty != null)&(this.sessionChatFenêtre != null)) {
-                    this.sessionChatFenêtre.listProperty.removeListener(listener);
+                if((this.sessionChatFenêtre.getListMessageDataObservable() != null)&(this.sessionChatFenêtre != null)) {
+                    this.sessionChatFenêtre.getListMessageDataObservable().removeListener(listener);
                 }
                 primaryStage.setScene(myScene);
             }
@@ -92,7 +92,7 @@ public class ChatControler implements Initializable {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                    this.sessionChatFenêtre.listProperty.removeListener(listener);
+                    this.sessionChatFenêtre.getListMessageDataObservable().removeListener(listener);
                     primaryStage.setScene(myScene);
                 }
             }
@@ -138,13 +138,12 @@ public class ChatControler implements Initializable {
 
             this.listener = change -> {
                 if (change.wasAdded()|change.wasUpdated()|change.wasRemoved()){
-                    affichageMessages.getItems().addAll(this.sessionChatFenêtre.getListMessageData());
+                    affichageMessages.getItems().addAll(this.sessionChatFenêtre.getListMessageDataObservable());
                 }
             };
+            this.sessionChatFenêtre.getListMessageDataObservable().addListener(listener);
 
-            this.sessionChatFenêtre.listProperty.addListener(listener);
-
-            affichageMessages.getItems().addAll(this.sessionChatFenêtre.getListMessageData());
+            affichageMessages.getItems().addAll(this.sessionChatFenêtre.getListMessageDataObservable());
 
 
 

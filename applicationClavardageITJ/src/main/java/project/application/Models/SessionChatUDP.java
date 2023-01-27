@@ -1,9 +1,11 @@
 package project.application.Models;
 
 import javafx.application.Platform;
+import javafx.beans.Observable;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import project.application.App.App;
@@ -28,12 +30,14 @@ public class SessionChatUDP extends Thread {
     private LinkedList<Messages> listMessage;
     private LinkedList<String>  listMessageData;
 
+    private ObservableList<String> listMessageDataObservable;
+
     private Boolean finConversation;
 
     private InetAddress adressOtherUser;
     public ListProperty<String> listProperty;
     public SessionChatUDP(Utilisateur user, Utilisateur other_user, InetAddress adressOtherUser, int portOuLancer, int portOuCommuniquer){
-
+        this.listMessageDataObservable = FXCollections.observableArrayList();
         this.user = user;
         this.other_user = other_user;
         this.myPort = portOuLancer;
@@ -50,6 +54,10 @@ public class SessionChatUDP extends Thread {
         } catch (SocketException e) {
             e.printStackTrace();
         }
+
+        Platform.runLater(()->{
+            this.listMessageDataObservable.add("Debut de la conversation");
+        });
     }
 
     public LinkedList<String> getListMessageData(){return this.listMessageData;}
@@ -58,7 +66,7 @@ public class SessionChatUDP extends Thread {
 
     public DatagramSocket getSocket(){return this.dgramSocket;}
 
-
+    public ObservableList<String> getListMessageDataObservable(){return this.listMessageDataObservable;}
     public void run(){
         DatagramPacket paquet = null;
         String message_recu = null;
@@ -99,7 +107,7 @@ public class SessionChatUDP extends Thread {
                     this.listMessageData.addLast(MessageFinale);
                     String finalMessageFinale = MessageFinale;
                     Platform.runLater( () -> {
-                        this.listMessageData.addLast(finalMessageFinale);
+                        this.listMessageDataObservable.add(finalMessageFinale);
                     });
                 }
             }
@@ -142,8 +150,9 @@ public class SessionChatUDP extends Thread {
             this.dgramSocket.send(packet);
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        this.listMessageData.add(MessageAEnvoyer);
+        }Platform.runLater(() ->{
+            this.listMessageDataObservable.add(MessageAEnvoyer);
+        });
 
     }
 
