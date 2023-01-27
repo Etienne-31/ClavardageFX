@@ -151,7 +151,7 @@ public class SessionChatUDP extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }Platform.runLater(() ->{
-            this.listMessageDataObservable.add(MessageAEnvoyer);
+            this.listMessageDataObservable.add(message);
         });
 
     }
