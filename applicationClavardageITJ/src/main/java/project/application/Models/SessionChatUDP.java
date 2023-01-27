@@ -74,23 +74,9 @@ public class SessionChatUDP extends Thread {
         String MessageFinale = null;
         System.out.println("On est dans le thread");
         Platform.runLater(()->{
-            List<Messages> listMessage = MessageDBManager.getListMessageConv(this.other_user.getIdUser(),this.user.getIdUser());
 
-            if(listMessage.isEmpty()){
                 this.listMessageDataObservable.add("Debut de la conversation");
-            }
-            else{
-                for(Messages iteMessage : listMessage){
-                    String message;
-                    if(iteMessage.getIdSender().equals(this.other_user.getIdUser())){
-                        message = this.other_user.userPseudo+ " : "+iteMessage.getData();
-                    }
-                    else{
-                        message = this.user.getUserPseudo()+" : "+iteMessage.getData();
-                    }
-                    this.listMessageDataObservable.add(message);
-                }
-            }
+
 
         });
 
