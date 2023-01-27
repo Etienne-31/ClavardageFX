@@ -55,7 +55,7 @@ public class ChatControler implements Initializable {
             if (!ChatControler.PseudoInterlocuteur.equals("")) {
                 String getText = textBar.getText();
                 System.out.println("J'ai retiré ce message de la bar de text "+getText);
-                if(!(this.sessionChatFenêtre.getSocket().isClosed()=){
+                if(!(this.sessionChatFenêtre.getSocket().isClosed())){
                     if (!((getText.equals("")) | (getText == null))) {
                         if (getText.length() < 1000){
                             this.sessionChatFenêtre.sendMessage(getText);
