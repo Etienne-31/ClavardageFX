@@ -72,8 +72,10 @@ public class ChatControler implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/acceuilView.fxml")); //Sert à loader la scene fait sur fxml
                 Scene myScene;
                 myScene = new Scene(fxmlLoader.load());
-                if((this.sessionChatFenêtre.listProperty != null)&(this.sessionChatFenêtre != null)) {
-                    this.sessionChatFenêtre.listProperty.removeListener(listener);
+                if((this.sessionChatFenêtre != null)) {
+                    if ((this.sessionChatFenêtre.listProperty != null)) {
+                        this.sessionChatFenêtre.listProperty.removeListener(listener);
+                    }
                 }
                 primaryStage.setScene(myScene);
             }
@@ -150,16 +152,8 @@ public class ChatControler implements Initializable {
 
         }
         else{
-            //affichageMessages.getItems().add(" En attente de connexion de l'autre utilisateur ");
-            affichageMessages.getItems().add(" Debut Conversation ");
-            affichageMessages.getItems().add(" Etienne : Bonjour ");
-            affichageMessages.getItems().add(" Othmane : Bonjour Etienne ");
-            affichageMessages.getItems().add(" Etienne : Comment ca va ?  ");
-            affichageMessages.getItems().add(" Othmane : Tranquille et toi ?  ");
-            affichageMessages.getItems().add(" Etienne : Ca va aussi  ");
-            affichageMessages.getItems().add(" Othmane : Tu voulais quelque chose ?  ");
-            affichageMessages.getItems().add(" Etienne : Oui tu veux sortir en ville ce soir ?");
-            affichageMessages.getItems().add(" Othmane : grave chaud ");
+            affichageMessages.getItems().add(" En attente de connexion de l'autre utilisateur ");
+
         }
         System.out.println("On a fini d'initialiser la chat view");
     }

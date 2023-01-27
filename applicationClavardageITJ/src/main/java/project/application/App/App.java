@@ -38,7 +38,7 @@ public class App extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
 
 
-        stage.setTitle("Application clavardage 1.0!");
+        stage.setTitle("Application clavardage 1.0");
         stage.setOnCloseRequest( e -> {
             e.consume();
             try {
