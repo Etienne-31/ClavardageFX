@@ -158,11 +158,10 @@ public class AcceuilControler implements Initializable {
             }
 
         }
-
-
     }
 
 
 }
+
 
 

@@ -72,10 +72,8 @@ public class ChatControler implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/acceuilView.fxml")); //Sert à loader la scene fait sur fxml
                 Scene myScene;
                 myScene = new Scene(fxmlLoader.load());
-                if((this.sessionChatFenêtre != null)) {
-                    if ((this.sessionChatFenêtre.listProperty != null)) {
-                        this.sessionChatFenêtre.listProperty.removeListener(listener);
-                    }
+                if((this.sessionChatFenêtre.listProperty != null)&(this.sessionChatFenêtre != null)) {
+                    this.sessionChatFenêtre.listProperty.removeListener(listener);
                 }
                 primaryStage.setScene(myScene);
             }
@@ -125,8 +123,8 @@ public class ChatControler implements Initializable {
             if(!convDejaActive){
                 boolean mode = false;
 
-                mode = ChatControler.mode;
-            }
+                    mode = ChatControler.mode;
+                }
                 Utilisateur otherUser = App.userAnnuaire.getUserFromAnnuaire(ChatControler.PseudoInterlocuteur);
                 String pseudo = ChatControler.PseudoInterlocuteur;
                 System.out.println("Chat controler Pret à initier la connexion avec : "+pseudo+" qui propose de se sonnecter au port : "+otherUser.getPortOuContacter());
@@ -147,7 +145,7 @@ public class ChatControler implements Initializable {
             System.out.println("On affiche la liste de message");
             affichageMessages.getItems().addAll(this.sessionChatFenêtre.getListMessageData());
             System.out.println("On lance le thread");
-            this.sessionChatFenêtre.run();
+            this.sessionChatFenêtre.start();
             System.out.println("Thread lancé");
 
         }
