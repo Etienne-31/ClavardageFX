@@ -58,6 +58,10 @@ public class ChatControler implements Initializable {
                 if (!((getText.equals("")) | (getText == null))) {
                     if (getText.length() < 1000){
                         this.sessionChatFenêtre.sendMessage(getText);
+                        textBar.clear();
+                    }
+                    else{
+                        AlertManager.Alert("Attention","Le message est trop long");
                     }
                 }
             }

@@ -56,19 +56,7 @@ public class AcceuilControler implements Initializable {
     @FXML
     Button dis;
 
-    @FXML
-    protected void display(){
-        ChatControler.PseudoInterlocuteur ="";
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/project/application/chatView.fxml"));
-        Scene scene = null;
-        try {
-            scene = new Scene(fxmlLoader.load(), 600, 400);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
+
 
     @FXML
     protected void goToChat(){

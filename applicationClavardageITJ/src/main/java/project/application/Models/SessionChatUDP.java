@@ -13,6 +13,7 @@ import project.application.Manager.ConnexionChatManager;
 
 import java.io.IOException;
 import java.net.*;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Enumeration;
 import java.util.LinkedList;
@@ -115,6 +116,7 @@ public class SessionChatUDP extends Thread {
         synchronized (ConnexionChatManager.mapConversationActive){
             ConnexionChatManager.mapConversationActive.remove(this.other_user.getUserPseudo());
         }
+        System.out.println("Le socket va se fermer ");
         this.dgramSocket.close();
 
         Platform.runLater(() -> {
@@ -144,7 +146,8 @@ public class SessionChatUDP extends Thread {
     }
 
     public void sendMessage(String message){
-        String MessageAEnvoyer = "/Message: "+user.getUserPseudo()+ " : "+message+" -- "+LocalDateTime.now().toString()+"/FinMessage/";
+        String MessageAEnvoyer = "/Message: "+user.getUserPseudo()+ " : "+message+" -- "+ Timestamp.valueOf(LocalDateTime.now()).toString()+"/FinMessage/";
+        String messageToDisplay = user.getUserPseudo()+ " : "+message+" -- "+LocalDateTime.now().toString();
         DatagramPacket packet = new DatagramPacket(MessageAEnvoyer.getBytes(),MessageAEnvoyer.length(),this.adressOtherUser,this.portOuCommuniquer);
         try {
             this.dgramSocket.send(packet);
