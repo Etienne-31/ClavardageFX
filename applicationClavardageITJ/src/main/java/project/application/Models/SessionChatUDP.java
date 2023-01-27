@@ -108,6 +108,7 @@ public class SessionChatUDP extends Thread {
                 Platform.runLater( () -> {
                         this.listMessageDataObservable.add(finalMessageFinale);
                 });
+                MessageFinale = null;
 
             }
         }
@@ -143,7 +144,7 @@ public class SessionChatUDP extends Thread {
     }
 
     public void sendMessage(String message){
-        String MessageAEnvoyer = "/Message:"+user.getUserPseudo()+ " : "+message+" -- "+LocalDateTime.now().toString()+"/FinMessage/";
+        String MessageAEnvoyer = "/Message: "+user.getUserPseudo()+ " : "+message+" -- "+LocalDateTime.now().toString()+"/FinMessage/";
         DatagramPacket packet = new DatagramPacket(MessageAEnvoyer.getBytes(),MessageAEnvoyer.length(),this.adressOtherUser,this.portOuCommuniquer);
         try {
             this.dgramSocket.send(packet);
