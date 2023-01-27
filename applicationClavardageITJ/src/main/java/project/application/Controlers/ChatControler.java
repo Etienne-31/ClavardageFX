@@ -142,8 +142,9 @@ public class ChatControler implements Initializable {
             affichageMessages.getItems().addAll(this.sessionChatFenêtre.getListMessageDataObservable());
 
             this.listener = change -> {
-                while(change.next()){
+                if(change.next()){
                     if(change.wasAdded()){
+                        affichageMessages.getItems().clear();
                         affichageMessages.getItems().addAll(this.sessionChatFenêtre.getListMessageDataObservable());
                     }
                 }

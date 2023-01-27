@@ -103,14 +103,12 @@ public class SessionChatUDP extends Thread {
                 if(MessageFinale.equals("EXIT_CONVERSATION")){
                     this.finConversation = true;
                 }
-                else{
-                    this.listMessage.addLast(new Messages(this.user,this.other_user,MessageFinale));
-                    this.listMessageData.addLast(MessageFinale);
-                    String finalMessageFinale = MessageFinale;
-                    Platform.runLater( () -> {
+                this.listMessage.addLast(new Messages(this.user,this.other_user,MessageFinale));
+                String finalMessageFinale = MessageFinale;
+                Platform.runLater( () -> {
                         this.listMessageDataObservable.add(finalMessageFinale);
-                    });
-                }
+                });
+
             }
         }
         synchronized (ConnexionChatManager.mapConversationActive){
@@ -184,10 +182,6 @@ public class SessionChatUDP extends Thread {
         catch(IOException e){
             e.printStackTrace();
         }
-        String msg = new String(receivedDatagram.getData());
-        int debutMessage = msg.indexOf("/Message:")+"/Message:".length();
-        int finMessage = msg.indexOf("/FinMessage/");
-        String MessageFinale = msg.substring(debutMessage,finMessage);
 
         return receivedDatagram;   //Si le datagram n'est pas null, on le renvoie tout simplement
     }
