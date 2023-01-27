@@ -18,6 +18,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Enumeration;
 import java.util.LinkedList;
+import java.util.List;
 
 public class SessionChatUDP extends Thread {
 
@@ -73,7 +74,24 @@ public class SessionChatUDP extends Thread {
         String MessageFinale = null;
         System.out.println("On est dans le thread");
         Platform.runLater(()->{
-            this.listMessageDataObservable.add("Debut de la conversation");
+            List<Messages> listMessage = MessageDBManager.getListMessageConv(this.other_user.getIdUser(),this.user.getIdUser());
+
+            if(listMessage.isEmpty()){
+                this.listMessageDataObservable.add("Debut de la conversation");
+            }
+            else{
+                for(Messages iteMessage : listMessage){
+                    String message;
+                    if(iteMessage.getIdSender().equals(this.other_user.getIdUser())){
+                        message = this.other_user.userPseudo+ " : "+iteMessage.getData();
+                    }
+                    else{
+                        message = this.user.getUserPseudo()+" : "+iteMessage.getData();
+                    }
+                    this.listMessageDataObservable.add(message);
+                }
+            }
+
         });
 
         while(!this.finConversation){
@@ -105,7 +123,7 @@ public class SessionChatUDP extends Thread {
                 if(MessageFinale.equals("EXIT_CONVERSATION")){
                     this.finConversation = true;
                 }
-                MessageDBManager.InsertDetached(new Messages(this.user,this.other_user,MessageFinale));
+                MessageDBManager.InsertDetached(new Messages(this.other_user,this.user,MessageFinale));
                 String finalMessageFinale = MessageFinale;
                 Platform.runLater( () -> {
                         this.listMessageDataObservable.add(finalMessageFinale);

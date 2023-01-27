@@ -55,15 +55,22 @@ public class ChatControler implements Initializable {
             if (!ChatControler.PseudoInterlocuteur.equals("")) {
                 String getText = textBar.getText();
                 System.out.println("J'ai retiré ce message de la bar de text "+getText);
-                if (!((getText.equals("")) | (getText == null))) {
-                    if (getText.length() < 1000){
-                        this.sessionChatFenêtre.sendMessage(getText);
-                        textBar.clear();
+                if(this.sessionChatFenêtre.getSocket().isClosed()){
+                    if (!((getText.equals("")) | (getText == null))) {
+                        if (getText.length() < 1000){
+                            this.sessionChatFenêtre.sendMessage(getText);
+                            textBar.clear();
+                        }
+                        else{
+                            AlertManager.Alert("Attention","Le message est trop long");
+                        }
                     }
-                    else{
-                        AlertManager.Alert("Attention","Le message est trop long");
-                    }
+
                 }
+                else{
+                    AlertManager.Alert("Attention ","La Connexion a été fermé on ne peut plus envoyer de messages");
+                }
+
             }
         }
     }
