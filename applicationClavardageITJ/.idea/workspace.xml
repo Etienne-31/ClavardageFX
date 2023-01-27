@@ -5,12 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a7398802-4a07-4fd5-b481-985b98198880" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/project/application/Manager/MessageDBManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Application.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Controlers/AcceuilControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Controlers/AcceuilControler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Controlers/ChatControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Controlers/ChatControler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Manager/MessageDBManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Manager/MessageDBManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Models/Messages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Models/Messages.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/project/application/Models/SessionChatUDP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/application/Models/SessionChatUDP.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
