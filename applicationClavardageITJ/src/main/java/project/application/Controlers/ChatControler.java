@@ -105,6 +105,7 @@ public class ChatControler implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ChatControler.primaryStage = App.primaryStage;
+        System.out.println("Initialisation de la chat view l'interlocuteur est : "+ChatControler.PseudoInterlocuteur);
         if(!(ChatControler.PseudoInterlocuteur.equals(""))){
 
             SessionChat sessionChatWindow;
@@ -113,6 +114,7 @@ public class ChatControler implements Initializable {
             synchronized (ConnexionChatManager.mapConversationActive) {
                 for (String key : ConnexionChatManager.mapConversationActive.keySet()) {
                     if (ChatControler.PseudoInterlocuteur.equals(key)) {
+                        System.out.println("Acceuil controler :La conversation entre "+App.user.getUserPseudo()+ " et "+  ConnexionChatManager.mapConversationActive.get(key).getOtherUser().getUserPseudo() +" a été trouvée et fonctionne avec le socket : "+ConnexionChatManager.mapConversationActive.get(key).getSocket().toString());
                         this.sessionChatFenêtre = ConnexionChatManager.mapConversationActive.get(key);
                         convDejaActive = true;
                         break;
@@ -120,39 +122,37 @@ public class ChatControler implements Initializable {
                 }
             }
 
-            if(!convDejaActive){
-                boolean mode = false;
+            if(!convDejaActive) {
 
-                    mode = ChatControler.mode;
-                }
+
                 Utilisateur otherUser = App.userAnnuaire.getUserFromAnnuaire(ChatControler.PseudoInterlocuteur);
                 String pseudo = ChatControler.PseudoInterlocuteur;
-                System.out.println("Chat controler Pret à initier la connexion avec : "+pseudo+" qui propose de se sonnecter au port : "+otherUser.getPortOuContacter());
-                this.sessionChatFenêtre = new SessionChatUDP(App.user,otherUser,otherUser.getIpUser(),ConnexionChatManager.numeroPortLibre-1,otherUser.getPortOuContacter());
+                System.out.println("Chat controler Pret à initier la connexion avec : " + pseudo + " qui propose de se sonnecter au port : " + otherUser.getPortOuContacter());
+                this.sessionChatFenêtre = new SessionChatUDP(App.user, otherUser, otherUser.getIpUser(), ConnexionChatManager.numeroPortLibre - 1, otherUser.getPortOuContacter());
 
                 synchronized (ConnexionChatManager.mapConversationActive) {
-                    ConnexionChatManager.mapConversationActive.put(pseudo,this.sessionChatFenêtre);
+                    ConnexionChatManager.mapConversationActive.put(pseudo, this.sessionChatFenêtre);
                 }
+            }
 
-            System.out.println("On crée le listener");
+
             this.listener = change -> {
                 if (change.wasAdded()) {
                     affichageMessages.getItems().addAll(this.sessionChatFenêtre.getListMessageData());
                 }
             };
-            System.out.println("On ajoute le listener");
+
             this.sessionChatFenêtre.listProperty.addListener(listener);
-            System.out.println("On affiche la liste de message");
+
             affichageMessages.getItems().addAll(this.sessionChatFenêtre.getListMessageData());
-            System.out.println("On lance le thread");
+
             this.sessionChatFenêtre.start();
-            System.out.println("Thread lancé");
+            
 
         }
         else{
             affichageMessages.getItems().add(" En attente de connexion de l'autre utilisateur ");
         }
-        System.out.println("On a fini d'initialiser la chat view");
     }
 
 }

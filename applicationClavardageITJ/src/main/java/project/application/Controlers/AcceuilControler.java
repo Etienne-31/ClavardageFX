@@ -77,7 +77,7 @@ public class AcceuilControler implements Initializable {
         Scene scene = null;
         for(String key : ConnexionChatManager.mapConversationActive.keySet()){
            if(pseudo.equals(key)){
-                System.out.println("La conversation entre "+App.user.getUserPseudo()+ " et "+  ConnexionChatManager.mapConversationActive.get(key).getOtherUser().getUserPseudo() +" a été trouvée et fonctionne avec le socket : "+ConnexionChatManager.mapConversationActive.get(key).getSocket().toString());
+                System.out.println("Acceuil controler :La conversation entre "+App.user.getUserPseudo()+ " et "+  ConnexionChatManager.mapConversationActive.get(key).getOtherUser().getUserPseudo() +" a été trouvée et fonctionne avec le socket : "+ConnexionChatManager.mapConversationActive.get(key).getSocket().toString());
                 chatDejactif = true;
                 break;
             }
@@ -98,6 +98,7 @@ public class AcceuilControler implements Initializable {
             primaryStage.show();
         }
         else{
+            System.out.println("Chat controler la conv n'a pas été trouvé entre "+App.user.getUserPseudo()+" et "+pseudo+" On va la crée mais avant on fait la demande de connexion ");
             try {
                 ConnexionChatManager.envoyerDemandeConnexionTCP(App.chatManager.getDgramSocket(),App.user,App.userAnnuaire.getUserFromAnnuaire(pseudo),App.portUdpGestionTCP,ConnexionChatManager.numeroPortLibre);
             } catch (IOException e) {
